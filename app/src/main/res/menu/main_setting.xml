@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/item_date"
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_baseline_date_range_24_white"/>
+
+    <item
+        android:id="@+id/item_setting"
+        android:title="Setting"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/item_info"
+        android:title="App info"
+        app:showAsAction="never"/>
+
+</menu>
