@@ -1,21 +1,31 @@
 package com.example.accounting.main
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.MainListAdapter
 import com.example.accounting.R
+import com.example.accounting.addNewItem.AddNewItemActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
         //view model
-        val viewModel= MainViewModel()
+//        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
+//        viewModel= MainViewModel(application)
+
         //tool bar
         val toolbar= findViewById<Toolbar>(R.id.toolbar_main)
         toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24_white)
@@ -59,5 +69,11 @@ class MainActivity : AppCompatActivity() {
         val adapter = MainListAdapter(this)
         rvList.adapter = adapter
         rvList.layoutManager = LinearLayoutManager(this)
+
+        //floating button
+        val fltBt: FloatingActionButton= findViewById(R.id.flt_bt_add)
+        fltBt.setOnClickListener{
+            startActivity(Intent(this, AddNewItemActivity::class.java))
+        }
     }
 }

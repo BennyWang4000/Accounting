@@ -10,7 +10,7 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:padding="15dp"
-    android:background="#F0F0F0"
+    android:background="@color/colorPrimaryLight"
     >
 
     <ImageView
