@@ -45,7 +45,6 @@ class MainListAdapter constructor(
         holder.name.text= listData[position].toString()
         holder.price.text= listData[position].toString()
         holder.layout.setOnClickListener{
-
         }
     }
 

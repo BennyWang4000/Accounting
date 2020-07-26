@@ -1,9 +1,11 @@
 package com.example.accounting.main
 
 import android.app.DatePickerDialog
+import android.content.Entity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,7 +75,27 @@ class MainActivity : AppCompatActivity() {
         //floating button
         val fltBt: FloatingActionButton= findViewById(R.id.flt_bt_add)
         fltBt.setOnClickListener{
-            startActivity(Intent(this, AddNewItemActivity::class.java))
+            val intent= Intent(this, AddNewItemActivity::class.java)
+            startActivity(intent)
+        }
+
+        //activity result
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Log.e("test", "Get Activity Result!")
+
+        Snackbar.make(this.findViewById(R.id.layout_main), "Result: $data", Snackbar.LENGTH_SHORT)
+            .show()
+
+        if (data != null) {
+            viewModel.insertItem(data)
+        }else{
+            Snackbar.make(this.findViewById(R.id.layout_main), "Error", Snackbar.LENGTH_SHORT)
+                .show()
         }
     }
 }
