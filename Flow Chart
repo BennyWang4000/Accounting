@@ -1,1 +1,90 @@
-<mxfile host="app.diagrams.net" modified="2020-07-27T06:30:43.539Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36 Edg/84.0.522.44" version="13.5.3" etag="NXCM7AyevSC4RHjj2xDm" type="github"><diagram id="vHbLdoeTal0snLo7YX1u">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-07-27T07:22:33.397Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36 Edg/84.0.522.44" etag="ye9L1M-rqJmBHfZ6Rtaq" version="13.5.3" type="github" pages="2">
+  <diagram id="vHbLdoeTal0snLo7YX1u" name=" Data Flow">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-2" value="Database&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="294" y="650" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gYo7Fwk6ZVgOci-9Glaa-3" target="gYo7Fwk6ZVgOci-9Glaa-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-3" value="Add New Item&lt;br&gt;&amp;nbsp;Activity" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gYo7Fwk6ZVgOci-9Glaa-4" target="gYo7Fwk6ZVgOci-9Glaa-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gYo7Fwk6ZVgOci-9Glaa-4" target="gYo7Fwk6ZVgOci-9Glaa-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-4" value="Main Activity" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="414" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-5" value="Recycler View Adapter" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gYo7Fwk6ZVgOci-9Glaa-6" target="gYo7Fwk6ZVgOci-9Glaa-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-6" value="Add New Item &lt;br&gt;View Model" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="190" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gYo7Fwk6ZVgOci-9Glaa-8" target="gYo7Fwk6ZVgOci-9Glaa-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-8" value="Main View Model" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="414" y="350" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="gYo7Fwk6ZVgOci-9Glaa-9" target="gYo7Fwk6ZVgOci-9Glaa-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gYo7Fwk6ZVgOci-9Glaa-9" value="Repository&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="294" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="0MCgdwM2-D4xV41V1FYc" name="Currently">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="VOfImexmb92fpJyGLrEP-0" />
+        <mxCell id="VOfImexmb92fpJyGLrEP-1" parent="VOfImexmb92fpJyGLrEP-0" />
+        <mxCell id="VOfImexmb92fpJyGLrEP-2" value="Database&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="VOfImexmb92fpJyGLrEP-1">
+          <mxGeometry x="320" y="640" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-3" value="Recycler View Adpater" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="VOfImexmb92fpJyGLrEP-1">
+          <mxGeometry x="320" y="70" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VOfImexmb92fpJyGLrEP-1" source="VOfImexmb92fpJyGLrEP-4" target="VOfImexmb92fpJyGLrEP-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-4" value="Main View Model&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="VOfImexmb92fpJyGLrEP-1">
+          <mxGeometry x="320" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VOfImexmb92fpJyGLrEP-1" source="VOfImexmb92fpJyGLrEP-5" target="VOfImexmb92fpJyGLrEP-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-5" value="Add New Item&amp;nbsp;&lt;br&gt;Activity&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="VOfImexmb92fpJyGLrEP-1">
+          <mxGeometry x="550" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VOfImexmb92fpJyGLrEP-1" source="VOfImexmb92fpJyGLrEP-6" target="VOfImexmb92fpJyGLrEP-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VOfImexmb92fpJyGLrEP-1" source="VOfImexmb92fpJyGLrEP-6" target="VOfImexmb92fpJyGLrEP-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-6" value="Main Activity" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="VOfImexmb92fpJyGLrEP-1">
+          <mxGeometry x="320" y="230" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VOfImexmb92fpJyGLrEP-1" source="VOfImexmb92fpJyGLrEP-7" target="VOfImexmb92fpJyGLrEP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VOfImexmb92fpJyGLrEP-7" value="Repository&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="VOfImexmb92fpJyGLrEP-1">
+          <mxGeometry x="320" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
