@@ -66,7 +66,7 @@
                 android:textSize="20dp"
                 android:inputType="number"
                 android:ems="5"
-                android:text="000000"
+                android:text="100"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"/>
@@ -92,14 +92,24 @@
 <!--    </RadioGroup>-->
 
     <EditText
-        android:id="@+id/et_body"
+        android:id="@+id/et_name"
+        android:hint="name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        app:layout_constraintTop_toBottomOf="@id/layout_bt_title"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+    <EditText
+        android:id="@+id/et_note"
+        android:hint="note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        app:layout_constraintTop_toBottomOf="@id/et_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

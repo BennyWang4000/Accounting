@@ -36,7 +36,7 @@ abstract class ListDatabase : RoomDatabase(){
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.
                     .fallbackToDestructiveMigration()
-                    .addCallback(WordDatabaseCallback(scope))
+                    .addCallback(ItemDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 // return instance
@@ -45,7 +45,7 @@ abstract class ListDatabase : RoomDatabase(){
         }
 
 
-        private class WordDatabaseCallback(
+        private class ItemDatabaseCallback(
             private val scope: CoroutineScope
         ) : RoomDatabase.Callback() {
             /**

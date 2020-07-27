@@ -4,13 +4,14 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.accounting.room.ItemEntity
 import com.example.accounting.room.ListDao
+import java.util.*
 
 //負責 view model 和 Dao / database 之間的資料使用
 class ListRepository(private val listDao: ListDao) {
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
     //以傳進之 dao 的方法，建立所有資料
-    val data: LiveData<List<ItemEntity>> = listDao.getAllItem()
+    val allData: LiveData<List<ItemEntity>> = listDao.getAllItem()
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
     // suspend function so the caller methods know this.
