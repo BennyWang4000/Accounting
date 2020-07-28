@@ -13,8 +13,6 @@ import java.util.*
 
 class AddNewItemActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_new_item_activity)
@@ -29,10 +27,9 @@ class AddNewItemActivity : AppCompatActivity() {
 //        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 
 
-
         btAdd.setOnClickListener{
             var newItem= ItemEntity(
-                1,
+                0,
                 ""+ Calendar.getInstance().get(Calendar.YEAR)+
                         (Calendar.getInstance().get(Calendar.MONTH)+ 1)+
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH),

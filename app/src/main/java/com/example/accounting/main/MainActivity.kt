@@ -1,5 +1,6 @@
 package com.example.accounting.main
 
+import android.app.Application
 import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +11,15 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
 import com.example.accounting.addNewItem.AddNewItemActivity
+import com.example.accounting.main.listFragment.ListFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -24,7 +29,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var btPreviousDay: Button
     private lateinit var btNextDay: Button
     private lateinit var tvToday: TextView
-    private lateinit var adapter:  MainListAdapter
+    private lateinit var frgList: Fragment
+    private val transaction: FragmentTransaction= supportFragmentManager.beginTransaction()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +41,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         btNextDay.setOnClickListener(this)
         btPreviousDay.setOnClickListener(this)
 
+        //view model
+        val factory= MainViewModelFactory(application)
+        viewModel= ViewModelProvider(this, factory).get(MainViewModel::class.java)
+//        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
+
+
+        //fragment 建立
+        transaction.replace(R.id.frg_list, ListFragment(viewModel.getCurrentDate(), application))
+        transaction.commit()
+
 
         //floating button
         val fltBt: FloatingActionButton= findViewById(R.id.flt_bt_add)
@@ -43,29 +59,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             startActivityForResult(intent, 1)
         }
 
-        //view model
-        val factory= MainViewModelFactory(application)
-        viewModel= ViewModelProvider(this, factory).get(MainViewModel::class.java)
-//        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 
-//        //observe data
-//        viewModel.data.observe(this, Observer { item ->
-//            // Update the cached copy of the words in the adapter.
-//            item?.let { adapter.addNewItem(it) }
-//        })
-
-        //recycler view
-         Log.e("test", viewModel.allData.toString())
-        try{
-            val rvList: RecyclerView= findViewById(R.id.rv_list)
-//            viewModel.allData.value.let{}
-            adapter = MainListAdapter(this, viewModel.allData.value!!)
-            rvList.adapter = adapter
-            rvList.layoutManager = LinearLayoutManager(this)
-        }catch(e: Exception){
-            Snackbar.make(this.findViewById(R.id.layout_main), "Recycler View Error... \n$e", Snackbar.LENGTH_SHORT)
-                .show()
-        }
         //tool bar
         val toolbar= findViewById<Toolbar>(R.id.toolbar_main)
         toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24_white)
@@ -102,11 +96,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
 
-
-
         //navigation drawer
-
-
     }
 
 //    //activity result
@@ -143,14 +133,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
     }
-
-    override fun onResume() {
-        super.onResume()
-        try {
-            adapter.notifyDataSetChanged()
-        }catch (e: java.lang.Exception){
-            Toast.makeText(this, "Notify Data Set Changed Error...\n$e", Toast.LENGTH_SHORT)
-                .show()
-        }
+    /**
+     * 疑問：fragment 是在 activity 底下的物件，那透過 activity 改變 fragment 是否違規？
+     * */
+    //change fragment
+    private fun changeFrg(date: List<Int>, application: Application){
+        val frg= ListFragment(date, application)
+        transaction.replace(R.id.frg_list, frg)
+        transaction.commit()
     }
+
+
+
+//    override fun onResume() {
+//        super.onResume()
+//        try {
+//            adapter.notifyDataSetChanged()
+//        }catch (e: java.lang.Exception){
+//            Toast.makeText(this, "Notify Data Set Changed Error...\n$e", Toast.LENGTH_SHORT)
+//                .show()
+//        }
+//    }
 }

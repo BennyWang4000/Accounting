@@ -4,19 +4,19 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.accounting.ListRepository
+import com.example.accounting.Repository
 import com.example.accounting.room.ItemEntity
 import com.example.accounting.room.ListDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddNewItemViewModel(application: Application): AndroidViewModel(application) {
-    private val repository: ListRepository
+    private val repository: Repository
     val data: LiveData<List<ItemEntity>>
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
-        repository = ListRepository(listDao)
+        repository = Repository(listDao)
         data = repository.allData
     }
 

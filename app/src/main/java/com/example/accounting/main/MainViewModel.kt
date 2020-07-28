@@ -7,12 +7,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.room.ItemEntity
 import com.example.accounting.room.ListDatabase
-import com.example.accounting.ListRepository
+import com.example.accounting.Repository
 import java.util.*
 
 class MainViewModel (application: Application): AndroidViewModel(application) {
     //建立 repository 實體
-    private val repository: ListRepository
+    private val repository: Repository
 
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
@@ -23,11 +23,10 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
-        repository = ListRepository(listDao)
+        repository = Repository(listDao)
         allData = repository.allData
-        Log.e("test", allData.toString())
+        Log.d("test", "MainViewModel allData: ${allData.value.toString()}")
     }
-
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
@@ -43,6 +42,7 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
 //        )
 //        repository.insertItem(item)
 //    }
+
 
     fun getCurrentDate(): List<Int> = listOf(
         Calendar.getInstance().get(Calendar.YEAR),

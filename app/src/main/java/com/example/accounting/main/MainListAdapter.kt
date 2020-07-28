@@ -14,11 +14,10 @@ import com.example.accounting.room.ItemEntity
 
 
 class MainListAdapter constructor(
-    private val context: Context,
-    var listData: List<ItemEntity>
+    private val context: Context
 ): RecyclerView.Adapter<MainListAdapter.ListViewHolder>() {
 
-//    private var listData= emptyList<ItemEntity>()
+    private var listData= emptyList<ItemEntity>()
 
     inner class ListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val layout: ConstraintLayout= itemView.findViewById(R.id.layout_item)
@@ -28,6 +27,7 @@ class MainListAdapter constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+        Log.d("test", "Adapter Data: $listData")
         return ListViewHolder(
             LayoutInflater
                 .from(context)
@@ -47,7 +47,7 @@ class MainListAdapter constructor(
         holder.name.text= listData[position].name
         holder.price.text= listData[position].price.toString()
         holder.layout.setOnClickListener{
-            Log.e("test", "$position is Clicked!")
+            Log.d("test", "$position is Clicked!")
         }
     }
 
@@ -55,4 +55,6 @@ class MainListAdapter constructor(
         this.listData = data
         notifyDataSetChanged()
     }
+
+
 }

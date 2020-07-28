@@ -73,14 +73,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list"
+    <fragment
+        android:id="@+id/frg_list"
+        android:name="com.example.accounting.main.listFragment.NullFragment"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_costs"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_costs" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/flt_bt_add"
