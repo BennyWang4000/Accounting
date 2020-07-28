@@ -5,18 +5,13 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
 import com.example.accounting.addNewItem.AddNewItemActivity
 import com.example.accounting.main.listFragment.ListFragment
@@ -63,7 +58,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         //tool bar
         val toolbar= findViewById<Toolbar>(R.id.toolbar_main)
         toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24_white)
-        toolbar.inflateMenu(R.menu.main_setting)
+        toolbar.inflateMenu(R.menu.main_toolbar)
         toolbar.setOnMenuItemClickListener{
             when(it.itemId){
                 R.id.item_setting -> {

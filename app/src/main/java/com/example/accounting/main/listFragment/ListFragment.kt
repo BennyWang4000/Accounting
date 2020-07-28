@@ -1,7 +1,6 @@
 package com.example.accounting.main.listFragment
 
 import android.app.Application
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,18 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
-import com.example.accounting.main.MainListAdapter
-import com.example.accounting.main.MainViewModel
-import com.example.accounting.main.MainViewModelFactory
 
 class ListFragment(val date: List<Int>, val application: Application) : Fragment(){
 
-    private lateinit var adapter:  MainListAdapter
+    private lateinit var adapter: ListAdapter
     private lateinit var viewModel:  ListViewModel
     private lateinit var rvList:  RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root=  inflater.inflate(R.layout.list_fragment, container, false)
+        val root=  inflater.inflate(R.layout.main_fragment_list, container, false)
 
         //view model
         val factory= ListViewModelFactory(application)
@@ -36,7 +32,8 @@ class ListFragment(val date: List<Int>, val application: Application) : Fragment
         try {
             rvList= root.findViewById(R.id.rv_list)
 //            viewModel.allData.value.let{}
-            adapter = MainListAdapter(context!!)
+            adapter =
+                ListAdapter(context!!)
             rvList.adapter = adapter
             rvList.layoutManager = LinearLayoutManager(context!!)
         } catch (e: Exception) {

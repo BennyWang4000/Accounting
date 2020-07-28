@@ -1,4 +1,4 @@
-package com.example.accounting.main
+package com.example.accounting.main.listFragment
 
 import android.content.Context
 import android.util.Log
@@ -13,9 +13,9 @@ import com.example.accounting.R
 import com.example.accounting.room.ItemEntity
 
 
-class MainListAdapter constructor(
+class ListAdapter constructor(
     private val context: Context
-): RecyclerView.Adapter<MainListAdapter.ListViewHolder>() {
+): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
     private var listData= emptyList<ItemEntity>()
 

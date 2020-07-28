@@ -67,7 +67,7 @@
             android:layout_marginLeft="40dp"/>
         <TextView
             android:id="@+id/tv_cost"
-            android:textSize="20dp"
+            android:textSize="28dp"
             android:text="000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
