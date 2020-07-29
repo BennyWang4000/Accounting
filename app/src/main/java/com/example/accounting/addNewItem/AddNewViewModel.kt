@@ -10,7 +10,7 @@ import com.example.accounting.room.ListDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AddNewItemViewModel(application: Application): AndroidViewModel(application) {
+class AddNewViewModel(application: Application): AndroidViewModel(application) {
     private val repository: Repository
     val data: LiveData<List<ItemEntity>>
 

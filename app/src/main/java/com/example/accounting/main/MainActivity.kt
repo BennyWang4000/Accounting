@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.accounting.R
-import com.example.accounting.addNewItem.AddNewItemActivity
+import com.example.accounting.addNewItem.AddNewActivity
 import com.example.accounting.main.listFragment.ListFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         //floating button
         val fltBt: FloatingActionButton= findViewById(R.id.flt_bt_add)
         fltBt.setOnClickListener{
-            val intent= Intent(this, AddNewItemActivity::class.java)
+            val intent= Intent(this, AddNewActivity::class.java)
             startActivityForResult(intent, 1)
         }
 

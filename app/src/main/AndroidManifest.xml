@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".itemInfo.ItemInfoActivity"></activity>
-        <activity android:name=".addNewItem.AddNewItemActivity" />
+        <activity android:name=".addNewItem.AddNewActivity" />
         <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

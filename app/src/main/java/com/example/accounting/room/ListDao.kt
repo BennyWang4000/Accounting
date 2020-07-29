@@ -13,8 +13,9 @@ import androidx.room.Query
  *          -目前使用
  *
  *      2. 一個 database ??個 table ，新增資料時，若沒有以該日期命名之資料表，則建立並放進資料
- *          -採用 : ALTER TABLE *** RENAME TO $date
+ *          -採用 : ALTER TABLE *** RENAME TO $date / (:data)
  *          -問題 : An annotation argument must be a compile-time constant
+ *          -問題
  *
  *      3. 一個 database 一個 table 包著??個 table，兩個欄位：一個日期、一個是放 item 的資料表
  *          -巢狀資料表可以ㄇ 🤔🤔🤔
@@ -28,13 +29,19 @@ interface ListDao {
 //    fun getAllDate(): LiveData<List<DateEntity>>
 
 
-    @Query("SELECT * FROM item_table")
-    fun getAllItem(): LiveData<List<ItemEntity>>
+    @Query("SELECT * FROM date_table")
+    fun getAllDate(): LiveData<List<ItemEntity>>
 //    @Query("ALTER TABLE item_table RENAME TO $date")
 //    fun alterTableName(date: Int)
 
-    @Query("SELECT * FROM item_table WHERE date IN (:date)")
-    fun getDateItem(date: String): LiveData<List<ItemEntity>>
+//    @Query("ALTER TABLE new_item_table RENAME TO (:date)")
+//    fun renameTable(date: String): LiveData<List<ItemEntity>>
+
+    @Query("SELECT * FROM date_table WHERE ")
+    fun getDateItem(date: String):
+
+//    @Query("SELECT * FROM item_table WHERE date IN (:date)")
+//    fun getDateItem(date: String): LiveData<List<ItemEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertItem(item: ItemEntity)

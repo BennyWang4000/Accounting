@@ -1,32 +1,41 @@
 package com.example.accounting.addNewItem
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
-import com.example.accounting.main.MainViewModel
-import com.example.accounting.main.MainViewModelFactory
 import com.example.accounting.room.ItemEntity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 
-class AddNewItemActivity : AppCompatActivity() {
+class AddNewActivity : AppCompatActivity() {
+
+    private lateinit var pagerType: ViewPager2
+    private lateinit var pagerAdapter: AddNewViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.add_new_item_activity)
+        setContentView(R.layout.add_new_activity)
         val etPrice: EditText= findViewById(R.id.et_cost)
         val etName: EditText= findViewById(R.id.et_name)
         val etNote: EditText= findViewById(R.id.et_note)
         val btAdd: FloatingActionButton = findViewById(R.id.flt_bt_save)
 
         //view model
-        val factory= AddNewItemViewModelFactory(application)
-        val viewModel= ViewModelProvider(this, factory).get(AddNewItemViewModel::class.java)
+        val factory= AddNewViewModelFactory(application)
+        val viewModel= ViewModelProvider(this, factory).get(AddNewViewModel::class.java)
 //        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 
+        //view pager
+        val viewList= listOf(R.layout.add_new_pager_type_1, R.layout.add_new_pager_type_2)
+        pagerAdapter= AddNewViewPagerAdapter()
 
+
+        //button is clicked
         btAdd.setOnClickListener{
             var newItem= ItemEntity(
                 0,
