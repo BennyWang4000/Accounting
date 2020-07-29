@@ -13,9 +13,9 @@ import com.example.accounting.R
 import com.example.accounting.room.ItemEntity
 
 
-class ListAdapter constructor(
+class ListRecyclerAdapter constructor(
     private val context: Context
-): RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+): RecyclerView.Adapter<ListRecyclerAdapter.ListViewHolder>() {
 
     private var listData= emptyList<ItemEntity>()
 

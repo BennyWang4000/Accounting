@@ -23,7 +23,4 @@ class AddNewViewModel(application: Application): AndroidViewModel(application) {
     fun insertItem(item: ItemEntity) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertItem(item)
     }
-//    suspend fun insertItem(item: ItemEntity){
-//        repository.insertItem(item)
-//    }
 }

@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
 
-class ListFragment(val date: List<Int>, val application: Application) : Fragment(){
+class ListFragment(val application: Application) : Fragment(){
 
-    private lateinit var adapter: ListAdapter
+    private lateinit var recyclerAdapter: ListRecyclerAdapter
     private lateinit var viewModel:  ListViewModel
     private lateinit var rvList:  RecyclerView
 
@@ -27,14 +27,14 @@ class ListFragment(val date: List<Int>, val application: Application) : Fragment
         viewModel= ViewModelProvider(this, factory).get(ListViewModel::class.java)
 
         //recycler view
-        Log.d("test", "viewModel.allData.value.toString(): ${viewModel.allData.value}")
+        Log.d("test", "viewModel.dateData.value.toString(): ${viewModel.dateData.value}")
 
         try {
             rvList= root.findViewById(R.id.rv_list)
 //            viewModel.allData.value.let{}
-            adapter =
-                ListAdapter(context!!)
-            rvList.adapter = adapter
+            recyclerAdapter =
+                ListRecyclerAdapter(context!!)
+            rvList.adapter = recyclerAdapter
             rvList.layoutManager = LinearLayoutManager(context!!)
         } catch (e: Exception) {
             Log.d("test", "Recycler View Load Error\n$e")
@@ -43,11 +43,11 @@ class ListFragment(val date: List<Int>, val application: Application) : Fragment
 
         //observe data
         try {
-            viewModel.allData.observe(this, Observer { item ->
+            viewModel.dateData.observe(this, Observer { item ->
                 // Update the cached copy of the words in the adapter.
                 item?.let {
                     Log.d("test", "ViewModel Observe")
-                    adapter.addNewItem(it)
+                    recyclerAdapter.addNewItem(it)
                 }
             })
         } catch (e: Exception) {

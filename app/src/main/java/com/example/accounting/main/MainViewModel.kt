@@ -4,11 +4,12 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.room.ItemEntity
 import com.example.accounting.room.ListDatabase
 import com.example.accounting.Repository
-import java.util.*
+import java.time.LocalDate
 
 class MainViewModel (application: Application): AndroidViewModel(application) {
     //建立 repository 實體
@@ -20,11 +21,17 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
     // - Repository is completely separated from the UI through the ViewModel.
     val allData: LiveData<List<ItemEntity>>
 
+    var currentDate: MutableLiveData<LocalDate>
+    var selectedDate: MutableLiveData<LocalDate>
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)
         allData = repository.allData
+
+        currentDate= repository.currentDate
+        selectedDate= repository.selectedDate
+
         Log.d("test", "MainViewModel allData: ${allData.value.toString()}")
     }
 
@@ -43,12 +50,10 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
 //        repository.insertItem(item)
 //    }
 
+//
+//    var currentDate= repository.currentDate
+//    var selectedDate= repository.selectedDate
 
-    fun getCurrentDate(): List<Int> = listOf(
-        Calendar.getInstance().get(Calendar.YEAR),
-        Calendar.getInstance().get(Calendar.MONTH),
-        Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-    )
 
 //    fun getNewItem(intent: Intent){
 //

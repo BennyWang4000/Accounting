@@ -12,13 +12,15 @@ import com.example.accounting.room.ListDatabase
 class ListViewModel(application: Application): AndroidViewModel(application) {
     //建立 repository 實體
     private val repository: Repository
-    val allData: LiveData<List<ItemEntity>>
+    val dateData: LiveData<List<ItemEntity>>
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)
-        allData = repository.allData
-        Log.d("test", "MainViewModel allData: ${allData.value.toString()}")
+        dateData= repository.allData
+//        預計改成：
+//        dateData = repository.getDateItem(repository.selectedDate.toInt())
+        Log.d("test", "MainViewModel allData: ${dateData.value.toString()}")
     }
 
 }

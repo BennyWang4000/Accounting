@@ -3,20 +3,25 @@ package com.example.accounting.main
 import android.app.Application
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.accounting.R
 import com.example.accounting.addNewItem.AddNewActivity
 import com.example.accounting.main.listFragment.ListFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import java.time.LocalDate
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -27,6 +32,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var frgList: Fragment
     private val transaction: FragmentTransaction= supportFragmentManager.beginTransaction()
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
@@ -36,14 +42,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         btNextDay.setOnClickListener(this)
         btPreviousDay.setOnClickListener(this)
 
+
         //view model
         val factory= MainViewModelFactory(application)
         viewModel= ViewModelProvider(this, factory).get(MainViewModel::class.java)
 //        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 
 
+        //observe
+        viewModel.selectedDate.observe(this, Observer { date ->
+            // Update the cached copy of the words in the adapter.
+            date?.let {
+                Log.d("test", "Selected Date Observe")
+                tvToday.text= viewModel.selectedDate.value.toString()
+            }
+        })
+
         //fragment 建立
-        transaction.replace(R.id.frg_list, ListFragment(viewModel.getCurrentDate(), application))
+        transaction.replace(R.id.frg_list, ListFragment(application))
         transaction.commit()
 
 
@@ -71,14 +87,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                         .show()
                     return@setOnMenuItemClickListener true
                 }
+
                 R.id.item_date -> {
                     DatePickerDialog(this, { _, year, month, day ->
                         run {
                             val date = "你設定的日期為:$year ${month+ 1} $day"
                             Snackbar.make(this.findViewById(R.id.layout_main), date, Snackbar.LENGTH_SHORT)
                             .show()
+
+                            viewModel.selectedDate.value= LocalDate.parse("$year$month$day")
+
                         }
-                    }, viewModel.getCurrentDate()[0], viewModel.getCurrentDate()[1], viewModel.getCurrentDate()[2])
+                    }, viewModel.selectedDate.value!!.year
+                        , viewModel.selectedDate.value!!.monthValue
+                        , viewModel.selectedDate.value!!.dayOfMonth)
                         .show()
                 return@setOnMenuItemClickListener true
                 }
@@ -92,24 +114,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         }
 
         //navigation drawer
-    }
 
-//    //activity result
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        Log.e("test", "Get Activity Result!")
-//
-//        Snackbar.make(this.findViewById(R.id.layout_main), "Result: ${data.toString()}", Snackbar.LENGTH_SHORT)
-//            .show()
-//
-//        if (data != null) {
-////            viewModel.insertItem(data)
-//        }else{
-//            Snackbar.make(this.findViewById(R.id.layout_main), "Error", Snackbar.LENGTH_SHORT)
-//                .show()
-//        }
-//    }
+    }
 
     //button be clicked
     override fun onClick(view: View?) {
@@ -117,10 +123,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             R.id.bt_previous_day -> {
                 Snackbar.make(this.findViewById(R.id.layout_main), "Previous Day...", Snackbar.LENGTH_SHORT)
                     .show()
+
+                viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
+
+                Log.d("test", viewModel.selectedDate.value.toString())
             }
             R.id.bt_next_day -> {
                 Snackbar.make(this.findViewById(R.id.layout_main), "Next Day...", Snackbar.LENGTH_SHORT)
                     .show()
+
+                viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
+
+                Log.d("test", viewModel.selectedDate.value.toString())
             }
             else -> {
                 Snackbar.make(this.findViewById(R.id.layout_main), "蛤？", Snackbar.LENGTH_SHORT)
@@ -133,20 +147,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
      * */
     //change fragment
     private fun changeFrg(date: List<Int>, application: Application){
-        val frg= ListFragment(date, application)
+        val frg= ListFragment(application)
         transaction.replace(R.id.frg_list, frg)
         transaction.commit()
     }
-
-
-
-//    override fun onResume() {
-//        super.onResume()
-//        try {
-//            adapter.notifyDataSetChanged()
-//        }catch (e: java.lang.Exception){
-//            Toast.makeText(this, "Notify Data Set Changed Error...\n$e", Toast.LENGTH_SHORT)
-//                .show()
-//        }
-//    }
 }

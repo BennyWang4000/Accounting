@@ -29,16 +29,20 @@ interface ListDao {
 //    fun getAllDate(): LiveData<List<DateEntity>>
 
 
-    @Query("SELECT * FROM date_table")
-    fun getAllDate(): LiveData<List<ItemEntity>>
+    @Query("SELECT * FROM item_table")
+    fun getAllItems(): LiveData<List<ItemEntity>>
+
+    @Query("SELECT * FROM item_table WHERE date IN (:date) ORDER BY id ASC")
+    fun getDateItems(date: Int): LiveData<List<ItemEntity>>
+
 //    @Query("ALTER TABLE item_table RENAME TO $date")
 //    fun alterTableName(date: Int)
 
 //    @Query("ALTER TABLE new_item_table RENAME TO (:date)")
 //    fun renameTable(date: String): LiveData<List<ItemEntity>>
 
-    @Query("SELECT * FROM date_table WHERE ")
-    fun getDateItem(date: String):
+//    @Query("SELECT * FROM date_table WHERE ")
+//    fun getDateItem(date: String):
 
 //    @Query("SELECT * FROM item_table WHERE date IN (:date)")
 //    fun getDateItem(date: String): LiveData<List<ItemEntity>>

@@ -3,25 +3,46 @@ package com.example.accounting
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.accounting.room.ItemEntity
 import com.example.accounting.room.ListDao
-import java.util.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 //負責 view model 和 Dao / database 之間的資料使用
 class Repository(private val listDao: ListDao) {
-    // Room executes all queries on a separate thread.
-    // Observed LiveData will notify the observer when the data has changed.
-    //以傳進之 dao 的方法，建立所有資料
-    private var selectedDate: Int
-    init{
-        selectedDate=0
+
+    var currentDate= MutableLiveData<LocalDate>()
+    var selectedDate= MutableLiveData<LocalDate>()
+
+    init {
+        val dateFormatter= DateTimeFormatter.ofPattern("yyyyMMdd")
+        currentDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
+        selectedDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
     }
+//    var currentDate=
+//        DateTimeFormatter
+//        .ofPattern("yyyyMMdd")
+//        .format(LocalDate.now())
+//        get()= field
+//        set(value) {
+//            field= value
+//        }
+//
+//    var selectedDate= currentDate
+//        get() = field
+//        set(value) {
+//            Log.d("test", "Selected Date: $value")
+//            field= value
+//        }
 
-    val allData: LiveData<List<ItemEntity>> = listDao.getAllItem()
 
+    val allData: LiveData<List<ItemEntity>> = listDao.getAllItems()
 
-
-
+    fun getDateItem(date: Int): LiveData<List<ItemEntity>> {
+        Log.d("test", listDao.getDateItems(date).value.toString())
+        return listDao.getDateItems(date)
+    }
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
     // suspend function so the caller methods know this.
@@ -33,8 +54,9 @@ class Repository(private val listDao: ListDao) {
     @WorkerThread
     //viewModel 使用之方法
     suspend fun insertItem(item: ItemEntity) {
-        //調用 dao 的方法
+        //使用 dao 的方法
         Log.d("test", item.toString())
         listDao.insertItem(item)
     }
+
 }

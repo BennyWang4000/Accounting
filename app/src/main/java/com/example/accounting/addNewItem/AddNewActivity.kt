@@ -28,7 +28,6 @@ class AddNewActivity : AppCompatActivity() {
         //view model
         val factory= AddNewViewModelFactory(application)
         val viewModel= ViewModelProvider(this, factory).get(AddNewViewModel::class.java)
-//        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 
         //view pager
         val viewList= listOf(R.layout.add_new_pager_type_1, R.layout.add_new_pager_type_2)
@@ -39,9 +38,9 @@ class AddNewActivity : AppCompatActivity() {
         btAdd.setOnClickListener{
             var newItem= ItemEntity(
                 0,
-                ""+ Calendar.getInstance().get(Calendar.YEAR)+
+                (""+ Calendar.getInstance().get(Calendar.YEAR)+
                         (Calendar.getInstance().get(Calendar.MONTH)+ 1)+
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).toInt(),
                 0,
                 "type",
                 etName.text.toString(),
@@ -50,13 +49,6 @@ class AddNewActivity : AppCompatActivity() {
             )
 
             viewModel.insertItem(newItem)
-            //貌似不符合 MVVM 原則 ：view 之間相互碰觸
-//            val intent= Intent()
-//            intent.putExtra("price", etPrice.text)
-//            intent.putExtra("body", etBody.text)
-//            setResult(1, intent)
-//
-//            Log.e("test", "Save Button Clicked!")
             finish()
         }
 

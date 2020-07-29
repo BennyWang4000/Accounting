@@ -9,9 +9,11 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "item_table")
 data class ItemEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "item_id") val itemId: Int= 1,
-    @ColumnInfo(name= "type") val type: String?,
-    @ColumnInfo(name= "name") val name: String?,
-    @ColumnInfo(name= "note") val note: String?,
-    @ColumnInfo(name= "price") val price: Int?
+    @ColumnInfo(name= "date") val date: Int,
+    @ColumnInfo(name= "id") val id: Int,
+    @ColumnInfo(name= "type") val type: String,
+    @ColumnInfo(name= "name") val name: String,
+    @ColumnInfo(name= "note") val note: String,
+    @ColumnInfo(name= "price") val price: Int
 ) {
 }
