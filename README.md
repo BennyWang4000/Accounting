@@ -5,3 +5,11 @@
 ##### Done in 2020/07/30
 - date picker dialog is showed with correct date
 - SelectedDate in repository is work correctly with companion object
+
+##### To do
+- banner view pager
+- view pager 2
+- navigation drawer
+- navigation bottom
+- prettify UI
+-------
