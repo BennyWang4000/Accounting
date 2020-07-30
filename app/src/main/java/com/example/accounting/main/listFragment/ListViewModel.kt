@@ -20,7 +20,7 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
         repository = Repository(listDao)
 //        dateData= repository.allData
 //        預計改成：
-        dateData = repository.getDateItem(repository.selectedDate.value!!.toString())
+        dateData = repository.getDateItem(Repository.selectedDate.value!!.toString())
         Log.d(ContentValues.TAG, "MainViewModel allData: ${dateData.value.toString()}")
     }
 

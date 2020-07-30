@@ -9,6 +9,7 @@ import com.example.accounting.room.ItemEntity
 import com.example.accounting.room.ListDatabase
 import com.example.accounting.Repository
 import java.time.LocalDate
+import com.example.accounting.Repository.Date as RepositoryDate
 
 class MainViewModel (application: Application): AndroidViewModel(application) {
     //建立 repository 實體
@@ -27,8 +28,8 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)
 
-        currentDate= repository.currentDate
-        selectedDate= repository.selectedDate
+        currentDate= RepositoryDate.currentDate
+        selectedDate= RepositoryDate.selectedDate
 
         dateItem = repository.getDateItem(selectedDate.value.toString())
     }
@@ -38,7 +39,7 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
 //    }
 
     fun test(){
-        Log.d(TAG, "REPOSITORY: " + repository.selectedDate.value!!.dayOfMonth.toString())
+        Log.d(TAG, "REPOSITORY: " + RepositoryDate.selectedDate.value!!.dayOfMonth.toString())
     }
 
     fun getSum(): Int{

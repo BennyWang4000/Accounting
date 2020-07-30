@@ -13,18 +13,17 @@ import com.example.accounting.room.ListDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import com.example.accounting.Repository.Date as RepositoryDate
 
 class AddNewViewModel(application: Application): AndroidViewModel(application) {
     private val repository: Repository
 
-    var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)
-        currentDate= repository.currentDate
-        selectedDate= repository.selectedDate
+        selectedDate= RepositoryDate.selectedDate
 
         Log.d(TAG,  "Add New View Model Date: ${selectedDate.value.toString()}")
     }

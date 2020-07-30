@@ -13,15 +13,38 @@ import java.time.format.DateTimeFormatter
 //負責 view model 和 Dao / database 之間的資料使用
 class Repository(private val listDao: ListDao) {
 
-    var currentDate= MutableLiveData<LocalDate>()
-    var selectedDate= MutableLiveData<LocalDate>()
 
-    init {
-        val dateFormatter= DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        currentDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
-        selectedDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
-        Log.d(TAG, "")
+    companion object Date {
+        var isCreated = false
+        val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        var currentDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString()
+            , dateFormatter))
+        var selectedDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString()
+            , dateFormatter))
     }
+
+//    companion object{
+//        val dateFormatter= DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//        var currentDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString(), dateFormatter))
+//        var selectedDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString(), dateFormatter))
+//    }
+
+
+//    private var isCreated = false
+//    var currentDate = MutableLiveData<LocalDate>()
+//    var selectedDate = MutableLiveData<LocalDate>()
+//
+//    init {
+//        val dateFormatter= DateTimeFormatter.ofPattern("yyyy-MM-dd")
+//        currentDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
+//
+//        if (!isCreated) {
+//            selectedDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
+//            Log.d(TAG, "Created")
+//            isCreated= true
+//        }
+//        Log.d(TAG, "")
+//    }
 
     val allData: LiveData<List<ItemEntity>> = listDao.getAllItems()
 

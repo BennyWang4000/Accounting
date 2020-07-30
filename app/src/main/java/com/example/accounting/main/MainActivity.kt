@@ -24,6 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
 
+
 class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var viewModel: MainViewModel

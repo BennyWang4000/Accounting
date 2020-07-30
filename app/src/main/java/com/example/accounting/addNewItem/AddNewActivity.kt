@@ -39,6 +39,8 @@ class AddNewActivity : AppCompatActivity() {
         val viewList= listOf(R.layout.add_new_pager_type_1, R.layout.add_new_pager_type_2)
         pagerAdapter= AddNewViewPagerAdapter()
 
+        tvToday.text= viewModel.selectedDate.value.toString()
+
         //observe
         viewModel.selectedDate.observe(this, androidx.lifecycle.Observer {
             try {
@@ -65,7 +67,5 @@ class AddNewActivity : AppCompatActivity() {
             viewModel.insertItem(newItem)
             finish()
         }
-
-
     }
 }
