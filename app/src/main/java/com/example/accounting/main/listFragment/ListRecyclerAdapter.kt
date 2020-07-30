@@ -1,5 +1,7 @@
 package com.example.accounting.main.listFragment
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,7 +29,7 @@ class ListRecyclerAdapter constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        Log.d("test", "Adapter Data: $listData")
+        Log.d(TAG, "Adapter Data: $listData")
         return ListViewHolder(
             LayoutInflater
                 .from(context)
@@ -47,7 +49,7 @@ class ListRecyclerAdapter constructor(
         holder.name.text= listData[position].name
         holder.price.text= listData[position].price.toString()
         holder.layout.setOnClickListener{
-            Log.d("test", "$position is Clicked!")
+            Log.d(ContentValues.TAG, "$position is Clicked!")
         }
     }
 

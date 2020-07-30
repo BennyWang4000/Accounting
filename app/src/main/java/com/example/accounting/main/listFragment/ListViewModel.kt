@@ -1,6 +1,7 @@
 package com.example.accounting.main.listFragment
 
 import android.app.Application
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -17,10 +18,10 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)
-        dateData= repository.allData
+//        dateData= repository.allData
 //        預計改成：
-//        dateData = repository.getDateItem(repository.selectedDate.toInt())
-        Log.d("test", "MainViewModel allData: ${dateData.value.toString()}")
+        dateData = repository.getDateItem(repository.selectedDate.value!!.toString())
+        Log.d(ContentValues.TAG, "MainViewModel allData: ${dateData.value.toString()}")
     }
 
 }

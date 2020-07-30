@@ -1,14 +1,19 @@
 package com.example.accounting.addNewItem
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
 import com.example.accounting.room.ItemEntity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 class AddNewActivity : AppCompatActivity() {
@@ -24,6 +29,7 @@ class AddNewActivity : AppCompatActivity() {
         val etName: EditText= findViewById(R.id.et_name)
         val etNote: EditText= findViewById(R.id.et_note)
         val btAdd: FloatingActionButton = findViewById(R.id.flt_bt_save)
+        val tvToday: TextView= findViewById(R.id.tv_today)
 
         //view model
         val factory= AddNewViewModelFactory(application)
@@ -33,20 +39,28 @@ class AddNewActivity : AppCompatActivity() {
         val viewList= listOf(R.layout.add_new_pager_type_1, R.layout.add_new_pager_type_2)
         pagerAdapter= AddNewViewPagerAdapter()
 
+        //observe
+        viewModel.selectedDate.observe(this, androidx.lifecycle.Observer {
+            try {
+                tvToday.text= viewModel.selectedDate.value.toString()
+            } catch (e: Exception) {
+                Snackbar.make(this.findViewById(R.id.layout_main), "$e", Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+        })
 
         //button is clicked
         btAdd.setOnClickListener{
             var newItem= ItemEntity(
                 0,
-                (""+ Calendar.getInstance().get(Calendar.YEAR)+
-                        (Calendar.getInstance().get(Calendar.MONTH)+ 1)+
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)).toInt(),
+                viewModel.selectedDate.value.toString(),
                 0,
                 "type",
                 etName.text.toString(),
                 etNote.text.toString(),
                 etPrice.text.toString().toInt()
             )
+            Log.d(ContentValues.TAG, "Add New Item Date: "+ viewModel.selectedDate.value.toString())
 
             viewModel.insertItem(newItem)
             finish()

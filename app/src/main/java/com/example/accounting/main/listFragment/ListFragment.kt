@@ -1,6 +1,7 @@
 package com.example.accounting.main.listFragment
 
 import android.app.Application
+import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,7 +28,7 @@ class ListFragment(val application: Application) : Fragment(){
         viewModel= ViewModelProvider(this, factory).get(ListViewModel::class.java)
 
         //recycler view
-        Log.d("test", "viewModel.dateData.value.toString(): ${viewModel.dateData.value}")
+        Log.d(ContentValues.TAG, "viewModel.dateData.value.toString(): ${viewModel.dateData.value}")
 
         try {
             rvList= root.findViewById(R.id.rv_list)
@@ -37,7 +38,7 @@ class ListFragment(val application: Application) : Fragment(){
             rvList.adapter = recyclerAdapter
             rvList.layoutManager = LinearLayoutManager(context!!)
         } catch (e: Exception) {
-            Log.d("test", "Recycler View Load Error\n$e")
+            Log.d(ContentValues.TAG, "Recycler View Load Error\n$e")
         }
 
 
@@ -46,13 +47,13 @@ class ListFragment(val application: Application) : Fragment(){
             viewModel.dateData.observe(this, Observer { item ->
                 // Update the cached copy of the words in the adapter.
                 item?.let {
-                    Log.d("test", "ViewModel Observe")
                     recyclerAdapter.addNewItem(it)
                 }
             })
         } catch (e: Exception) {
-            Log.d("test", "Data Observe Error...\n$e")
+            Log.d(ContentValues.TAG, "Data Observe Error...\n$e")
         }
+
         return root
     }
 }

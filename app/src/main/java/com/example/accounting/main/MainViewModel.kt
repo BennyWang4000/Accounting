@@ -1,11 +1,10 @@
 package com.example.accounting.main
 
 import android.app.Application
+import android.content.ClipData
+import android.content.ContentValues.TAG
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.accounting.room.ItemEntity
 import com.example.accounting.room.ListDatabase
 import com.example.accounting.Repository
@@ -19,7 +18,7 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val allData: LiveData<List<ItemEntity>>
+    val dateItem: LiveData<List<ItemEntity>>
 
     var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
@@ -27,12 +26,29 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)
-        allData = repository.allData
 
         currentDate= repository.currentDate
         selectedDate= repository.selectedDate
 
-        Log.d("test", "MainViewModel allData: ${allData.value.toString()}")
+        dateItem = repository.getDateItem(selectedDate.value.toString())
+    }
+
+//    fun upDateRepository(){
+//        repository.selectedDate.value= this.selectedDate.value
+//    }
+
+    fun test(){
+        Log.d(TAG, "REPOSITORY: " + repository.selectedDate.value!!.dayOfMonth.toString())
+    }
+
+    fun getSum(): Int{
+        var sum: Int= 0
+
+        for(i in 0..dateItem.value!!.size){
+            sum+= dateItem.value!!.get(i).price
+        }
+        Log.d(TAG, "sum: $sum")
+        return sum
     }
 
     /**

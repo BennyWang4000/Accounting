@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import java.time.LocalDate
 
 /**
  * 方案：
@@ -33,7 +34,7 @@ interface ListDao {
     fun getAllItems(): LiveData<List<ItemEntity>>
 
     @Query("SELECT * FROM item_table WHERE date IN (:date) ORDER BY id ASC")
-    fun getDateItems(date: Int): LiveData<List<ItemEntity>>
+    fun getDateItems(date: String): LiveData<List<ItemEntity>>
 
 //    @Query("ALTER TABLE item_table RENAME TO $date")
 //    fun alterTableName(date: Int)

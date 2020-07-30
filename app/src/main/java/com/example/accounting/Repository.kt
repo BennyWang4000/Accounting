@@ -1,5 +1,6 @@
 package com.example.accounting
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
@@ -16,33 +17,14 @@ class Repository(private val listDao: ListDao) {
     var selectedDate= MutableLiveData<LocalDate>()
 
     init {
-        val dateFormatter= DateTimeFormatter.ofPattern("yyyyMMdd")
+        val dateFormatter= DateTimeFormatter.ofPattern("yyyy-MM-dd")
         currentDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
         selectedDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
+        Log.d(TAG, "")
     }
-//    var currentDate=
-//        DateTimeFormatter
-//        .ofPattern("yyyyMMdd")
-//        .format(LocalDate.now())
-//        get()= field
-//        set(value) {
-//            field= value
-//        }
-//
-//    var selectedDate= currentDate
-//        get() = field
-//        set(value) {
-//            Log.d("test", "Selected Date: $value")
-//            field= value
-//        }
-
 
     val allData: LiveData<List<ItemEntity>> = listDao.getAllItems()
 
-    fun getDateItem(date: Int): LiveData<List<ItemEntity>> {
-        Log.d("test", listDao.getDateItems(date).value.toString())
-        return listDao.getDateItems(date)
-    }
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
     // suspend function so the caller methods know this.
@@ -55,8 +37,12 @@ class Repository(private val listDao: ListDao) {
     //viewModel 使用之方法
     suspend fun insertItem(item: ItemEntity) {
         //使用 dao 的方法
-        Log.d("test", item.toString())
+        Log.d(TAG, item.toString())
         listDao.insertItem(item)
     }
 
+    fun getDateItem(date: String): LiveData<List<ItemEntity>> {
+        Log.d(TAG, listDao.getDateItems(date.toString()).value.toString())
+        return listDao.getDateItems(date)
+    }
 }

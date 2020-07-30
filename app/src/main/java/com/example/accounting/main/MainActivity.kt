@@ -2,6 +2,7 @@ package com.example.accounting.main
 
 import android.app.Application
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -53,8 +54,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         viewModel.selectedDate.observe(this, Observer { date ->
             // Update the cached copy of the words in the adapter.
             date?.let {
-                Log.d("test", "Selected Date Observe")
+                Log.d(ContentValues.TAG, "Main View Observe Date: $date")
                 tvToday.text= viewModel.selectedDate.value.toString()
+                viewModel.test()
             }
         })
 
@@ -95,14 +97,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                             Snackbar.make(this.findViewById(R.id.layout_main), date, Snackbar.LENGTH_SHORT)
                             .show()
 
-                            viewModel.selectedDate.value= LocalDate.parse("$year$month$day")
+                            viewModel.selectedDate.value= LocalDate.parse(
+                                "$year-" +
+                                        String.format("%02d", month+ 1)+ "-" +
+                                        String.format("%02d", day)
+                            )
 
                         }
                     }, viewModel.selectedDate.value!!.year
-                        , viewModel.selectedDate.value!!.monthValue
-                        , viewModel.selectedDate.value!!.dayOfMonth)
+                        , String.format("%02d", viewModel.selectedDate.value!!.monthValue.plus(-1)).toInt()
+                        , String.format("%02d", viewModel.selectedDate.value!!.dayOfMonth).toInt())
                         .show()
-                return@setOnMenuItemClickListener true
+
+                    return@setOnMenuItemClickListener true
                 }
 
                 else -> {
@@ -125,16 +132,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                     .show()
 
                 viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
-
-                Log.d("test", viewModel.selectedDate.value.toString())
             }
             R.id.bt_next_day -> {
                 Snackbar.make(this.findViewById(R.id.layout_main), "Next Day...", Snackbar.LENGTH_SHORT)
                     .show()
 
                 viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
-
-                Log.d("test", viewModel.selectedDate.value.toString())
             }
             else -> {
                 Snackbar.make(this.findViewById(R.id.layout_main), "蛤？", Snackbar.LENGTH_SHORT)
