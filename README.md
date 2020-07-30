@@ -13,4 +13,5 @@
 - navigation drawer
 - navigation bottom
 - prettify UI
+- Android Architecture Components samples
 -------
