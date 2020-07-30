@@ -26,6 +26,7 @@ class ListRecyclerAdapter constructor(
         val imageType: ImageView = itemView.findViewById(R.id.item_image)
         val name: TextView = itemView.findViewById(R.id.item_name)
         val price: TextView = itemView.findViewById(R.id.item_price)
+        val date: TextView = itemView.findViewById(R.id.item_date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -47,6 +48,7 @@ class ListRecyclerAdapter constructor(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.name.text= listData[position].name
+        holder.date.text= listData[position].date
         holder.price.text= listData[position].price.toString()
         holder.layout.setOnClickListener{
             Log.d(ContentValues.TAG, "$position is Clicked!")

@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var btPreviousDay: Button
     private lateinit var btNextDay: Button
     private lateinit var tvToday: TextView
-    private lateinit var frgList: Fragment
-    private val transaction: FragmentTransaction= supportFragmentManager.beginTransaction()
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,8 +60,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         })
 
         //fragment 建立
-        transaction.replace(R.id.frg_list, ListFragment(application))
-        transaction.commit()
+        changeFrg(application)
 
 
         //floating button
@@ -94,16 +91,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                 R.id.item_date -> {
                     DatePickerDialog(this, { _, year, month, day ->
                         run {
-                            val date = "你設定的日期為:$year ${month+ 1} $day"
-                            Snackbar.make(this.findViewById(R.id.layout_main), date, Snackbar.LENGTH_SHORT)
-                            .show()
-
                             viewModel.selectedDate.value= LocalDate.parse(
                                 "$year-" +
                                         String.format("%02d", month+ 1)+ "-" +
                                         String.format("%02d", day)
                             )
-
+                            changeFrg(application)
                         }
                     }, viewModel.selectedDate.value!!.year
                         , String.format("%02d", viewModel.selectedDate.value!!.monthValue.plus(-1)).toInt()
@@ -129,16 +122,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.bt_previous_day -> {
-                Snackbar.make(this.findViewById(R.id.layout_main), "Previous Day...", Snackbar.LENGTH_SHORT)
-                    .show()
-
                 viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
+                changeFrg(application)
             }
             R.id.bt_next_day -> {
-                Snackbar.make(this.findViewById(R.id.layout_main), "Next Day...", Snackbar.LENGTH_SHORT)
-                    .show()
-
                 viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
+                changeFrg(application)
             }
             else -> {
                 Snackbar.make(this.findViewById(R.id.layout_main), "蛤？", Snackbar.LENGTH_SHORT)
@@ -150,9 +139,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
      * 疑問：fragment 是在 activity 底下的物件，那透過 activity 改變 fragment 是否違規？
      * */
     //change fragment
-    private fun changeFrg(date: List<Int>, application: Application){
-        val frg= ListFragment(application)
+    private fun changeFrg(application: Application){
+        var frg= ListFragment(application)
+        val transaction: FragmentTransaction= supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frg_list, frg)
         transaction.commit()
+
+        Snackbar.make(this.findViewById(R.id.layout_main),
+            "Change Date to ${viewModel.selectedDate.value}",
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 }
