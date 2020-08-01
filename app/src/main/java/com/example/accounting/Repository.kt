@@ -23,12 +23,6 @@ class Repository(private val listDao: ListDao) {
             , dateFormatter))
     }
 
-//    companion object{
-//        val dateFormatter= DateTimeFormatter.ofPattern("yyyy-MM-dd")
-//        var currentDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString(), dateFormatter))
-//        var selectedDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString(), dateFormatter))
-//    }
-
 
 //    private var isCreated = false
 //    var currentDate = MutableLiveData<LocalDate>()

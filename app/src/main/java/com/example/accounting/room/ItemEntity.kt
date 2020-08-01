@@ -2,12 +2,15 @@ package com.example.accounting.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.time.LocalDate
 
 //const val tableName: String = "20200101"
 
-@Entity(tableName = "item_table")
+@Entity(tableName = "item_table",
+    indices = [Index(value = ["date"])]
+)
 data class ItemEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "item_id") val itemId: Int= 1,
     @ColumnInfo(name= "date") val date: String,

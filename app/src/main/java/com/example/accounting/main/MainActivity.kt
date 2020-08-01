@@ -24,6 +24,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
 
+/**
+ *  找個時間製作此 app 的類別圖和流程圖
+ *      - 重構各大 fragment 和 activity
+ *  */
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -55,7 +59,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             date?.let {
                 Log.d(ContentValues.TAG, "Main View Observe Date: $date")
                 tvToday.text= viewModel.selectedDate.value.toString()
-                viewModel.test()
             }
         })
 

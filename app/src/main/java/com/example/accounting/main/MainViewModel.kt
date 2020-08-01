@@ -38,9 +38,6 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
 //        repository.selectedDate.value= this.selectedDate.value
 //    }
 
-    fun test(){
-        Log.d(TAG, "REPOSITORY: " + RepositoryDate.selectedDate.value!!.dayOfMonth.toString())
-    }
 
     fun getSum(): Int{
         var sum: Int= 0

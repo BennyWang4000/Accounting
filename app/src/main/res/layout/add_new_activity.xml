@@ -84,7 +84,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager_type"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/layout_costs"
         app:layout_constraintStart_toStartOf="parent"

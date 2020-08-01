@@ -7,6 +7,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "date_table")
 data class DateEntity(
     @PrimaryKey val date: Int,
-    @ColumnInfo(name = "items") val items: ItemEntity?
-) {
-}
+    @ColumnInfo(name = "sum") val sum: Int
+)

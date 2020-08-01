@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.accounting.R
 
-class ItemInfoActivity : AppCompatActivity() {
+/**
+ * 理想：可以用 recycler view 中的 position 選擇 table 中的 id
+ * */
+
+class ItemInfoActvity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_info_activity)
+
 
 
     }
