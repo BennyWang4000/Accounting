@@ -15,12 +15,12 @@ class Repository(private val listDao: ListDao) {
 
 
     companion object Date {
-        var isCreated = false
-        val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         var currentDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString()
             , dateFormatter))
         var selectedDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString()
             , dateFormatter))
+        var lastPosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
     }
 
 
@@ -40,7 +40,7 @@ class Repository(private val listDao: ListDao) {
 //        Log.d(TAG, "")
 //    }
 
-    val allData: LiveData<List<ItemEntity>> = listDao.getAllItems()
+//    val allData: LiveData<List<ItemEntity>> = listDao.getAllItems()
 
 
     // You must call this on a non-UI thread or your app will crash. So we're making this a
@@ -59,7 +59,6 @@ class Repository(private val listDao: ListDao) {
     }
 
     fun getDateItem(date: String): LiveData<List<ItemEntity>> {
-        Log.d(TAG, listDao.getDateItems(date.toString()).value.toString())
         return listDao.getDateItems(date)
     }
 }

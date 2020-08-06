@@ -13,8 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
+import com.example.accounting.main.listFragment.adapter.ListRecyclerAdapter
 
-class ListFragment(val application: Application) : Fragment(){
+class ListFragment(var position: Int, val application: Application) : Fragment(){
 
     private lateinit var recyclerAdapter: ListRecyclerAdapter
     private lateinit var viewModel:  ListViewModel
@@ -28,31 +29,31 @@ class ListFragment(val application: Application) : Fragment(){
         viewModel= ViewModelProvider(this, factory).get(ListViewModel::class.java)
 
         //recycler view
-        Log.d(ContentValues.TAG, "viewModel.dateData.value.toString(): ${viewModel.dateData.value}")
+        rvList= root.findViewById(R.id.rv_list)
+//           viewModel.allData.value.let{}
+        recyclerAdapter = ListRecyclerAdapter(context!!, viewModel)
+        rvList.adapter = recyclerAdapter
+        rvList.layoutManager = LinearLayoutManager(context!!)
 
-        try {
-            rvList= root.findViewById(R.id.rv_list)
-//            viewModel.allData.value.let{}
-            recyclerAdapter =
-                ListRecyclerAdapter(context!!)
-            rvList.adapter = recyclerAdapter
-            rvList.layoutManager = LinearLayoutManager(context!!)
-        } catch (e: Exception) {
-            Log.d(ContentValues.TAG, "Recycler View Load Error\n$e")
-        }
+        //observe page changed
+        viewModel.selectedDate.observe(this, Observer {
+//            viewModel.pageChanged()
+            Log.d(ContentValues.TAG, "list viewModel observe selectedDate: $it :D")
+            recyclerAdapter.notifyDataSetChanged()
+        })
 
+//        viewModel.nextDayData.observe(this, Observer{})
+//        viewModel.privousDayData.observe(this, Observer {})
+//        viewModel.selectedDateData.observe(this, Observer{})
 
         //observe data
-        try {
-            viewModel.dateData.observe(this, Observer { item ->
-                // Update the cached copy of the words in the adapter.
-                item?.let {
-                    recyclerAdapter.addNewItem(it)
-                }
-            })
-        } catch (e: Exception) {
-            Log.d(ContentValues.TAG, "Data Observe Error...\n$e")
-        }
+        viewModel.getDateData(position).observe(this, Observer { item ->
+            // Update the cached copy of the words in the adapter.
+            item?.let {
+                recyclerAdapter.addNewItem(it)
+                recyclerAdapter.notifyDataSetChanged()
+            }
+        })
 
         return root
     }

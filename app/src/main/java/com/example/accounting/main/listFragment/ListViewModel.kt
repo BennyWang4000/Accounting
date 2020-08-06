@@ -16,10 +16,17 @@ import com.example.accounting.Repository.Date as RepositoryDate
 class ListViewModel(application: Application): AndroidViewModel(application) {
     //建立 repository 實體
     private val repository: Repository
-    val dateData: LiveData<List<ItemEntity>>
+    var selectedDateData: LiveData<List<ItemEntity>>
+//    var privousDayData: LiveData<List<ItemEntity>>
+//    var nextDayData: LiveData<List<ItemEntity>>
 
     var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
+
+//    var lastPosition= RepositoryDate.lastPosition
+
+    private val PAGER_LIST_MAX_VALUE= 3
+    private val PAGER_LIST_MID_POSITION= 1
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
@@ -28,8 +35,35 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
         currentDate= RepositoryDate.currentDate
         selectedDate= RepositoryDate.selectedDate
 
-        dateData = repository.getDateItem(selectedDate.value.toString())
-        Log.d(ContentValues.TAG, "MainViewModel dateData: ${dateData.value.toString()}")
+        selectedDateData = repository.getDateItem(selectedDate.value.toString())
+//        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
+//        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
+
     }
 
+
+    fun getDateData(position: Int): LiveData<List<ItemEntity>>{
+//        return when{
+//            position> lastPosition.value!! ->{
+//                Log.d(ContentValues.TAG, "position $position> lastPosition.value ${lastPosition.value}")
+//                privousDayData
+//            }
+//            position< lastPosition.value!! -> {
+//                Log.d(ContentValues.TAG, "position $position> lastPosition.value${lastPosition.value}")
+//                nextDayData
+//            }
+//            else -> {
+//                Log.d(ContentValues.TAG, "position $position== lastPosition.value ${lastPosition.value}")
+//                selectedDateData
+//            }
+//
+//        }
+        return selectedDateData
+    }
+
+    fun pageChanged(){
+//        selectedDateData = repository.getDateItem(selectedDate.value.toString())
+//        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
+//        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
+    }
 }

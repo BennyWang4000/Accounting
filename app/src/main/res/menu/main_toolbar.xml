@@ -12,7 +12,8 @@
     <item
         android:id="@+id/item_setting"
         android:title="Setting"
-        app:showAsAction="never"/>
+        app:showAsAction="never"
+        android:icon="@drawable/ic_baseline_settings_24_gray"/>
     <item
         android:id="@+id/item_info"
         android:title="App info"

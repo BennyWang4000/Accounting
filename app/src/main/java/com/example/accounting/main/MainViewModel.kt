@@ -24,6 +24,9 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
     var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
 
+    var pagePosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
+
+    var lastPosition= RepositoryDate.lastPosition
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)
@@ -37,6 +40,7 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
 //    fun upDateRepository(){
 //        repository.selectedDate.value= this.selectedDate.value
 //    }
+
 
 
     fun getSum(): Int{

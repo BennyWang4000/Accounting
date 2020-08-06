@@ -1,4 +1,4 @@
-package com.example.accounting.main.listFragment
+package com.example.accounting.main.listFragment.adapter
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -12,11 +12,13 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
+import com.example.accounting.main.listFragment.ListViewModel
 import com.example.accounting.room.ItemEntity
 
 
 class ListRecyclerAdapter constructor(
-    private val context: Context
+    private val context: Context,
+    private val viewModel: ListViewModel
 ): RecyclerView.Adapter<ListRecyclerAdapter.ListViewHolder>() {
 
     private var listData= emptyList<ItemEntity>()
@@ -32,13 +34,7 @@ class ListRecyclerAdapter constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         Log.d(TAG, "Adapter Data: $listData")
         return ListViewHolder(
-            LayoutInflater
-                .from(context)
-                .inflate(
-                    R.layout.main_item_layout
-                    , parent
-                    , false
-                )
+            LayoutInflater.from(context).inflate(R.layout.main_item_layout, parent, false)
         )
     }
 
