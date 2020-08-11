@@ -8,13 +8,10 @@ import com.example.accounting.R
  * 理想：可以用 recycler view 中的 position 選擇 table 中的 id
  * */
 
-class ItemInfoActvity : AppCompatActivity() {
+class ItemInfoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_info_activity)
-
-
-
     }
 }

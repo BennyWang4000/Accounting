@@ -1,17 +1,19 @@
 package com.example.accounting.main
 
+import android.app.Application
 import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -19,6 +21,7 @@ import com.example.accounting.R
 import com.example.accounting.addNewItem.AddNewActivity
 import com.example.accounting.main.adapter.ListPagerAdapter
 import com.example.accounting.main.adapter.ListPagerCallBack
+import com.example.accounting.main.listFragment.mainFragment.MainViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
@@ -30,27 +33,28 @@ import java.time.LocalDate
  *      為配合 navigation drawer 和各功能
  *  */
 
-class MainActivity : AppCompatActivity(), View.OnClickListener{
+class MainFragment(val application: Application) : Fragment(){
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var btPreviousDay: Button
-    private lateinit var btNextDay: Button
-    private lateinit var tvToday: TextView
     private lateinit var pagerType: ViewPager2
     private lateinit var pagerAdapter: ListPagerAdapter
     private lateinit var pagerCallBack: ListPagerCallBack
 
     private val LIST_PAGER_MID_POSITION= Int.MAX_VALUE/ 2
 
-    @RequiresApi(Build.VERSION_CODES.P)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        tvToday= findViewById(R.id.tv_today)
-        btNextDay= findViewById(R.id.bt_next_day)
-        btPreviousDay= findViewById(R.id.bt_previous_day)
-        btNextDay.setOnClickListener(this)
-        btPreviousDay.setOnClickListener(this)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        val root=  inflater.inflate(R.layout.main_fragment, container, false)
+
+        val tvToday= root.findViewById<TextView>(R.id.tv_today)
+        val btNextDay= root.findViewById<Button>(R.id.bt_next_day)
+        val btPreviousDay= root.findViewById<Button>(R.id.bt_previous_day)
+
+//        btPreviousDay.setOnClickListener(this)
 
 
         //view model
@@ -63,8 +67,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
         //滑動後改變日期，並設定currentItem為中間
         //view pager
-        pagerType= findViewById(R.id.pager_list)
-        pagerAdapter= ListPagerAdapter(application, viewModel, this)
+        val pagerType= root.findViewById<ViewPager2>(R.id.pager_list)
+        pagerAdapter= ListPagerAdapter(application, viewModel, activity!!)
         pagerType.adapter= pagerAdapter
         pagerType.currentItem= LIST_PAGER_MID_POSITION
 
@@ -83,51 +87,63 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         viewModel.selectedDate.observe(this, Observer { date ->
             // Update the cached copy of the words in the adapter.
             date?.let {
-                Log.d(ContentValues.TAG, "Main View Observe Date: $date")
                 tvToday.text= viewModel.selectedDate.value.toString()
             }
         })
+
         //fragment 建立
 //        changeFrg(application)
 
+        //button clicked
+        btNextDay.setOnClickListener {
+            viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
+            pagerAdapter.notifyDataSetChanged()
+            pagerType.currentItem++
+        }
+        btPreviousDay.setOnClickListener {
+            viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
+            pagerAdapter.notifyDataSetChanged()
+            pagerType.currentItem--
+        }
+
 
         //floating button
-        val fltBt: FloatingActionButton= findViewById(R.id.flt_bt_add)
+        val fltBt: FloatingActionButton= root.findViewById(R.id.flt_bt_add)
         fltBt.setOnClickListener{
-            val intent= Intent(this, AddNewActivity::class.java)
+            val intent= Intent(activity, AddNewActivity::class.java)
             startActivityForResult(intent, 1)
         }
 
 
         //tool bar
-        val toolbar= findViewById<Toolbar>(R.id.toolbar_main)
-        toolbar.overflowIcon = getDrawable(R.drawable.ic_baseline_more_vert_24_white)
+        val toolbar= root.findViewById<Toolbar>(R.id.toolbar_main)
+        toolbar.overflowIcon = getDrawable(application.applicationContext, R.drawable.ic_baseline_more_vert_24_white)
         toolbar.inflateMenu(R.menu.main_toolbar)
         toolbar.setOnMenuItemClickListener{
             when(it.itemId){
                 R.id.item_setting -> {
-                    Snackbar.make(this.findViewById(R.id.layout_main), "setting...", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(root.findViewById(R.id.layout_main), "setting...", Snackbar.LENGTH_SHORT)
                         .show()
                     return@setOnMenuItemClickListener true
                 }
                 R.id.item_info -> {
-                    Snackbar.make(this.findViewById(R.id.layout_main), "app info...", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(root.findViewById(R.id.layout_main), "app info...", Snackbar.LENGTH_SHORT)
                         .show()
                     return@setOnMenuItemClickListener true
                 }
 
                 R.id.item_date -> {
-                    DatePickerDialog(this, { _, year, month, day ->
-                        run {
-                            viewModel.selectedDate.value= LocalDate.parse(
-                                "$year-" +
-                                        String.format("%02d", month+ 1)+ "-" +
-                                        String.format("%02d", day))
+                    DatePickerDialog(
+                        application.applicationContext, { _, year, month, day ->
+                            run {
+                                viewModel.selectedDate.value= LocalDate.parse(
+                                    "$year-" +
+                                            String.format("%02d", month+ 1)+ "-" +
+                                            String.format("%02d", day))
 
 //                            changeFrg(application)
-                            pagerAdapter.notifyDataSetChanged()
-                        }
-                    }, viewModel.selectedDate.value!!.year
+                            }
+                        }, viewModel.selectedDate.value!!.year
                         , String.format("%02d", viewModel.selectedDate.value!!.monthValue.plus(-1)).toInt()
                         , String.format("%02d", viewModel.selectedDate.value!!.dayOfMonth).toInt())
                         .show()
@@ -136,39 +152,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                 }
 
                 else -> {
-                    Snackbar.make(this.findViewById(R.id.layout_main), "Unknown Issue", Snackbar.LENGTH_SHORT)
+                    Snackbar.make(root.findViewById(R.id.layout_main), "Unknown Issue", Snackbar.LENGTH_SHORT)
                         .show()
                     return@setOnMenuItemClickListener true
                 }
             }
         }
 
-        //navigation drawer
-
-
+        return root
     }
 
-    //button be clicked
-    override fun onClick(view: View?) {
-        when(view?.id){
-            R.id.bt_previous_day -> {
-                viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
-                pagerAdapter.notifyDataSetChanged()
-                pagerType.currentItem--
-//                changeFrg(application)
-            }
-            R.id.bt_next_day -> {
-                viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
-                pagerAdapter.notifyDataSetChanged()
-                pagerType.currentItem++
-//                changeFrg(application)
-            }
-            else -> {
-                Snackbar.make(this.findViewById(R.id.layout_main), "Unknown Button...", Snackbar.LENGTH_SHORT)
-                    .show()
-            }
-        }
-    }
     /**
      * 疑問：fragment 是在 activity 底下的物件，那透過 activity 改變 fragment 是否違規？
      * */
@@ -179,7 +172,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 //        transaction.replace(R.id.frg_list, frg)
 //        transaction.commit()
 //
-//        Snackbar.make(this.findViewById(R.id.layout_main),
+//        Snackbar.make(this.activity!!.findViewById(R.id.layout_main),
 //            "Change Date to ${viewModel.selectedDate.value}",
 //            Snackbar.LENGTH_SHORT
 //        ).show()

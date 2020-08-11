@@ -1,7 +1,6 @@
-package com.example.accounting.main
+package com.example.accounting.main.listFragment.mainFragment
 
 import android.app.Application
-import android.content.ClipData
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.*
@@ -27,6 +26,8 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
     var pagePosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
 
     var lastPosition= RepositoryDate.lastPosition
+    var currentPosition= RepositoryDate.currentPosition
+
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
         repository = Repository(listDao)

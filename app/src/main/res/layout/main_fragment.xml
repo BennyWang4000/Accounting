@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity"
+    tools:context=".main.MainFragment"
     android:id="@+id/layout_main">
 
     <androidx.appcompat.widget.Toolbar
@@ -21,26 +21,6 @@
         app:titleTextColor="#FFF"
         app:navigationIcon="@drawable/ic_baseline_menu_24_white"
         android:elevation="2dp"/>
-
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/layout_drawer"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        tools:openDrawer="start">
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation_drawer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start|left"
-            app:menu="@menu/main_navigation_drawer"
-
-            android:fitsSystemWindows="true"/>
-    </androidx.drawerlayout.widget.DrawerLayout>
 
     <LinearLayout
         android:id="@+id/layout_bt_title"

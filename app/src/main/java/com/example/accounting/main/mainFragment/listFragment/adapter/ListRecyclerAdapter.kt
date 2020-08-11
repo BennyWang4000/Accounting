@@ -1,4 +1,4 @@
-package com.example.accounting.main.listFragment.adapter
+package com.example.accounting.main.listFragment.mainFragment.adapter
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
@@ -55,6 +55,4 @@ class ListRecyclerAdapter constructor(
         this.listData = data
         notifyDataSetChanged()
     }
-
-
 }

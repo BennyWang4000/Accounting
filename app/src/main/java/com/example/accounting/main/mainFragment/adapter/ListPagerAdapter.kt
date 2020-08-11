@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.accounting.main.MainViewModel
+import com.example.accounting.main.listFragment.mainFragment.MainViewModel
 import com.example.accounting.main.listFragment.ListFragment
 
 /**

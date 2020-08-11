@@ -17,12 +17,13 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     //建立 repository 實體
     private val repository: Repository
     var selectedDateData: LiveData<List<ItemEntity>>
-//    var privousDayData: LiveData<List<ItemEntity>>
-//    var nextDayData: LiveData<List<ItemEntity>>
+    var privousDayData: LiveData<List<ItemEntity>>
+    var nextDayData: LiveData<List<ItemEntity>>
 
     var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
 
+    var currentPosition: MutableLiveData<Int>
 //    var lastPosition= RepositoryDate.lastPosition
 
     private val PAGER_LIST_MAX_VALUE= 3
@@ -36,9 +37,10 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
         selectedDate= RepositoryDate.selectedDate
 
         selectedDateData = repository.getDateItem(selectedDate.value.toString())
-//        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
-//        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
+        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
+        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
 
+        currentPosition= RepositoryDate.currentPosition
     }
 
 

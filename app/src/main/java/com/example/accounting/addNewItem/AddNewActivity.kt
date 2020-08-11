@@ -55,7 +55,7 @@ class AddNewActivity : AppCompatActivity() {
 
         //button is clicked
         btAdd.setOnClickListener{
-            var newItem= ItemEntity(
+            val newItem= ItemEntity(
                 0,
                 viewModel.selectedDate.value.toString(),
                 0,

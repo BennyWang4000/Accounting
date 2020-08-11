@@ -21,6 +21,7 @@ class Repository(private val listDao: ListDao) {
         var selectedDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString()
             , dateFormatter))
         var lastPosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
+        var currentPosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
     }
 
 
