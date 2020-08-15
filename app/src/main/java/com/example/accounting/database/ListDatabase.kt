@@ -1,19 +1,24 @@
-package com.example.accounting.room
+package com.example.accounting.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.accounting.database.dao.ListDao
+import com.example.accounting.database.dao.TypeDao
+import com.example.accounting.database.model.ItemEntity
+import com.example.accounting.database.model.TypeEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [ItemEntity::class], version = 1)
+@Database(entities = [ItemEntity::class, TypeEntity::class], version = 2)
 abstract class ListDatabase : RoomDatabase(){
 
     //取得 dao 實體(?
     abstract fun getListDao(): ListDao
+    abstract fun getTypeDao(): TypeDao
 
     //官方推薦的 Singleton 寫法，因為實體的產生很耗資源，而且也不需要多個資料庫實體
     companion object {
@@ -21,9 +26,7 @@ abstract class ListDatabase : RoomDatabase(){
         private var INSTANCE: ListDatabase? = null
 
         //回傳此 class
-        fun getDatabase(
-            context: Context,
-            scope: CoroutineScope
+        fun getDatabase(context: Context, scope: CoroutineScope
         ): ListDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database

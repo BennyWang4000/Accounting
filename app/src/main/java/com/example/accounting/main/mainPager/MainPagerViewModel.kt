@@ -4,13 +4,13 @@ import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.accounting.room.ItemEntity
-import com.example.accounting.room.ListDatabase
+import com.example.accounting.database.model.ItemEntity
+import com.example.accounting.database.ListDatabase
 import com.example.accounting.Repository
 import java.time.LocalDate
 import com.example.accounting.Repository.Date as RepositoryDate
 
-class MainViewModel (application: Application): AndroidViewModel(application) {
+class MainPagerViewModel (application: Application): AndroidViewModel(application) {
     //建立 repository 實體
     private val repository: Repository
 
@@ -26,7 +26,11 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
     var pagePosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
 
     var lastPosition= RepositoryDate.lastPosition
-    var currentPosition= RepositoryDate.currentPosition
+//    var currentPosition= RepositoryDate.currentPosition
+
+
+    var privousDayData: LiveData<List<ItemEntity>>
+    var nextDayData: LiveData<List<ItemEntity>>
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
@@ -36,6 +40,8 @@ class MainViewModel (application: Application): AndroidViewModel(application) {
         selectedDate= RepositoryDate.selectedDate
 
         dateItem = repository.getDateItem(selectedDate.value.toString())
+        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
+        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
     }
 
 //    fun upDateRepository(){

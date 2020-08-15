@@ -1,19 +1,19 @@
-package com.example.accounting.main.adapter
+package com.example.accounting.main.mainPager.adapter
 
 import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
-import com.example.accounting.main.MainFragment
-import com.example.accounting.main.listFragment.mainFragment.MainViewModel
+import com.example.accounting.main.MainPagerFragment
+import com.example.accounting.main.listFragment.mainFragment.MainPagerViewModel
 
 /**
  *  問題：一開始所有都一樣日期，直到滑動才開始observe
  * */
-class ListPagerCallBack(val viewModel: MainViewModel, val actvity: MainFragment): ViewPager2.OnPageChangeCallback() {
+class MainPagerCallBack(val viewModel: MainPagerViewModel, val actvity: MainPagerFragment): ViewPager2.OnPageChangeCallback() {
 
-    private val PAGER_LIST_MID_POSITION= Int.MAX_VALUE/ 2
-    private var lastPosition= PAGER_LIST_MID_POSITION
+    private val _pagerListMidPosition= Int.MAX_VALUE/ 2
+    private var lastPosition= _pagerListMidPosition
 
     init{
         viewModel.selectedDate.observe(actvity, Observer {
@@ -25,16 +25,18 @@ class ListPagerCallBack(val viewModel: MainViewModel, val actvity: MainFragment)
         super.onPageSelected(position)
         if(viewModel.lastPosition.value!!> position){
 
-            viewModel.currentPosition.let {
-                it.value= it.value!!- 1
-            }
+//            viewModel.currentPosition.let {
+//                it.value= it.value!!- 1
+//            }
+
             viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
             Log.d(ContentValues.TAG, "Scrolled Left  position: ${viewModel.pagePosition.value}")
         }else if(viewModel.lastPosition.value!!< position){
 
-            viewModel.currentPosition.let {
-                it.value= it.value!!+ 1
-            }
+//            viewModel.currentPosition.let {
+//                it.value= it.value!!+ 1
+//            }
+
             viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
             Log.d(ContentValues.TAG, "Scrolled right  position: ${viewModel.pagePosition.value}")
         }

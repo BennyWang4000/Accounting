@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
 import com.example.accounting.addNewItem.adapter.TypePagerAdapter
-import com.example.accounting.room.ItemEntity
+import com.example.accounting.database.model.ItemEntity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 
@@ -20,9 +22,9 @@ class AddNewActivity : AppCompatActivity() {
     private lateinit var pagerTypeAdapter: TypePagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_new_activity)
+
         val etPrice: EditText= findViewById(R.id.et_cost)
         val etName: EditText= findViewById(R.id.et_name)
         val etNote: EditText= findViewById(R.id.et_note)
@@ -52,6 +54,8 @@ class AddNewActivity : AppCompatActivity() {
                     .show()
             }
         })
+
+
 
         //button is clicked
         btAdd.setOnClickListener{

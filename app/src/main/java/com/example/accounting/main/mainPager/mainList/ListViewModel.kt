@@ -1,21 +1,19 @@
 package com.example.accounting.main.listFragment
 
 import android.app.Application
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.Repository
-import com.example.accounting.room.ItemEntity
-import com.example.accounting.room.ListDatabase
+import com.example.accounting.database.model.ItemEntity
+import com.example.accounting.database.ListDatabase
 import java.time.LocalDate
 import com.example.accounting.Repository.Date as RepositoryDate
 
 class ListViewModel(application: Application): AndroidViewModel(application) {
     //建立 repository 實體
-    private val repository: Repository
+     val repository: Repository
     var selectedDateData: LiveData<List<ItemEntity>>
     var privousDayData: LiveData<List<ItemEntity>>
     var nextDayData: LiveData<List<ItemEntity>>
@@ -24,10 +22,10 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     var selectedDate: MutableLiveData<LocalDate>
 
     var currentPosition: MutableLiveData<Int>
-//    var lastPosition= RepositoryDate.lastPosition
+    var lastPosition= RepositoryDate.lastPosition
 
-    private val PAGER_LIST_MAX_VALUE= 3
-    private val PAGER_LIST_MID_POSITION= 1
+    private val PAGER_LIST_MAX_VALUE= Int.MAX_VALUE
+    private val PAGER_LIST_MID_POSITION= Int.MAX_VALUE/ 2
 
     init {
         val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
@@ -61,6 +59,10 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
 //
 //        }
         return selectedDateData
+    }
+
+    fun getRecyclerViewData(position: Int): LiveData<List<ItemEntity>>{
+        return repository.getDateItem(selectedDate.value!!.plusDays((PAGER_LIST_MAX_VALUE- position).toLong()).toString())
     }
 
     fun pageChanged(){

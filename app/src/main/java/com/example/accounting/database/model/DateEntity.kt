@@ -1,4 +1,4 @@
-package com.example.accounting.room
+package com.example.accounting.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

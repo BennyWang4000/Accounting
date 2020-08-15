@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimary"
-        app:title="@string/app_name"
+        app:title="Expense Info"
         app:titleTextColor="#FFF"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24_white"
         android:elevation="2dp"/>

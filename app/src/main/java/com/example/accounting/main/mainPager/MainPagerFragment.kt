@@ -1,7 +1,6 @@
 package com.example.accounting.main
 
 import android.app.Application
-import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -11,20 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
 import com.example.accounting.addNewItem.AddNewActivity
-import com.example.accounting.main.adapter.ListPagerAdapter
-import com.example.accounting.main.adapter.ListPagerCallBack
-import com.example.accounting.main.listFragment.mainFragment.MainViewModel
+import com.example.accounting.main.mainPager.adapter.MainPagerAdapter
+import com.example.accounting.main.mainPager.adapter.MainPagerCallBack
+import com.example.accounting.main.listFragment.mainFragment.MainPagerViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import java.time.LocalDate
 
 /**
  *  找個時間製作此 app 的類別圖和流程圖
@@ -33,12 +28,12 @@ import java.time.LocalDate
  *      為配合 navigation drawer 和各功能
  *  */
 
-class MainFragment(val application: Application) : Fragment(){
+class MainPagerFragment(val application: Application) : Fragment(){
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainPagerViewModel
     private lateinit var pagerType: ViewPager2
-    private lateinit var pagerAdapter: ListPagerAdapter
-    private lateinit var pagerCallBack: ListPagerCallBack
+    private lateinit var pagerAdapter: MainPagerAdapter
+    private lateinit var pagerCallBack: MainPagerCallBack
 
     private val LIST_PAGER_MID_POSITION= Int.MAX_VALUE/ 2
 
@@ -58,8 +53,8 @@ class MainFragment(val application: Application) : Fragment(){
 
 
         //view model
-        val factory= MainViewModelFactory(application)
-        viewModel= ViewModelProvider(this, factory).get(MainViewModel::class.java)
+        val factory= MainPagerViewModelFactory(application)
+        viewModel= ViewModelProvider(this, factory).get(MainPagerViewModel::class.java)
 //        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 //        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -68,11 +63,11 @@ class MainFragment(val application: Application) : Fragment(){
         //滑動後改變日期，並設定currentItem為中間
         //view pager
         val pagerType= root.findViewById<ViewPager2>(R.id.pager_list)
-        pagerAdapter= ListPagerAdapter(application, viewModel, activity!!)
+        pagerAdapter= MainPagerAdapter(application, viewModel, activity!!)
         pagerType.adapter= pagerAdapter
         pagerType.currentItem= LIST_PAGER_MID_POSITION
 
-        pagerCallBack= ListPagerCallBack(viewModel, this)
+        pagerCallBack= MainPagerCallBack(viewModel, this)
         pagerType.registerOnPageChangeCallback(pagerCallBack)
         Log.d(ContentValues.TAG, "pager position: ${pagerType.currentItem}")
 
@@ -112,51 +107,6 @@ class MainFragment(val application: Application) : Fragment(){
         fltBt.setOnClickListener{
             val intent= Intent(activity, AddNewActivity::class.java)
             startActivityForResult(intent, 1)
-        }
-
-
-        //tool bar
-        val toolbar= root.findViewById<Toolbar>(R.id.toolbar_main)
-        toolbar.overflowIcon = getDrawable(application.applicationContext, R.drawable.ic_baseline_more_vert_24_white)
-        toolbar.inflateMenu(R.menu.main_toolbar)
-        toolbar.setOnMenuItemClickListener{
-            when(it.itemId){
-                R.id.item_setting -> {
-                    Snackbar.make(root.findViewById(R.id.layout_main), "setting...", Snackbar.LENGTH_SHORT)
-                        .show()
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.item_info -> {
-                    Snackbar.make(root.findViewById(R.id.layout_main), "app info...", Snackbar.LENGTH_SHORT)
-                        .show()
-                    return@setOnMenuItemClickListener true
-                }
-
-                R.id.item_date -> {
-                    DatePickerDialog(
-                        application.applicationContext, { _, year, month, day ->
-                            run {
-                                viewModel.selectedDate.value= LocalDate.parse(
-                                    "$year-" +
-                                            String.format("%02d", month+ 1)+ "-" +
-                                            String.format("%02d", day))
-
-//                            changeFrg(application)
-                            }
-                        }, viewModel.selectedDate.value!!.year
-                        , String.format("%02d", viewModel.selectedDate.value!!.monthValue.plus(-1)).toInt()
-                        , String.format("%02d", viewModel.selectedDate.value!!.dayOfMonth).toInt())
-                        .show()
-
-                    return@setOnMenuItemClickListener true
-                }
-
-                else -> {
-                    Snackbar.make(root.findViewById(R.id.layout_main), "Unknown Issue", Snackbar.LENGTH_SHORT)
-                        .show()
-                    return@setOnMenuItemClickListener true
-                }
-            }
         }
 
         return root

@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.Repository
-import com.example.accounting.room.ListDatabase
+import com.example.accounting.database.ListDatabase
 
 class ItemInfoViewModel(application: Application) : AndroidViewModel(application){
     private val repository: Repository

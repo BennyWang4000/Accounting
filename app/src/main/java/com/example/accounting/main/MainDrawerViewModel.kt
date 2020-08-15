@@ -3,8 +3,8 @@ package com.example.accounting.main
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.accounting.Repository
-import com.example.accounting.room.ItemEntity
-import com.example.accounting.room.ListDatabase
+import com.example.accounting.database.model.ItemEntity
+import com.example.accounting.database.ListDatabase
 import java.time.LocalDate
 
 class MainDrawerViewModel(application: Application): AndroidViewModel(application) {

@@ -1,12 +1,11 @@
-package com.example.accounting.room
+package com.example.accounting.database.dao
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import java.time.LocalDate
+import com.example.accounting.database.model.ItemEntity
 
 /**
  * 方案：
@@ -24,32 +23,17 @@ import java.time.LocalDate
  *          -巢狀資料表可以ㄇ 🤔🤔🤔
  * */
 
-@Dao()
+@Dao
 interface ListDao {
-//    var date: String= "20000101"
-
-//    @Query("SELECT * from date_table ORDER BY date ASC")
-//    fun getAllDate(): LiveData<List<DateEntity>>
-
-
-    @Query("SELECT * FROM item_table")
+    @Query("SELECT * FROM item_table ORDER BY date ASC")
     fun getAllItems(): LiveData<List<ItemEntity>>
 
     @Query("SELECT * FROM item_table WHERE date IN (:date) ORDER BY id ASC")
     fun getDateItems(date: String): LiveData<List<ItemEntity>>
 
-//    @Query("ALTER TABLE item_table RENAME TO $date")
-//    fun alterTableName(date: Int)
-
-//    @Query("ALTER TABLE new_item_table RENAME TO (:date)")
-//    fun renameTable(date: String): LiveData<List<ItemEntity>>
-
-//    @Query("SELECT * FROM date_table WHERE ")
-//    fun getDateItem(date: String):
-
-//    @Query("SELECT * FROM item_table WHERE date IN (:date)")
-//    fun getDateItem(date: String): LiveData<List<ItemEntity>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertItem(item: ItemEntity)
+
+
 }
+

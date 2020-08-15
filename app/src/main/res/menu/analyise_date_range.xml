@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_custom"
+        android:title="自訂"/>
+    <item
+        android:id="@+id/item_month"
+        android:title="月"/>
+    <item
+        android:id="@+id/item_half_year"
+        android:title="半年"/>
+    <item
+        android:id="@+id/item_one_year"
+        android:title="一年"/>
+
+</menu>

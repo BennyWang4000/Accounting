@@ -1,10 +1,9 @@
-package com.example.accounting.room
+package com.example.accounting.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.time.LocalDate
 
 //const val tableName: String = "20200101"
 
