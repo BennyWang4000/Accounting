@@ -1,16 +1,12 @@
-package com.example.accounting.addNewItem.adapter
+package com.example.accounting.addNewItem.addNewFragment.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
-import com.google.android.material.snackbar.Snackbar
-import kotlin.coroutines.coroutineContext
 
 class TypePagerAdapter() : RecyclerView.Adapter<TypePagerAdapter.PagerViewHolder>() {
     inner class PagerViewHolder(item: View): RecyclerView.ViewHolder(item){

@@ -1,17 +1,17 @@
-package com.example.accounting.addNewItem
+package com.example.accounting.addNewItem.addNewFragment
 
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
-import com.example.accounting.addNewItem.adapter.TypePagerAdapter
+import com.example.accounting.addNewItem.addNewFragment.adapter.TypePagerAdapter
 import com.example.accounting.database.model.ItemEntity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -28,11 +28,13 @@ class AddNewActivity : AppCompatActivity() {
         val etPrice: EditText= findViewById(R.id.et_cost)
         val etName: EditText= findViewById(R.id.et_name)
         val etNote: EditText= findViewById(R.id.et_note)
-        val btAdd: FloatingActionButton = findViewById(R.id.flt_bt_save)
         val tvToday: TextView= findViewById(R.id.tv_today)
 
         //view model
-        val factory= AddNewViewModelFactory(application)
+        val factory=
+            AddNewViewModelFactory(
+                application
+            )
         val viewModel= ViewModelProvider(this, factory).get(AddNewViewModel::class.java)
 
         //view pager
@@ -56,22 +58,34 @@ class AddNewActivity : AppCompatActivity() {
         })
 
 
-
-        //button is clicked
-        btAdd.setOnClickListener{
-            val newItem= ItemEntity(
-                0,
-                viewModel.selectedDate.value.toString(),
-                0,
-                "type",
-                etName.text.toString(),
-                etNote.text.toString(),
-                etPrice.text.toString().toInt()
-            )
-            Log.d(ContentValues.TAG, "Add New Item Date: "+ viewModel.selectedDate.value.toString())
-
-            viewModel.insertItem(newItem)
+        val toolbar= findViewById<Toolbar>(R.id.toolbar_add)
+        toolbar.inflateMenu(R.menu.add_new_toolbar)
+        toolbar.setNavigationOnClickListener {
             finish()
+        }
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.item_save -> {
+                    val newItem = ItemEntity(
+                        0,
+                        viewModel.selectedDate.value.toString(),
+                        0,
+                        "type",
+                        etName.text.toString(),
+                        etNote.text.toString(),
+                        etPrice.text.toString().toInt()
+                    )
+                    Log.d(
+                        ContentValues.TAG,
+                        "Add New Item Date: " + viewModel.selectedDate.value.toString()
+                    )
+                    viewModel.insertItem(newItem)
+
+
+                }else -> {}
+            }
+            finish()
+            return@setOnMenuItemClickListener true
         }
     }
 }

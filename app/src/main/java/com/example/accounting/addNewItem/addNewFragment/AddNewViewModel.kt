@@ -1,4 +1,4 @@
-package com.example.accounting.addNewItem
+package com.example.accounting.addNewItem.addNewFragment
 
 import android.app.Application
 import android.content.ContentValues.TAG

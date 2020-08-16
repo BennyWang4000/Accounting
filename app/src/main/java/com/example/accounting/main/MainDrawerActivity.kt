@@ -8,8 +8,10 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.accounting.R
+import com.example.accounting.addNewItem.addNewFragment.AddNewActivity
 import com.example.accounting.pieChart.PieChartActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -64,14 +66,9 @@ class MainDrawerActivity : AppCompatActivity() {
         }
         toolbar.setOnMenuItemClickListener{
             when(it.itemId){
-                R.id.item_setting -> {
-                    Snackbar.make(findViewById(R.id.layout_main), "setting...", Snackbar.LENGTH_SHORT)
-                        .show()
-                    return@setOnMenuItemClickListener true
-                }
-                R.id.item_info -> {
-                    Snackbar.make(findViewById(R.id.layout_main), "app info...", Snackbar.LENGTH_SHORT)
-                        .show()
+                R.id.item_add -> {
+                    val intent= Intent(this, AddNewActivity::class.java)
+                    startActivityForResult(intent, 1)
                     return@setOnMenuItemClickListener true
                 }
 
@@ -101,5 +98,9 @@ class MainDrawerActivity : AppCompatActivity() {
                 }
             }
         }
+        toolbar.title= viewModel.selectedDate.value.toString()
+        viewModel.selectedDate.observe(this, Observer {
+            toolbar.title= it.toString()
+        })
     }
 }

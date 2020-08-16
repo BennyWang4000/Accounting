@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
-import com.example.accounting.addNewItem.AddNewActivity
+import com.example.accounting.addNewItem.addNewFragment.AddNewActivity
 import com.example.accounting.main.mainPager.adapter.MainPagerAdapter
 import com.example.accounting.main.mainPager.adapter.MainPagerCallBack
 import com.example.accounting.main.listFragment.mainFragment.MainPagerViewModel
@@ -44,10 +44,10 @@ class MainPagerFragment(val application: Application) : Fragment(){
     ): View? {
 
         val root=  inflater.inflate(R.layout.main_fragment, container, false)
-
-        val tvToday= root.findViewById<TextView>(R.id.tv_today)
-        val btNextDay= root.findViewById<Button>(R.id.bt_next_day)
-        val btPreviousDay= root.findViewById<Button>(R.id.bt_previous_day)
+        val tvCost= root.findViewById<TextView>(R.id.tv_cost)
+//        val tvToday= root.findViewById<TextView>(R.id.tv_today)
+//        val btNextDay= root.findViewById<Button>(R.id.bt_next_day)
+//        val btPreviousDay= root.findViewById<Button>(R.id.bt_previous_day)
 
 //        btPreviousDay.setOnClickListener(this)
 
@@ -82,32 +82,25 @@ class MainPagerFragment(val application: Application) : Fragment(){
         viewModel.selectedDate.observe(this, Observer { date ->
             // Update the cached copy of the words in the adapter.
             date?.let {
-                tvToday.text= viewModel.selectedDate.value.toString()
+//                tvToday.text= viewModel.selectedDate.value.toString()
+                tvCost.text= viewModel.getSum().toString()
             }
         })
 
         //fragment 建立
 //        changeFrg(application)
 
-        //button clicked
-        btNextDay.setOnClickListener {
-            viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
-            pagerAdapter.notifyDataSetChanged()
-            pagerType.currentItem++
-        }
-        btPreviousDay.setOnClickListener {
-            viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
-            pagerAdapter.notifyDataSetChanged()
-            pagerType.currentItem--
-        }
-
-
-        //floating button
-        val fltBt: FloatingActionButton= root.findViewById(R.id.flt_bt_add)
-        fltBt.setOnClickListener{
-            val intent= Intent(activity, AddNewActivity::class.java)
-            startActivityForResult(intent, 1)
-        }
+//        //button clicked
+//        btNextDay.setOnClickListener {
+//            viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
+//            pagerAdapter.notifyDataSetChanged()
+//            pagerType.currentItem++
+//        }
+//        btPreviousDay.setOnClickListener {
+//            viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
+//            pagerAdapter.notifyDataSetChanged()
+//            pagerType.currentItem--
+//        }
 
         return root
     }

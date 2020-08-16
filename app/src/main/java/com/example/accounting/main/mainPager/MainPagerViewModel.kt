@@ -53,10 +53,11 @@ class MainPagerViewModel (application: Application): AndroidViewModel(applicatio
     fun getSum(): Int{
         var sum: Int= 0
 
-        for(i in 0..dateItem.value!!.size){
-            sum+= dateItem.value!!.get(i).price
-        }
-        Log.d(TAG, "sum: $sum")
+//        for(i in 0..dateItem.value!!.size){
+//            sum+= dateItem.value!!.get(i).price
+//        }
+//        Log.d(TAG, "sum: $sum")
+
         return sum
     }
 
