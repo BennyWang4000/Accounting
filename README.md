@@ -1,27 +1,39 @@
-# Accounting App
-###### This is a app that take "Ahorro" as reference for my summer vaction homework 
+## Accounting App
+###### This is a app that take "Ahorro" as reference for my summer vacation homework 
 ###### Not done yet :D
 
 -------
-##### 8/16
+#### 2020/08/16
 ###### Done:
-- A calculator in "AddNewActivity" is working
+- A calculator in "AddNewActivity" via bottom sheet is working
+- Calculator is working normally
 - Color and UI updated (button background...)
 ###### To do:
+- Fix number type in calculator 
 - Fix the view pager/radio group problem
 - Remake a new date picker
 - Use theme to control most color of item
 - A splash screen
 - App launch icon
 - Setting menu
+- Update database for analysis
+- Item type
 -------
-
-##### Done in 2020/07/30
+#### 2020/08/11
+###### Done:
+- Pie chart
+- Navigation drawer
+###### To do:
+- Fix the view pager/radio group problem
+- Update UI
+- Fix "No chart data available."
+-------
+#### 2020/07/30
+###### Done:
 - date picker dialog is showed with correct date
 - SelectedDate in repository is work correctly with companion object
 - changes the fragment when user changes the date
-
-##### To do
+###### To do
 - banner view pager
 - view pager 2
 - navigation drawer
