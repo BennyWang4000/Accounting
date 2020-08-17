@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.accounting.R
-import com.example.accounting.addNewItem.addNewFragment.AddNewActivity
+import com.example.accounting.addNewItem.AddNewActivity
 import com.example.accounting.pieChart.PieChartActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -103,4 +103,29 @@ class MainDrawerActivity : AppCompatActivity() {
             toolbar.title= it.toString()
         })
     }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        Log.e("Main Drawer Activity", "onPause()")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Log.e("Main Drawer Activity", "onStop()")
+//    }
+//
+//    override fun onRestart() {
+//        super.onRestart()
+//        Log.e("Main Drawer Activity", "onRestart()")
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        Log.e("Main Drawer Activity", "onResume()")
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        Log.e("Main Drawer Activity", "onDestroy()")
+//    }
 }

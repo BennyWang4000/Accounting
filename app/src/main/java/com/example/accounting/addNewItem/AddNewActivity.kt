@@ -1,4 +1,4 @@
-package com.example.accounting.addNewItem.addNewFragment
+package com.example.accounting.addNewItem
 
 import android.content.ContentValues
 import android.content.Intent
@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
+import com.example.accounting.addNewItem.addNewFragment.AddNewViewModel
+import com.example.accounting.addNewItem.addNewFragment.AddNewViewModelFactory
 import com.example.accounting.addNewItem.addNewFragment.adapter.TypePagerAdapter
 import com.example.accounting.database.model.ItemEntity
 import com.example.accounting.editText.EditTextActivity
@@ -234,9 +236,11 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
 
         when(requestCode){
             REQUEST_CODE_TITLE -> {
+                viewModel.title.value= data!!.getStringExtra("content")
                 tvTitle.text= viewModel.title.value
             }
             REQUEST_CODE_NOTE -> {
+                viewModel.note.value= data!!.getStringExtra("content")
                 tvNote.text= viewModel.note.value
             }
             REQUEST_CODE_EXPENSE -> {

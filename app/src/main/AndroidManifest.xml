@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".itemInfo.ItemInfoActivity" />
-        <activity android:name=".addNewItem.addNewFragment.AddNewActivity" />
+        <activity android:name=".addNewItem.AddNewActivity" />
     </application>
 
 </manifest>

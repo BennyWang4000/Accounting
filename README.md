@@ -1,6 +1,27 @@
 ## Accounting App
 ###### This is a app that take "Ahorro" as reference for my summer vacation homework 
 ###### Not done yet :D
+-------
+#### Database:
+![database](https://cdn.discordapp.com/attachments/744849098926063667/744849374080794704/unknown.png)
+###### item_table:
+- **id
+- *date_id
+- *item_id
+- title
+- note
+- price
+
+###### date_table:
+- **id 
+- date
+- sum
+
+###### type_table:
+- **id 
+- type
+- icon
+
 
 -------
 #### 2020/08/16
@@ -9,6 +30,7 @@
 - Calculator is working normally
 - Color and UI updated (button background...)
 ###### To do:
+- *Ready for rebuild database*
 - Fix number type in calculator 
 - Fix the view pager/radio group problem
 - Remake a new date picker
@@ -44,16 +66,6 @@
 ###### 8/6 目前問題 
 - **view pager 日期會重複**
 - navigation 
--------
-
-
-
-找個時間製作此 app 的類別圖和流程圖
-    - 重構各大 fragment 和 activity
-    
-    為配合 navigation drawer 和各功能將 main activity 改成 fragment 互換
-    
-    理想：可以用 recycler view 中的 position 選擇 table 中的 id
 ------
 #### 資料庫優化：
 ###### 一個 database 一個 table ，全部塞進同一個資料表
