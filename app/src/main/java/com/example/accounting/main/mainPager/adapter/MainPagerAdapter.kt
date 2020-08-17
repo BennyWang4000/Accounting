@@ -14,7 +14,7 @@ import com.example.accounting.main.listFragment.mainFragment.MainPagerViewModel
  * 目前想到的問題；
  *      - 個數：return item count?
  * */
-class MainPagerAdapter(val application: Application, val viewModel: MainPagerViewModel, activity: FragmentActivity) : FragmentStateAdapter(activity){
+class MainPagerAdapter(val viewModel: MainPagerViewModel, activity: FragmentActivity) : FragmentStateAdapter(activity){
 
     private val PAGER_LIST_MAX_VALUE= Int.MAX_VALUE
     private val PAGER_LIST_MID_POSITION= Int.MAX_VALUE/ 2
@@ -24,6 +24,6 @@ class MainPagerAdapter(val application: Application, val viewModel: MainPagerVie
     override fun getItemCount(): Int = PAGER_LIST_MAX_VALUE
 
     override fun createFragment(position: Int): Fragment {
-        return ListFragment(position, application)
+        return ListFragment(position)
     }
 }

@@ -15,37 +15,37 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
 import com.example.accounting.main.mainPager.mainList.adapter.ListRecyclerAdapter
 
-class ListFragment(var position: Int, val application: Application) : Fragment(){
+class ListFragment() : Fragment(){
 
     private lateinit var recyclerAdapter: ListRecyclerAdapter
     private lateinit var viewModel:  ListViewModel
     private lateinit var rvList:  RecyclerView
+    var position: Int= 0
+
+    constructor(p: Int) : this() {
+        this.position= p
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root=  inflater.inflate(R.layout.main_fragment_list, container, false)
-
+        val root = inflater.inflate(R.layout.main_fragment_list, container, false)
         //view model
-        val factory= ListViewModelFactory(application)
-        viewModel= ViewModelProvider(this, factory).get(ListViewModel::class.java)
-
+        val factory = ListViewModelFactory(activity!!.application)
+        viewModel = ViewModelProvider(this, factory).get(ListViewModel::class.java)
         //recycler view
-        rvList= root.findViewById(R.id.rv_list)
-//           viewModel.allData.value.let{}
+        rvList = root.findViewById(R.id.rv_list)
+        //           viewModel.allData.value.let{}
         recyclerAdapter = ListRecyclerAdapter(context!!, viewModel, position)
         rvList.adapter = recyclerAdapter
         rvList.layoutManager = LinearLayoutManager(context!!)
-
         //observe page changed
         viewModel.selectedDate.observe(this, Observer {
-//            viewModel.pageChanged()
+            //            viewModel.pageChanged()
             Log.d(ContentValues.TAG, "list viewModel observe selectedDate: $it :D")
             recyclerAdapter.notifyDataSetChanged()
         })
-
-//        viewModel.nextDayData.observe(this, Observer{})
-//        viewModel.privousDayData.observe(this, Observer {})
-//        viewModel.selectedDateData.observe(this, Observer{})
-
+        //        viewModel.nextDayData.observe(this, Observer{})
+        //        viewModel.privousDayData.observe(this, Observer {})
+        //        viewModel.selectedDateData.observe(this, Observer{})
         //observe data
         viewModel.getDateData(position).observe(this, Observer { item ->
             // Update the cached copy of the words in the adapter.
@@ -54,7 +54,6 @@ class ListFragment(var position: Int, val application: Application) : Fragment()
                 recyclerAdapter.notifyDataSetChanged()
             }
         })
-
         return root
     }
 }

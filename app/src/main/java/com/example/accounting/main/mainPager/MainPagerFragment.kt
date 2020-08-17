@@ -2,24 +2,20 @@ package com.example.accounting.main
 
 import android.app.Application
 import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
-import com.example.accounting.addNewItem.addNewFragment.AddNewActivity
 import com.example.accounting.main.mainPager.adapter.MainPagerAdapter
 import com.example.accounting.main.mainPager.adapter.MainPagerCallBack
 import com.example.accounting.main.listFragment.mainFragment.MainPagerViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 /**
  *  找個時間製作此 app 的類別圖和流程圖
@@ -28,7 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
  *      為配合 navigation drawer 和各功能
  *  */
 
-class MainPagerFragment(val application: Application) : Fragment(){
+class MainPagerFragment() : Fragment(){
 
     private lateinit var viewModel: MainPagerViewModel
     private lateinit var pagerType: ViewPager2
@@ -42,9 +38,9 @@ class MainPagerFragment(val application: Application) : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val root = inflater.inflate(R.layout.main_fragment, container, false)
 
-        val root=  inflater.inflate(R.layout.main_fragment, container, false)
-        val tvCost= root.findViewById<TextView>(R.id.tv_cost)
+        val tvCost = root.findViewById<TextView>(R.id.tv_cost)
 //        val tvToday= root.findViewById<TextView>(R.id.tv_today)
 //        val btNextDay= root.findViewById<Button>(R.id.bt_next_day)
 //        val btPreviousDay= root.findViewById<Button>(R.id.bt_previous_day)
@@ -52,25 +48,22 @@ class MainPagerFragment(val application: Application) : Fragment(){
 //        btPreviousDay.setOnClickListener(this)
 
 
-        //view model
-        val factory= MainPagerViewModelFactory(application)
-        viewModel= ViewModelProvider(this, factory).get(MainPagerViewModel::class.java)
+            //view model
+        val factory = MainPagerViewModelFactory(activity!!.application)
+        viewModel = ViewModelProvider(this, factory).get(MainPagerViewModel::class.java)
 //        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
 //        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
-
 
 
         //滑動後改變日期，並設定currentItem為中間
         //view pager
-        val pagerType= root.findViewById<ViewPager2>(R.id.pager_list)
-        pagerAdapter= MainPagerAdapter(application, viewModel, activity!!)
-        pagerType.adapter= pagerAdapter
-        pagerType.currentItem= LIST_PAGER_MID_POSITION
-
-        pagerCallBack= MainPagerCallBack(viewModel, this)
+        val pagerType = root.findViewById<ViewPager2>(R.id.pager_list)
+        pagerAdapter = MainPagerAdapter(viewModel, activity!!)
+        pagerType.adapter = pagerAdapter
+        pagerType.currentItem = LIST_PAGER_MID_POSITION
+        pagerCallBack = MainPagerCallBack(viewModel, this)
         pagerType.registerOnPageChangeCallback(pagerCallBack)
         Log.d(ContentValues.TAG, "pager position: ${pagerType.currentItem}")
-
         // observe page be changed
 //        viewModel.pagePosition.observe(this, Observer{
 //            Log.d(ContentValues.TAG, "after page changed selected date: ${viewModel.selectedDate.value}")
@@ -82,12 +75,12 @@ class MainPagerFragment(val application: Application) : Fragment(){
         viewModel.selectedDate.observe(this, Observer { date ->
             // Update the cached copy of the words in the adapter.
             date?.let {
-//                tvToday.text= viewModel.selectedDate.value.toString()
-                tvCost.text= viewModel.getSum().toString()
+//               tvToday.text= viewModel.selectedDate.value.toString()
+                tvCost.text = viewModel.getSum().toString()
             }
         })
 
-        //fragment 建立
+            //fragment 建立
 //        changeFrg(application)
 
 //        //button clicked
@@ -101,7 +94,6 @@ class MainPagerFragment(val application: Application) : Fragment(){
 //            pagerAdapter.notifyDataSetChanged()
 //            pagerType.currentItem--
 //        }
-
         return root
     }
 

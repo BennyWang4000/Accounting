@@ -1,7 +1,21 @@
 # Accounting App
 ###### This is a app that take "Ahorro" as reference for my summer vaction homework 
 ###### Not done yet :D
+
 -------
+##### 8/16
+###### Done:
+- A calculator in "AddNewActivity" is working
+- Color and UI updated (button background...)
+###### To do:
+- Fix the view pager/radio group problem
+- Remake a new date picker
+- Use theme to control most color of item
+- A splash screen
+- App launch icon
+- Setting menu
+-------
+
 ##### Done in 2020/07/30
 - date picker dialog is showed with correct date
 - SelectedDate in repository is work correctly with companion object
@@ -19,6 +33,9 @@
 - **view pager 日期會重複**
 - navigation 
 -------
+
+
+
 找個時間製作此 app 的類別圖和流程圖
     - 重構各大 fragment 和 activity
     

@@ -17,6 +17,6 @@ data class ItemEntity(
     @ColumnInfo(name= "type") val type: String,
     @ColumnInfo(name= "name") val name: String,
     @ColumnInfo(name= "note") val note: String,
-    @ColumnInfo(name= "price") val price: Int
+    @ColumnInfo(name= "price") val price: Double
 ) {
 }

@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".addNewItem.AddNewDrawerActivity"></activity>
-        <activity android:name=".pieChart.PieChartActivity" />
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".pieChart.PieChartFragment" />
+        <activity android:name=".editText.EditTextActivity"/>
+        <!-- <activity android:name=".addNewItem.AddNewDrawerActivity"></activity> -->
+        <activity android:name=".pieChart.PieChartActivity" /> <!-- <activity android:name=".SplashActivity" /> -->
+        <!-- <activity android:name=".pieChart.PieChartFragment" /> -->
         <activity
             android:name=".main.MainDrawerActivity"
             android:theme="@style/SplashTheme">
@@ -24,7 +24,6 @@
         </activity>
         <activity android:name=".itemInfo.ItemInfoActivity" />
         <activity android:name=".addNewItem.addNewFragment.AddNewActivity" />
-        <activity android:name=".main.MainPagerFragment" />
     </application>
 
 </manifest>

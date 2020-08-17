@@ -32,7 +32,7 @@ class MainDrawerActivity : AppCompatActivity() {
         viewModel= ViewModelProvider(this, factory).get(MainDrawerViewModel::class.java)
 
         //fragment
-        val frg= MainPagerFragment(application)
+        val frg= MainPagerFragment()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_fragment, frg)
         transaction.commit()

@@ -13,7 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [ItemEntity::class, TypeEntity::class], version = 2)
+@Database(entities = [ItemEntity::class, TypeEntity::class], version = 3)
 abstract class ListDatabase : RoomDatabase(){
 
     //取得 dao 實體(?

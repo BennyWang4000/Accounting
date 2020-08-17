@@ -8,6 +8,7 @@
         <item name="android:textColor">@color/AhorroTextColor</item>
         <item name="backgroundColor">@color/AhorroBackground_YellowLight</item>
         <item name="itemTextColor">@color/AhorroTextColor</item>
+        <item name="itemBackground">@drawable/ahorro_button_yellow</item>
         <item name="buttonStyle">?android:attr/borderlessButtonStyle</item>
 <!--        <item name="itemBackground">@color/AhorroRed</item>"-->
 <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
