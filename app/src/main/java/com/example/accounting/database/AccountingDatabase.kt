@@ -5,42 +5,43 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.accounting.database.dao.ListDao
-import com.example.accounting.database.dao.TypeDao
+import com.example.accounting.database.dao.AccountingDao
+import com.example.accounting.database.model.AccountEntity
+import com.example.accounting.database.model.DateEntity
 import com.example.accounting.database.model.ItemEntity
 import com.example.accounting.database.model.TypeEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [ItemEntity::class, TypeEntity::class], version = 3)
-abstract class ListDatabase : RoomDatabase(){
+@Database(entities = [ItemEntity::class, TypeEntity::class, DateEntity::class, AccountEntity::class], version = 5)
+abstract class AccountingDatabase : RoomDatabase(){
 
     //取得 dao 實體(?
-    abstract fun getListDao(): ListDao
-    abstract fun getTypeDao(): TypeDao
+    abstract fun getItemDao(): AccountingDao
 
     //官方推薦的 Singleton 寫法，因為實體的產生很耗資源，而且也不需要多個資料庫實體
     companion object {
         @Volatile
-        private var INSTANCE: ListDatabase? = null
+        private var INSTANCE: AccountingDatabase? = null
 
         //回傳此 class
         fun getDatabase(context: Context, scope: CoroutineScope
-        ): ListDatabase {
+        ): AccountingDatabase {
             // if the INSTANCE is not null, then return it,
             // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    ListDatabase::class.java,
-                    "word_database"
-                )
+                val instance =
+                    Room
+                        .databaseBuilder(
+                            context.applicationContext,
+                            AccountingDatabase::class.java,
+                    "accounting_database")
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.
-                    .fallbackToDestructiveMigration()
-                    .addCallback(ItemDatabaseCallback(scope))
-                    .build()
+                        .fallbackToDestructiveMigration()
+                        .addCallback(ItemDatabaseCallback(scope))
+                        .build()
                 INSTANCE = instance
                 // return instance
                 instance
@@ -61,7 +62,7 @@ abstract class ListDatabase : RoomDatabase(){
                 // comment out the following line.
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.getListDao())
+                        populateDatabase(database.getItemDao())
                     }
                 }
             }
@@ -71,7 +72,7 @@ abstract class ListDatabase : RoomDatabase(){
          * Populate the database in a new coroutine.
          * If you want to start with more words, just add them.
          */
-        fun populateDatabase(listDao: ListDao) {
+        fun populateDatabase(accountingDao: AccountingDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
 //            listDao.deleteAll()

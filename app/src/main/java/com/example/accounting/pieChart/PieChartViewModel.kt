@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.Repository
 import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.ListDatabase
+import com.example.accounting.database.AccountingDatabase
 import com.github.mikephil.charting.data.PieEntry
 import java.time.LocalDate
 
@@ -21,7 +21,7 @@ class PieChartViewModel(application: Application): AndroidViewModel(application)
     var sumData= listOf<PieEntry>()
 
     init {
-        val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
+        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
         repository = Repository(listDao)
 
         selectedDate= Repository.selectedDate

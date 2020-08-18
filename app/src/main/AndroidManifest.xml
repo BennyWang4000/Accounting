@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".editText.EditTextActivity"/>
-        <!-- <activity android:name=".addNewItem.AddNewDrawerActivity"></activity> -->
+        <activity android:name=".setting.SettingActivity"></activity>
+        <activity android:name=".editText.EditTextActivity" /> <!-- <activity android:name=".addNewItem.AddNewDrawerActivity"></activity> -->
         <activity android:name=".pieChart.PieChartActivity" /> <!-- <activity android:name=".SplashActivity" /> -->
         <!-- <activity android:name=".pieChart.PieChartFragment" /> -->
         <activity

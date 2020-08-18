@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.Repository
 import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.ListDatabase
+import com.example.accounting.database.AccountingDatabase
 import java.time.LocalDate
 import com.example.accounting.Repository.Date as RepositoryDate
 
@@ -28,7 +28,7 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     private val PAGER_LIST_MID_POSITION= Int.MAX_VALUE/ 2
 
     init {
-        val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
+        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
         repository = Repository(listDao)
 
         currentDate= RepositoryDate.currentDate

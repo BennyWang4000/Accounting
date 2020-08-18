@@ -6,19 +6,19 @@ import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.dao.ListDao
+import com.example.accounting.database.dao.AccountingDao
+import com.example.accounting.database.model.DateEntity
+import com.example.accounting.database.model.TypeEntity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 //負責 view model 和 Dao / database 之間的資料使用
-class Repository(private val listDao: ListDao) {
+class Repository(private val accountingDao: AccountingDao) {
 
     companion object Date {
         private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        var currentDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString()
-            , dateFormatter))
-        var selectedDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString()
-            , dateFormatter))
+        var currentDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString(), dateFormatter))
+        var selectedDate = MutableLiveData<LocalDate>(LocalDate.parse(LocalDate.now().toString(), dateFormatter))
         var lastPosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
         var currentPosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
     }
@@ -35,43 +35,31 @@ class Repository(private val listDao: ListDao) {
     suspend fun insertItem(item: ItemEntity) {
         //使用 dao 的方法
         Log.d(TAG, item.toString())
-        listDao.insertItem(item)
+        accountingDao.insertItem(item)
     }
 
-    fun getDateItem(date: String): LiveData<List<ItemEntity>> {
-        return listDao.getDateItems(date)
+    //item_table--------------------------------------
+    fun getDateItem(dateId: Int): LiveData<List<ItemEntity>> {
+        return accountingDao.getDateItems(dateId)
     }
-
 //    fun  getDateSum(date: String): LiveData<List<DateEntity>>
-
     fun getAllItem(): LiveData<List<ItemEntity>>{
-        return listDao.getAllItems()
+        return accountingDao.getAllItems()
     }
 
-//    fun getPieData(): LiveData<List<PieEntry>>{
-//        return listDao.getPieChartData()
-//    }
+    //date_table--------------------------------------
+    fun getDateId(date: String): LiveData<List<DateEntity>>{
+        return accountingDao.getDateId(date)
+    }
+    fun getDate(dateId: Int): LiveData<List<DateEntity>>{
+        return accountingDao.getDate(dateId)
+    }
+    fun insertDate(date: DateEntity){
+        accountingDao.insertDate(date)
+    }
 
-
-
-//    private var isCreated = false
-//    var currentDate = MutableLiveData<LocalDate>()
-//    var selectedDate = MutableLiveData<LocalDate>()
-//
-//    init {
-//        val dateFormatter= DateTimeFormatter.ofPattern("yyyy-MM-dd")
-//        currentDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
-//
-//        if (!isCreated) {
-//            selectedDate.value= LocalDate.parse(LocalDate.now().toString(), dateFormatter)
-//            Log.d(TAG, "Created")
-//            isCreated= true
-//        }
-//        Log.d(TAG, "")
-//    }
-
-//    val allData: LiveData<List<ItemEntity>> = listDao.getAllItems()
-
-
-
+    //type_table--------------------------------------
+    fun getTypeId(type: String): LiveData<List<TypeEntity>>{
+        return accountingDao.getTypeId(type)
+    }
 }

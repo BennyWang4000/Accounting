@@ -92,14 +92,13 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
             when (it.itemId) {
                 R.id.item_save -> {
                     val newItem = ItemEntity(
-                        0,
-                        viewModel.selectedDate.value.toString(),
-                        0,
-                        "type",
+                        1,
+                        viewModel.dateId.value!!,
+                        viewModel.getTypeId(TODO("type id")),
                         viewModel.title.value!!,
-                        viewModel.note.value!!,
-//                        etPrice.text.toString().toInt()
-                    viewModel.operand1.value!!.toDouble()
+                        viewModel.operand1.value!!.toDouble(),
+                        0,
+                        0
                     )
                     Log.d(
                         ContentValues.TAG,

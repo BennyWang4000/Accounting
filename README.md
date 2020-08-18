@@ -2,26 +2,11 @@
 ###### This is a app that take "Ahorro" as reference for my summer vacation homework 
 ###### Not done yet :D
 -------
-#### Database:
-![database](https://cdn.discordapp.com/attachments/744849098926063667/744849374080794704/unknown.png)
-###### item_table:
-- **id
-- *date_id
-- *item_id
-- title
-- note
-- price
-
-###### date_table:
-- **id 
-- date
-- sum
-
-###### type_table:
-- **id 
-- type
-- icon
-
+#### 2020/08/18
+###### New ER of Table:
+![ER](https://cdn.discordapp.com/attachments/744849098926063667/745182833617928232/unknown.png)
+###### To do: 
+- rebuild current table :D 
 
 -------
 #### 2020/08/16

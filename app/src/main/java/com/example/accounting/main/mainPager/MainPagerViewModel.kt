@@ -1,11 +1,9 @@
 package com.example.accounting.main.listFragment.mainFragment
 
 import android.app.Application
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.ListDatabase
+import com.example.accounting.database.AccountingDatabase
 import com.example.accounting.Repository
 import java.time.LocalDate
 import com.example.accounting.Repository.Date as RepositoryDate
@@ -33,7 +31,7 @@ class MainPagerViewModel (application: Application): AndroidViewModel(applicatio
     var nextDayData: LiveData<List<ItemEntity>>
 
     init {
-        val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
+        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
         repository = Repository(listDao)
 
         currentDate= RepositoryDate.currentDate

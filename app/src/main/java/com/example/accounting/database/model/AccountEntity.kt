@@ -5,12 +5,10 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(
-    tableName = "date_table",
-    indices = [Index(value = ["id", "date"], unique = true)]
-)
-data class DateEntity(
+@Entity(tableName = "account_table",
+    indices = [Index(value = ["id", "account"], unique = true)])
+data class AccountEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") val id: Int= 1,
-    @ColumnInfo(name = "date") val date: String,
-    @ColumnInfo(name = "sum") val sum: Int
+    @ColumnInfo(name= "account") val account: String,
+    @ColumnInfo(name= "is_default") val isDefault: Boolean
 )

@@ -9,7 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.accounting.Repository
 import com.example.accounting.addNewItem.Calculator
 import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.ListDatabase
+import com.example.accounting.database.AccountingDatabase
+import com.example.accounting.database.model.DateEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -24,28 +25,46 @@ class AddNewViewModel(application: Application): AndroidViewModel(application) {
     var operand2: MutableLiveData<String>
     var isOperating: MutableLiveData<Boolean>
 
+    var price: MutableLiveData<Double>
     var title: MutableLiveData<String>
     var note: MutableLiveData<String>
 
+    val dateId: MutableLiveData<Int>
+
     init {
-        val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
-        repository = Repository(listDao)
+        val accountingDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
+        repository = Repository(accountingDao)
+
         selectedDate= RepositoryDate.selectedDate
+
+        dateId= MutableLiveData(repository.getDateId(selectedDate.value.toString()).value!![0].id)
 
         operand1= calculator.operand1
         operand2= calculator.operand2
         isOperating= calculator.isOperating
 
+        price= MutableLiveData(0.0)
         title= MutableLiveData("")
         note= MutableLiveData("")
 
         Log.d(TAG,  "Add New View Model Date: ${selectedDate.value.toString()}")
     }
 
+    // to database
     fun insertItem(item: ItemEntity) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertItem(item)
     }
+    fun getDateId(date: String): Int{
+        return -1
+    }
+    fun insertDate(date: DateEntity){
+        repository.insertDate(date)
+    }
+    fun getTypeId(type: String): Int{
+        return repository.getTypeId(type).value!![0].id
+    }
 
+    // to calculator
     fun clickNum(num: String){
         calculator.clickNumber(num)
     }

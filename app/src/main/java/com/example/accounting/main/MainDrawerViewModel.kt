@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.accounting.Repository
 import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.ListDatabase
+import com.example.accounting.database.AccountingDatabase
 import java.time.LocalDate
 
 class MainDrawerViewModel(application: Application): AndroidViewModel(application) {
@@ -25,14 +25,18 @@ class MainDrawerViewModel(application: Application): AndroidViewModel(applicatio
     var lastPosition= Repository.lastPosition
     var currentPosition= Repository.currentPosition
 
+    var dateId: MutableLiveData<Int>
+
     init {
-        val listDao = ListDatabase.getDatabase(application, viewModelScope).getListDao()
+        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
         repository = Repository(listDao)
 
         currentDate= Repository.currentDate
         selectedDate= Repository.selectedDate
 
-        dateItem = repository.getDateItem(selectedDate.value.toString())
+        dateId= MutableLiveData(repository.getDateId(selectedDate.value.toString()).value!![0].id)
+
+        dateItem = repository.getDateItem(dateId.value!!)
     }
 
 }
