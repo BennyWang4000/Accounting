@@ -9,7 +9,7 @@ import com.example.accounting.database.AccountingDatabase
 class ItemInfoViewModel(application: Application) : AndroidViewModel(application){
     private val repository: Repository
     init {
-        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
+        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getAccountingDao()
         repository = Repository(listDao)
 
     }

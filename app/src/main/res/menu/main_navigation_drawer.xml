@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
-        android:id="@+id/item_pie_chart"
-        android:icon="@drawable/ic_baseline_pie_chart_24_darkgray"
-        android:title="圓餅圖分析"/>
+        android:id="@+id/item_main_expense"
+        android:title="支出"
+        android:icon="@drawable/ic_baseline_money_off_24_gray"/>
     <item
-        android:id="@+id/analysis_2"
-        android:title="null"/>
+        android:id="@+id/item_main_income"
+        android:icon="@drawable/ic_baseline_attach_money_24_gray"
+        android:title="收入"/>
     <item
-        android:id="@+id/analysis_3"
-        android:title="null"/>
+        android:id="@+id/item_main_analysis"
+        android:icon="@drawable/ic_baseline_bar_chart_24_gray"
+        android:title="分析"/>
     <item
-        android:id="@+id/analysis_4"
-        android:title="null"/>
+        android:id="@+id/item_main_settings"
+        android:title="設定"
+        android:icon="@drawable/ic_baseline_settings_24_gray"/>
 </menu>

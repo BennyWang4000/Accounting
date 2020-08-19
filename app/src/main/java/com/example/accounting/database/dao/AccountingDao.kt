@@ -2,53 +2,48 @@ package com.example.accounting.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.accounting.database.model.DateEntity
-import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.model.TypeEntity
-import java.time.LocalDate
+import com.example.accounting.database.model.AccountEntity
+import com.example.accounting.database.model.ExpenseEntity
+import com.example.accounting.database.model.CategoryEntity
+import com.example.accounting.database.model.RoutineEntity
 
 @Dao
 interface AccountingDao {
 
-    //item_table--------------------------------------
-    @Query("SELECT * FROM item_table")
-    fun getAllItems(): LiveData<List<ItemEntity>>
+    //expense_table--------------------------------------
+    @Query("SELECT * FROM expense_table")
+    fun getAllExpenses(): LiveData<List<ExpenseEntity>>
 
-    @Query("SELECT * FROM item_table WHERE date_id IN (:dateId) ORDER BY id ASC")
-    fun getDateItems(dateId: Int): LiveData<List<ItemEntity>>
+    @Query("SELECT * FROM expense_table WHERE date IN (:d)")
+    fun getDailyExpenses(d: String): LiveData<List<ExpenseEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertItem(item: ItemEntity)
+    fun insertExpense(expense: ExpenseEntity)
 
+    //category_table--------------------------------------
+    @Query("SELECT * FROM  category_table")
+    fun getAllCategories(): LiveData<List<CategoryEntity>>
 
-    //date_table--------------------------------------
-    @Query("SELECT * FROM date_table")
-    fun getAllDate(): LiveData<List<DateEntity>>
+    @Query("SELECT * FROM category_table WHERE _id IN (:id)")
+    fun getCategories(id: Int): LiveData<List<CategoryEntity>>
 
-    @Query("SELECT * FROM date_table WHERE id IN (:dateId)")
-    fun getDate(dateId: Int): LiveData<List<DateEntity>>
-
-    @Query("SELECT * FROM date_table WHERE date IN (:d)")
-    fun getDateId(d: String): LiveData<List<DateEntity>>
+    @Query("SELECT * FROM category_table WHERE name IN (:n)")
+    fun getTypeId(n: String): LiveData<List<CategoryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertDate(date: DateEntity)
+    fun insertCategory(category: CategoryEntity)
 
+    @Query("DELETE FROM category_table WHERE _id IN (:id)")
+    fun delCategory(id: Int)
 
-    //type_table--------------------------------------
-    @Query("SELECT * FROM type_table ")
-    fun getAllType(): LiveData<List<TypeEntity>>
+    //account_table--------------------------------------
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertAccount(account: AccountEntity)
+//    @Query("INSERT INTO account_table VALUES (:i, :n)")
+//    fun insertAccount(i: Int, n: String)
 
-    @Query("SELECT * FROM type_table WHERE id IN (:typeId)")
-    fun getType(typeId: Int): LiveData<List<TypeEntity>>
-
-    @Query("SELECT * FROM type_table WHERE type IN (:t)")
-    fun getTypeId(t: String): LiveData<List<TypeEntity>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertType(type: TypeEntity)
-
-    @Query("DELETE FROM type_table WHERE type IN (:t)")
-    fun delType(t: String)
+    //routine_table--------------------------------------
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertRoutine(routine: RoutineEntity)
 }
 

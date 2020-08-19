@@ -5,10 +5,9 @@ import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.accounting.database.model.ItemEntity
+import com.example.accounting.database.model.ExpenseEntity
 import com.example.accounting.database.dao.AccountingDao
-import com.example.accounting.database.model.DateEntity
-import com.example.accounting.database.model.TypeEntity
+import com.example.accounting.database.model.CategoryEntity
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -32,34 +31,34 @@ class Repository(private val accountingDao: AccountingDao) {
     //Thread 不是自動使用，而是透過特殊方法呼叫(?
     @WorkerThread
     //viewModel 使用之方法
-    suspend fun insertItem(item: ItemEntity) {
+    suspend fun insertItem(expense: ExpenseEntity) {
         //使用 dao 的方法
-        Log.d(TAG, item.toString())
-        accountingDao.insertItem(item)
+        Log.d(TAG, expense.toString())
+        accountingDao.insertExpense(expense)
     }
 
-    //item_table--------------------------------------
-    fun getDateItem(dateId: Int): LiveData<List<ItemEntity>> {
-        return accountingDao.getDateItems(dateId)
+    //expense_table--------------------------------------
+    fun getDailyExpenses(date: String): LiveData<List<ExpenseEntity>> {
+        return accountingDao.getDailyExpenses(date)
     }
 //    fun  getDateSum(date: String): LiveData<List<DateEntity>>
-    fun getAllItem(): LiveData<List<ItemEntity>>{
-        return accountingDao.getAllItems()
+    fun getAllItem(): LiveData<List<ExpenseEntity>>{
+        return accountingDao.getAllExpenses()
     }
 
-    //date_table--------------------------------------
-    fun getDateId(date: String): LiveData<List<DateEntity>>{
-        return accountingDao.getDateId(date)
-    }
-    fun getDate(dateId: Int): LiveData<List<DateEntity>>{
-        return accountingDao.getDate(dateId)
-    }
-    fun insertDate(date: DateEntity){
-        accountingDao.insertDate(date)
-    }
+//    //date_table--------------------------------------
+//    fun getDateId(date: String): LiveData<List<DateEntity>>{
+//        return accountingDao.getDateId(date)
+//    }
+//    fun getDate(dateId: Int): LiveData<List<DateEntity>>{
+//        return accountingDao.getDate(dateId)
+//    }
+//    fun insertDate(date: DateEntity){
+//        accountingDao.insertDate(date)
+//    }
 
     //type_table--------------------------------------
-    fun getTypeId(type: String): LiveData<List<TypeEntity>>{
+    fun getTypeId(type: String): LiveData<List<CategoryEntity>>{
         return accountingDao.getTypeId(type)
     }
 }

@@ -36,7 +36,7 @@
         >
 
         <ImageView
-            android:id="@+id/item_image"
+            android:id="@+id/item_iv_category"
             android:src="@drawable/ic_baseline_android_24_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,29 +47,29 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:id="@+id/item_name"
+            android:id="@+id/item_tv_category"
             android:layout_marginLeft="10dp"
             android:text="Name"
             android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/item_image"
+            app:layout_constraintStart_toEndOf="@id/item_iv_category"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:id="@+id/item_ntd"
+            android:id="@+id/item_tv_ntd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NT$"
             android:textSize="25dp"
-            app:layout_constraintEnd_toStartOf="@id/item_price"
+            app:layout_constraintEnd_toStartOf="@id/item_tv_amount"
             android:layout_marginRight="10dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
-            android:id="@+id/item_price"
+            android:id="@+id/item_tv_amount"
             android:text="000000"
             android:textSize="25dp"
             android:layout_marginLeft="10dp"

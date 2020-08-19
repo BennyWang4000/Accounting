@@ -24,7 +24,7 @@ class MainDrawerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //設回原本之 theme
-        setTheme(R.style.AppTheme)
+        setTheme(R.style.ExpenseTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_drawer_activity)
         //view model
@@ -42,7 +42,19 @@ class MainDrawerActivity : AppCompatActivity() {
         val drawer: NavigationView= findViewById(R.id.navigation_drawer)
         drawer.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.item_pie_chart -> {
+                R.id.item_main_expense -> {
+                    setTheme(R.style.ExpenseTheme)
+                    val frgExpense= MainPagerFragment()
+                    transaction.replace(R.id.main_fragment, frgExpense)
+                    transaction.commit()
+                }
+                R.id.item_main_income -> {
+                    setTheme(R.style.IncomeTheme)
+                    val frgIncome= MainPagerFragment()
+                    transaction.replace(R.id.main_fragment, frgIncome)
+                    transaction.commit()
+                }
+                R.id.item_main_analysis -> {
                     startActivity(Intent(this, PieChartActivity::class.java))
                 }
                 else -> {}
@@ -66,13 +78,12 @@ class MainDrawerActivity : AppCompatActivity() {
         }
         toolbar.setOnMenuItemClickListener{
             when(it.itemId){
-                R.id.item_add -> {
+                R.id.menu_add -> {
                     val intent= Intent(this, AddNewActivity::class.java)
                     startActivityForResult(intent, 1)
                     return@setOnMenuItemClickListener true
                 }
-
-                R.id.item_date -> {
+                R.id.menu_date -> {
                     DatePickerDialog(
                         this, { _, year, month, day ->
                             run {
@@ -103,29 +114,4 @@ class MainDrawerActivity : AppCompatActivity() {
             toolbar.title= it.toString()
         })
     }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        Log.e("Main Drawer Activity", "onPause()")
-//    }
-//
-//    override fun onStop() {
-//        super.onStop()
-//        Log.e("Main Drawer Activity", "onStop()")
-//    }
-//
-//    override fun onRestart() {
-//        super.onRestart()
-//        Log.e("Main Drawer Activity", "onRestart()")
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        Log.e("Main Drawer Activity", "onResume()")
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        Log.e("Main Drawer Activity", "onDestroy()")
-//    }
 }

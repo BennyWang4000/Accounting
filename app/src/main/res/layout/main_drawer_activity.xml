@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start|left"
             app:menu="@menu/main_navigation_drawer"
-            android:background="@color/AhorroBackground_YellowLight"
+            android:background="?attr/colorSecondary"
             android:fitsSystemWindows="true"/>
 
     </androidx.drawerlayout.widget.DrawerLayout>

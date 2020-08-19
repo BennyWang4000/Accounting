@@ -1,25 +1,26 @@
 package com.example.accounting.main.listFragment
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.Repository
-import com.example.accounting.database.model.ItemEntity
+import com.example.accounting.database.model.ExpenseEntity
 import com.example.accounting.database.AccountingDatabase
 import java.time.LocalDate
 import com.example.accounting.Repository.Date as RepositoryDate
 
-class ListViewModel(application: Application): AndroidViewModel(application) {
+class ListViewModel(application: Application, val position: Int): AndroidViewModel(application) {
     //建立 repository 實體
-     val repository: Repository
-    var selectedDateData: LiveData<List<ItemEntity>>
-    var privousDayData: LiveData<List<ItemEntity>>
-    var nextDayData: LiveData<List<ItemEntity>>
+    private val repository: Repository
+    var pageDateData: LiveData<List<ExpenseEntity>>
 
     var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
+
+    var pageDate: LocalDate
 
     var currentPosition: MutableLiveData<Int>
     var lastPosition= RepositoryDate.lastPosition
@@ -28,46 +29,30 @@ class ListViewModel(application: Application): AndroidViewModel(application) {
     private val PAGER_LIST_MID_POSITION= Int.MAX_VALUE/ 2
 
     init {
-        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
+        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getAccountingDao()
         repository = Repository(listDao)
 
         currentDate= RepositoryDate.currentDate
         selectedDate= RepositoryDate.selectedDate
 
-        selectedDateData = repository.getDateItem(selectedDate.value.toString())
-        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
-        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
+        pageDate= selectedDate.value!!.plusDays((position- PAGER_LIST_MID_POSITION).toLong())
+        pageDateData= repository.getDailyExpenses(pageDate.toString())
+
+        if(repository.getDailyExpenses(pageDate.toString()).value== null) {
+            Log.d("pageDate:", "NULL DATA..")
+        }
+
 
         currentPosition= RepositoryDate.currentPosition
     }
 
 
-    fun getDateData(position: Int): LiveData<List<ItemEntity>>{
-//        return when{
-//            position> lastPosition.value!! ->{
-//                Log.d(ContentValues.TAG, "position $position> lastPosition.value ${lastPosition.value}")
-//                privousDayData
-//            }
-//            position< lastPosition.value!! -> {
-//                Log.d(ContentValues.TAG, "position $position> lastPosition.value${lastPosition.value}")
-//                nextDayData
-//            }
-//            else -> {
-//                Log.d(ContentValues.TAG, "position $position== lastPosition.value ${lastPosition.value}")
-//                selectedDateData
-//            }
-//
-//        }
-        return selectedDateData
+    fun getDateData(): LiveData<List<ExpenseEntity>>{
+        return pageDateData
     }
 
-    fun getRecyclerViewData(position: Int): LiveData<List<ItemEntity>>{
-        return repository.getDateItem(selectedDate.value!!.plusDays((PAGER_LIST_MAX_VALUE- position).toLong()).toString())
-    }
-
-    fun pageChanged(){
-//        selectedDateData = repository.getDateItem(selectedDate.value.toString())
-//        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
-//        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
+    fun getSum(): Double{
+        var sum: Double= 0.0
+        return sum
     }
 }

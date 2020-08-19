@@ -2,7 +2,6 @@ package com.example.accounting.main.listFragment.mainFragment
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.accounting.database.model.ItemEntity
 import com.example.accounting.database.AccountingDatabase
 import com.example.accounting.Repository
 import java.time.LocalDate
@@ -16,7 +15,7 @@ class MainPagerViewModel (application: Application): AndroidViewModel(applicatio
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    val dateItem: LiveData<List<ItemEntity>>
+//    val dailyExpense: LiveData<List<ExpenseEntity>>
 
     var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
@@ -27,19 +26,14 @@ class MainPagerViewModel (application: Application): AndroidViewModel(applicatio
 //    var currentPosition= RepositoryDate.currentPosition
 
 
-    var privousDayData: LiveData<List<ItemEntity>>
-    var nextDayData: LiveData<List<ItemEntity>>
-
     init {
-        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getItemDao()
+        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getAccountingDao()
         repository = Repository(listDao)
 
         currentDate= RepositoryDate.currentDate
         selectedDate= RepositoryDate.selectedDate
 
-        dateItem = repository.getDateItem(selectedDate.value.toString())
-        privousDayData = repository.getDateItem(selectedDate.value!!.plusDays(-1).toString())
-        nextDayData = repository.getDateItem(selectedDate.value!!.plusDays(1).toString())
+//        dailyExpense = repository.getDateItem(selectedDate.value.toString())
     }
 
 //    fun upDateRepository(){
@@ -48,16 +42,7 @@ class MainPagerViewModel (application: Application): AndroidViewModel(applicatio
 
 
 
-    fun getSum(): Int{
-        var sum: Int= 0
 
-//        for(i in 0..dateItem.value!!.size){
-//            sum+= dateItem.value!!.get(i).price
-//        }
-//        Log.d(TAG, "sum: $sum")
-
-        return sum
-    }
 
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
@@ -72,14 +57,5 @@ class MainPagerViewModel (application: Application): AndroidViewModel(applicatio
 //            intent.getStringExtra("price").toInt()
 //        )
 //        repository.insertItem(item)
-//    }
-
-//
-//    var currentDate= repository.currentDate
-//    var selectedDate= repository.selectedDate
-
-
-//    fun getNewItem(intent: Intent){
-//
 //    }
 }

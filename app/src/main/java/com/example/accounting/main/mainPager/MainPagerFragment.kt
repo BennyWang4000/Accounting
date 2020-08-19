@@ -40,7 +40,7 @@ class MainPagerFragment() : Fragment(){
     ): View? {
         val root = inflater.inflate(R.layout.main_fragment, container, false)
 
-        val tvCost = root.findViewById<TextView>(R.id.tv_cost)
+
 //        val tvToday= root.findViewById<TextView>(R.id.tv_today)
 //        val btNextDay= root.findViewById<Button>(R.id.bt_next_day)
 //        val btPreviousDay= root.findViewById<Button>(R.id.bt_previous_day)
@@ -71,14 +71,7 @@ class MainPagerFragment() : Fragment(){
 //            tvToday.text= viewModel.selectedDate.value.toString()
 //        })
 
-        //observe selected date
-        viewModel.selectedDate.observe(this, Observer { date ->
-            // Update the cached copy of the words in the adapter.
-            date?.let {
-//               tvToday.text= viewModel.selectedDate.value.toString()
-                tvCost.text = viewModel.getSum().toString()
-            }
-        })
+
 
             //fragment 建立
 //        changeFrg(application)

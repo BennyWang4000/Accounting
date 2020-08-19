@@ -32,7 +32,7 @@ class EditTextActivity() : AppCompatActivity() {
             application.applicationContext,
             R.drawable.ic_baseline_more_vert_24_white
         )
-        toolbar.inflateMenu(R.menu.add_new_toolbar)
+        toolbar.inflateMenu(R.menu.save_tool_bar)
         toolbar.setNavigationOnClickListener {
             finish()
         }

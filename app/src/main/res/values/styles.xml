@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/AhorroSwitchBackground</item>
+        <item name="colorPrimary">@color/AhorroWhite</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/AhorroActionBar_Gray</item>
         <item name="android:textColor">@color/AhorroTextColor</item>
@@ -15,5 +15,47 @@
 <!--        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
 <!--        <item name="colorAccent">@color/colorAccent</item>-->
     </style>
+<!--    <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">-->
+<!--        <item name="background"-->
+<!--    </style>-->
 
+<!--    Expense Theme===============================================-->
+    <style name="ExpenseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/AhorroBlack</item>
+
+        <item name="colorPrimary">@color/AhorroRedLight</item>
+        <item name="colorPrimaryVariant">@color/AhorroRed</item>
+        <item name="colorPrimaryDark">@color/AhorroRedDark</item>
+        <item name="colorOnPrimary">@color/AhorroWhite</item>
+
+
+        <item name="backgroundColor">@color/AhorroBackground_Yellow</item>
+        <item name="colorOnBackground">@color/AhorroTextColor</item>
+
+        <item name="colorSecondary">@color/AhorroBackground_YellowLight</item>
+        <item name="colorSecondaryVariant">@color/AhorroBackground_Yellow</item>
+        <item name="colorOnSecondary">@color/AhorroTextColor</item>
+
+        <item name="colorAccent">@color/AhorroSwitchOn</item>
+    </style>
+
+<!--    Income Theme===============================================-->
+    <style name="IncomeTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:statusBarColor">@color/AhorroBlack</item>
+
+        <item name="colorPrimary">@color/AhorroGreenLight</item>
+        <item name="colorPrimaryVariant">@color/AhorroGreen</item>
+        <item name="colorPrimaryDark">@color/AhorroGreenDark</item>
+        <item name="colorOnPrimary">@color/AhorroWhite</item>
+
+
+        <item name="backgroundColor">@color/AhorroBackground_Yellow</item>
+        <item name="colorOnBackground">@color/AhorroTextColor</item>
+
+        <item name="colorSecondary">@color/AhorroBackground_YellowLight</item>
+        <item name="colorSecondaryVariant">@color/AhorroBackground_Yellow</item>
+        <item name="colorOnSecondary">@color/AhorroTextColor</item>
+
+        <item name="colorAccent">@color/AhorroSwitchOn</item>
+    </style>
 </resources>

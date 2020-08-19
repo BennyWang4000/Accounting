@@ -6,19 +6,25 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.accounting.database.dao.AccountingDao
-import com.example.accounting.database.model.AccountEntity
-import com.example.accounting.database.model.DateEntity
-import com.example.accounting.database.model.ItemEntity
-import com.example.accounting.database.model.TypeEntity
+import com.example.accounting.database.model.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [ItemEntity::class, TypeEntity::class, DateEntity::class, AccountEntity::class], version = 5)
+@Database(
+    entities = [
+        SettingsEntity::class,
+        ExpenseEntity::class,
+        IncomeEntity::class,
+        CategoryEntity::class,
+        RoutineEntity::class,
+        AccountEntity::class],
+    version = 105
+)
 abstract class AccountingDatabase : RoomDatabase(){
 
     //取得 dao 實體(?
-    abstract fun getItemDao(): AccountingDao
+    abstract fun getAccountingDao(): AccountingDao
 
     //官方推薦的 Singleton 寫法，因為實體的產生很耗資源，而且也不需要多個資料庫實體
     companion object {
@@ -62,7 +68,7 @@ abstract class AccountingDatabase : RoomDatabase(){
                 // comment out the following line.
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.getItemDao())
+                        populateDatabase(database.getAccountingDao())
                     }
                 }
             }
@@ -76,7 +82,26 @@ abstract class AccountingDatabase : RoomDatabase(){
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
 //            listDao.deleteAll()
-
+            accountingDao.insertAccount(AccountEntity(0, "現金"))
+            accountingDao.insertCategory(CategoryEntity(
+                0,
+                "早餐",
+                "breakfast",
+                0,
+                "defaultName",
+                -1
+            ))
+            accountingDao.insertRoutine(RoutineEntity(
+                0,
+                0.0,
+                0,
+                "A",
+                0,
+                "A",
+                "A",
+                0,
+                0
+            ))
         }
     }
 

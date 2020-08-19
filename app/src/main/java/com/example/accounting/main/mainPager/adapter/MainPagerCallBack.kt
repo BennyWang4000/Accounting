@@ -24,23 +24,12 @@ class MainPagerCallBack(val viewModel: MainPagerViewModel, val actvity: MainPage
     override fun onPageSelected(position: Int){
         super.onPageSelected(position)
         if(viewModel.lastPosition.value!!> position){
-
-//            viewModel.currentPosition.let {
-//                it.value= it.value!!- 1
-//            }
-
             viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(-1)
             Log.d(ContentValues.TAG, "Scrolled Left  position: ${viewModel.pagePosition.value}")
         }else if(viewModel.lastPosition.value!!< position){
-
-//            viewModel.currentPosition.let {
-//                it.value= it.value!!+ 1
-//            }
-
             viewModel.selectedDate.value= viewModel.selectedDate.value!!.plusDays(1)
             Log.d(ContentValues.TAG, "Scrolled right  position: ${viewModel.pagePosition.value}")
         }
         viewModel.lastPosition.value= position
-        viewModel.pagePosition.value= position
     }
 }

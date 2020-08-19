@@ -16,7 +16,7 @@ import com.example.accounting.R
 import com.example.accounting.addNewItem.addNewFragment.AddNewViewModel
 import com.example.accounting.addNewItem.addNewFragment.AddNewViewModelFactory
 import com.example.accounting.addNewItem.addNewFragment.adapter.TypePagerAdapter
-import com.example.accounting.database.model.ItemEntity
+import com.example.accounting.database.model.ExpenseEntity
 import com.example.accounting.editText.EditTextActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
@@ -84,21 +84,21 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
 
         //tool bar
         val toolbar= findViewById<Toolbar>(R.id.toolbar_add)
-        toolbar.inflateMenu(R.menu.add_new_toolbar)
+        toolbar.inflateMenu(R.menu.save_tool_bar)
         toolbar.setNavigationOnClickListener {
             finish()
         }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.item_save -> {
-                    val newItem = ItemEntity(
-                        1,
-                        viewModel.dateId.value!!,
-                        viewModel.getTypeId(TODO("type id")),
-                        viewModel.title.value!!,
-                        viewModel.operand1.value!!.toDouble(),
+                    val newItem = ExpenseEntity(
                         0,
-                        0
+                        viewModel.operand1.value!!.toDouble(),
+                        viewModel.selectedDate.value!!.toString(),
+                        viewModel.descr.value!!,
+                        1,
+                        1,
+                        1
                     )
                     Log.d(
                         ContentValues.TAG,
@@ -235,12 +235,12 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
 
         when(requestCode){
             REQUEST_CODE_TITLE -> {
-                viewModel.title.value= data!!.getStringExtra("content")
-                tvTitle.text= viewModel.title.value
+                viewModel.descr.value= data!!.getStringExtra("content")
+                tvTitle.text= viewModel.descr.value
             }
             REQUEST_CODE_NOTE -> {
-                viewModel.note.value= data!!.getStringExtra("content")
-                tvNote.text= viewModel.note.value
+                viewModel.account.value= 0
+                tvNote.text= viewModel.account.value.toString()
             }
             REQUEST_CODE_EXPENSE -> {
                 Snackbar.make(this.findViewById<ConstraintLayout>(R.id.layout_add_new), ":D", Snackbar.LENGTH_SHORT).show()

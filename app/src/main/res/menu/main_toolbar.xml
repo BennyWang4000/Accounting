@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_date"
+        android:id="@+id/menu_date"
         android:title="Pick Picker"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_date_range_24_white"/>
 
     <item
-        android:id="@+id/item_add"
+        android:id="@+id/menu_add"
         android:title="Add a New Item"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_baseline_add_circle_outline_24_white"/>
