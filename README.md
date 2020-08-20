@@ -3,11 +3,13 @@
 ###### Not done yet :D
 -------
 #### 2020/08/19
+###### New ER of Table
 ###### Done: 
-- Database update almost complete
-- 
+- Database update is almost complete
+- Use themes to alter UI color
+- Implement switching between two of fragment in "Income Mode" and "Expense Mode" with the same class
 -------
-#### 2020/08/18
+#### 2020/08/18f
 ###### New ER of Table:
 ![ER](https://cdn.discordapp.com/attachments/744849098926063667/745182833617928232/unknown.png)
 ###### To do: 
