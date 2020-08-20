@@ -2,6 +2,11 @@
 ###### This is a app that take "Ahorro" as reference for my summer vacation homework 
 ###### Not done yet :D
 -------
+#### 2020/08/19
+###### Done: 
+- Database update almost complete
+- 
+-------
 #### 2020/08/18
 ###### New ER of Table:
 ![ER](https://cdn.discordapp.com/attachments/744849098926063667/745182833617928232/unknown.png)
