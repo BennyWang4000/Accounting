@@ -18,17 +18,36 @@
 <!--    <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">-->
 <!--        <item name="background"-->
 <!--    </style>-->
+<!--    MainDatePickerDialog-->
+    <style name="CalculatorButton" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/ahorro_button_calculator</item>
+        <item name="android:textColor">@color/AhorroTextColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">62dp</item>
+    </style>
+    
+    
+    
+<!--    Date Picker Theme===============================================-->
+    <style name="MainDatePickerDialog" parent="android:Widget.Holo.DatePicker">
+        <item name="android:buttonBarPositiveButtonStyle">@drawable/ahorro_button_green_rect</item>
+        <item name="android:buttonBarNegativeButtonStyle">@drawable/ahorro_button_red_rect</item>
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:colorBackground">@color/AhorroBackground_YellowLight</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
 
 <!--    Expense Theme===============================================-->
     <style name="ExpenseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor">@color/AhorroBlack</item>
+        <item name="android:navigationBarColor">@color/AhorroBlack</item>
 
         <item name="colorPrimary">@color/AhorroRedLight</item>
         <item name="colorPrimaryVariant">@color/AhorroRed</item>
         <item name="colorPrimaryDark">@color/AhorroRedDark</item>
         <item name="colorOnPrimary">@color/AhorroWhite</item>
 
-
         <item name="backgroundColor">@color/AhorroBackground_Yellow</item>
         <item name="colorOnBackground">@color/AhorroTextColor</item>
 
@@ -37,18 +56,20 @@
         <item name="colorOnSecondary">@color/AhorroTextColor</item>
 
         <item name="colorAccent">@color/AhorroSwitchOn</item>
+x
+        <item name="android:datePickerStyle">@style/MainDatePickerDialog</item>
     </style>
 
 <!--    Income Theme===============================================-->
     <style name="IncomeTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor">@color/AhorroBlack</item>
+        <item name="android:navigationBarColor">@color/AhorroBlack</item>
 
         <item name="colorPrimary">@color/AhorroGreenLight</item>
         <item name="colorPrimaryVariant">@color/AhorroGreen</item>
         <item name="colorPrimaryDark">@color/AhorroGreenDark</item>
         <item name="colorOnPrimary">@color/AhorroWhite</item>
 
-
         <item name="backgroundColor">@color/AhorroBackground_Yellow</item>
         <item name="colorOnBackground">@color/AhorroTextColor</item>
 
@@ -57,5 +78,7 @@
         <item name="colorOnSecondary">@color/AhorroTextColor</item>
 
         <item name="colorAccent">@color/AhorroSwitchOn</item>
+
+        <item name="android:datePickerDialogTheme">@style/MainDatePickerDialog</item>
     </style>
 </resources>

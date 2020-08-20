@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
         CategoryEntity::class,
         RoutineEntity::class,
         AccountEntity::class],
-    version = 105
+    version = 106
 )
 abstract class AccountingDatabase : RoomDatabase(){
 

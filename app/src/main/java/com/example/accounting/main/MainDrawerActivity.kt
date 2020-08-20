@@ -1,9 +1,10 @@
 package com.example.accounting.main
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -32,9 +33,10 @@ class MainDrawerActivity : AppCompatActivity() {
         viewModel= ViewModelProvider(this, factory).get(MainDrawerViewModel::class.java)
 
         //fragment
-        val frg= MainPagerFragment()
-        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_fragment, frg)
+        val frgExpense= MainPagerFragment()
+        val frgIncome= MainPagerFragment()
+        var transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_fragment, frgExpense)
         transaction.commit()
 
         //navigation drawer
@@ -44,15 +46,17 @@ class MainDrawerActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.item_main_expense -> {
                     setTheme(R.style.ExpenseTheme)
-                    val frgExpense= MainPagerFragment()
+                    transaction= supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.main_fragment, frgExpense)
                     transaction.commit()
+                    drawerLayout.closeDrawer(drawer)
                 }
                 R.id.item_main_income -> {
                     setTheme(R.style.IncomeTheme)
-                    val frgIncome= MainPagerFragment()
+                    transaction= supportFragmentManager.beginTransaction()
                     transaction.replace(R.id.main_fragment, frgIncome)
                     transaction.commit()
+                    drawerLayout.closeDrawer(drawer)
                 }
                 R.id.item_main_analysis -> {
                     startActivity(Intent(this, PieChartActivity::class.java))
@@ -76,6 +80,7 @@ class MainDrawerActivity : AppCompatActivity() {
                 drawerLayout.openDrawer(drawer)
             }
         }
+
         toolbar.setOnMenuItemClickListener{
             when(it.itemId){
                 R.id.menu_add -> {
@@ -84,21 +89,18 @@ class MainDrawerActivity : AppCompatActivity() {
                     return@setOnMenuItemClickListener true
                 }
                 R.id.menu_date -> {
-                    DatePickerDialog(
-                        this, { _, year, month, day ->
+                    DatePickerDialog(this, { _, year, month, day ->
                             run {
                                 viewModel.selectedDate.value= LocalDate.parse(
                                     "$year-" +
                                             String.format("%02d", month+ 1)+ "-" +
                                             String.format("%02d", day))
 
-//                            changeFrg(application)
                             }
-                        }, viewModel.selectedDate.value!!.year
-                        , String.format("%02d", viewModel.selectedDate.value!!.monthValue.plus(-1)).toInt()
-                        , String.format("%02d", viewModel.selectedDate.value!!.dayOfMonth).toInt())
-                        .show()
-
+                }, viewModel.selectedDate.value!!.year
+                , String.format("%02d", viewModel.selectedDate.value!!.monthValue.plus(-1)).toInt()
+                , String.format("%02d", viewModel.selectedDate.value!!.dayOfMonth).toInt())
+                    .show()
                     return@setOnMenuItemClickListener true
                 }
 

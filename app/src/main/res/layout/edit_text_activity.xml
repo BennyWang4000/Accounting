@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".editText.EditTextActivity"
+    tools:context=".editArea.EditAreaActivity"
     android:background="@color/AhorroBackground_YellowLight">
 
     <androidx.appcompat.widget.Toolbar

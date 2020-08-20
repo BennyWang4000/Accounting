@@ -1,4 +1,4 @@
-package com.example.accounting.editText
+package com.example.accounting.editArea
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +12,7 @@ import com.example.accounting.R
 /**
  *  use startActivityForResult()
  * */
-class EditTextActivity() : AppCompatActivity() {
+class EditAreaActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_text_activity)

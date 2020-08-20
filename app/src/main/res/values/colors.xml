@@ -9,10 +9,10 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccentDark">#024A55</color>
     <color name="colorAccent">#03DAC5</color>
-//---------------------------------------------//
 
 
-    //105 202  62<color name="AhorroGreenLight">#69CA3E</color>
+    // Ahorro---------------------------------------------
+    //155 202  62<color name="AhorroGreenLight">#9BCA3E</color>
     //142 191  46<color name="AhorroGreen">#8EBF2E</color>
     //125 160  24<color name="AhorroGreenDark">#7DA018</color>
     //239 135  80<color name="AhorroOrange">#EF8750</color>

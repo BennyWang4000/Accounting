@@ -17,7 +17,7 @@ import com.example.accounting.addNewItem.addNewFragment.AddNewViewModel
 import com.example.accounting.addNewItem.addNewFragment.AddNewViewModelFactory
 import com.example.accounting.addNewItem.addNewFragment.adapter.TypePagerAdapter
 import com.example.accounting.database.model.ExpenseEntity
-import com.example.accounting.editText.EditTextActivity
+import com.example.accounting.editArea.EditAreaActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 
@@ -149,7 +149,7 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
         val btMinus= findViewById<Button>(R.id.bt_minus)
         val btDiverse= findViewById<Button>(R.id.bt_divided)
         val btProduct= findViewById<Button>(R.id.bt_multiplied)
-        val btBackspace= findViewById<ImageButton>(R.id.bt_backspace)
+        val btBackspace= findViewById<Button>(R.id.bt_backspace)
 
         bt1.setOnClickListener(this)
         bt1.setOnClickListener(this)
@@ -195,15 +195,15 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
         when (v!!.id){
             R.id.layout_edit_title_container -> {
                 Log.d("layout press", "title")
-                startActivityForResult(Intent(this, EditTextActivity::class.java), REQUEST_CODE_TITLE)
+                startActivityForResult(Intent(this, EditAreaActivity::class.java), REQUEST_CODE_TITLE)
             }
             R.id.layout_edit_note_container -> {
                 Log.d("layout press", "note")
-                startActivityForResult(Intent(this, EditTextActivity::class.java), REQUEST_CODE_NOTE)
+                startActivityForResult(Intent(this, EditAreaActivity::class.java), REQUEST_CODE_NOTE)
             }
             R.id.layout_edit_expense_container -> {
                 Log.d("layout press", "expense")
-                startActivityForResult(Intent(this, EditTextActivity::class.java), REQUEST_CODE_EXPENSE)
+                startActivityForResult(Intent(this, EditAreaActivity::class.java), REQUEST_CODE_EXPENSE)
 
             }
             R.id.bt_1 -> {viewModel.clickNum("1")}

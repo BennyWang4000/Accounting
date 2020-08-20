@@ -6,22 +6,22 @@ import androidx.room.*
 
 @Entity(
     tableName = "expense_table",
-//    foreignKeys = [
-//        ForeignKey(
-//            entity = AccountEntity::class,
-//            parentColumns = arrayOf("_id"),
-//            childColumns = arrayOf("account_id"),
-//            onDelete = ForeignKey.CASCADE),
-//        ForeignKey(
-//            entity = CategoryEntity::class,
-//            parentColumns = arrayOf("_id"),
-//            childColumns = arrayOf("category_id"),
-//            onDelete = ForeignKey.CASCADE),
-//        ForeignKey(
-//            entity = RoutineEntity::class,
-//            parentColumns = arrayOf("_id"),
-//            childColumns = arrayOf("routine_id"),
-//            onDelete = ForeignKey.CASCADE)],
+    foreignKeys = [
+        ForeignKey(
+            entity = AccountEntity::class,
+            parentColumns = arrayOf("_id"),
+            childColumns = arrayOf("account_id"),
+            onDelete = ForeignKey.CASCADE),
+        ForeignKey(
+            entity = CategoryEntity::class,
+            parentColumns = arrayOf("_id"),
+            childColumns = arrayOf("category_id"),
+            onDelete = ForeignKey.CASCADE),
+        ForeignKey(
+            entity = RoutineEntity::class,
+            parentColumns = arrayOf("_id"),
+            childColumns = arrayOf("routine_id"),
+            onDelete = ForeignKey.CASCADE)],
     indices = [Index(value = ["_id"])]
 )
 //CASCADE - 會將有所關聯的紀錄行也會進行刪除或修改。
