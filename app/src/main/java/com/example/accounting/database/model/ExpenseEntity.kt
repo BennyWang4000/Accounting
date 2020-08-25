@@ -36,7 +36,7 @@ data class ExpenseEntity(
     @ColumnInfo(name = "amount") var amount: Double,
     @ColumnInfo(name = "date") var date: String,
     @ColumnInfo(name = "descr") var descr: String,
-    @ColumnInfo(name = "account_id") var account_id: Int,
-    @ColumnInfo(name = "category_id") var category_id: Int,
-    @ColumnInfo(name = "routine_id") var routine_id: Int
+    @ColumnInfo(name = "account_id") var accountId: Int,
+    @ColumnInfo(name = "category_id") var categoryId: Int,
+    @ColumnInfo(name = "routine_id") var routineId: Int
 )

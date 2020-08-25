@@ -1,6 +1,7 @@
 package com.example.accounting.main.mainPager.adapter
 
 import android.app.Application
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -24,6 +25,7 @@ class MainPagerAdapter(val viewModel: MainPagerViewModel, activity: FragmentActi
     override fun getItemCount(): Int = PAGER_LIST_MAX_VALUE
 
     override fun createFragment(position: Int): Fragment {
+        Log.e("TEST", "${position}")
         return ListFragment(position)
     }
 }

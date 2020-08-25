@@ -49,7 +49,6 @@ class PieChartViewModel(application: Application): AndroidViewModel(application)
     }
 
     fun getPieDataSum(): Double{
-        val mSum: Int
         return allData.value!!.sumByDouble { it.amount }
     }
 

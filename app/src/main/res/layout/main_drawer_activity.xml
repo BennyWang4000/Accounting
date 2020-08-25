@@ -24,6 +24,7 @@
         app:titleTextColor="#FFF" />
 
     <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/layout_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
@@ -31,20 +32,10 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_main"
         tools:openDrawer="start">
 
-
-        <androidx.drawerlayout.widget.DrawerLayout
-            android:id="@+id/layout_drawer"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
-            tools:openDrawer="start">
-
-        </androidx.drawerlayout.widget.DrawerLayout>
-
         <fragment
             android:id="@+id/main_fragment"
             android:layout_height="match_parent"
-            android:name="com.example.accounting.main.listFragment.NullFragment"
+            android:name="com.example.accounting.main.MainPagerFragment"
             android:layout_width="match_parent"/>
 
         <com.google.android.material.navigation.NavigationView
@@ -52,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start|left"
+            app:itemBackground="@drawable/ahorro_navigation_drawer_item"
             app:menu="@menu/main_navigation_drawer"
             android:background="?attr/colorSecondary"
             android:fitsSystemWindows="true"/>

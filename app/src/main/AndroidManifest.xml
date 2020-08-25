@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ExpenseTheme">
-        <activity android:name=".setting.SettingActivity"/>
+        <activity android:name=".budget.BudgetActivity"></activity>
+        <activity android:name=".setting.SettingActivity" />
         <activity android:name=".editArea.EditAreaActivity" /> <!-- <activity android:name=".addNewItem.AddNewDrawerActivity"></activity> -->
         <activity android:name=".pieChart.PieChartActivity" /> <!-- <activity android:name=".SplashActivity" /> -->
         <!-- <activity android:name=".pieChart.PieChartFragment" /> -->

@@ -2,10 +2,7 @@ package com.example.accounting.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.accounting.database.model.AccountEntity
-import com.example.accounting.database.model.ExpenseEntity
-import com.example.accounting.database.model.CategoryEntity
-import com.example.accounting.database.model.RoutineEntity
+import com.example.accounting.database.model.*
 
 @Dao
 interface AccountingDao {
@@ -13,6 +10,9 @@ interface AccountingDao {
     //expense_table--------------------------------------
     @Query("SELECT * FROM expense_table")
     fun getAllExpenses(): LiveData<List<ExpenseEntity>>
+
+    @Query("SELECT * FROM expense_table WHERE date LIKE :m")
+    fun getMonthlyExpenses(m: String): LiveData<List<ExpenseEntity>>
 
     @Query("SELECT * FROM expense_table WHERE date IN (:d)")
     fun getDailyExpenses(d: String): LiveData<List<ExpenseEntity>>
@@ -45,5 +45,33 @@ interface AccountingDao {
     //routine_table--------------------------------------
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertRoutine(routine: RoutineEntity)
+
+    //setting_table
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertSetting(setting: SettingsEntity)
+
+    @Query("SELECT * FROM setting_table WHERE _id = 1")
+    fun getSettings(): LiveData<List<SettingsEntity>>
+    @Query("SELECT budget_amount FROM setting_table WHERE _id= 1")
+    fun getBudgetAmount(): LiveData<Int>
+    @Query("UPDATE setting_table SET default_account_index = (:index) WHERE _id = 1")
+    fun updateDefaultAccountIndex(index: Int)
+
+    @Query("UPDATE setting_table SET budget_amount = (:am) WHERE _id = 1")
+    fun updateBudgetAmount(am: Int)
+
+    @Query("UPDATE setting_table SET tracker_id = (:id) WHERE _id = 1")
+    fun updateTrackerId(id: String)
+    @Query("UPDATE setting_table SET budget_show = (:isShow) WHERE _id = 1")
+    fun updateBudgetShow(isShow: Boolean)
+    @Query("UPDATE setting_table SET is_first_launch = (:isFirst) WHERE _id = 1")
+    fun updateIsFirstLaunch(isFirst: Boolean)
+    @Query("UPDATE setting_table SET currency_code = (:code) WHERE _id = 1")
+    fun updateCurrencyCode(code: Int)
+    @Query("UPDATE setting_table SET budget_start_date = (:date) WHERE _id = 1")
+    fun updateBudgetStartDate(date: Int)
+    @Query("UPDATE setting_table SET passcode = (:code) WHERE _id = 1")
+    fun updatePasscode(code: Int)
+
 }
 

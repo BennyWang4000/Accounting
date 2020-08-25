@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.accounting.R
 import com.example.accounting.addNewItem.AddNewActivity
 import com.example.accounting.pieChart.PieChartActivity
+import com.example.accounting.setting.SettingActivity
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
@@ -61,6 +62,9 @@ class MainDrawerActivity : AppCompatActivity() {
                 R.id.item_main_analysis -> {
                     startActivity(Intent(this, PieChartActivity::class.java))
                 }
+                R.id.item_main_settings -> {
+                    startActivity(Intent(this, SettingActivity::class.java))
+                }
                 else -> {}
             }
             return@setNavigationItemSelectedListener true
@@ -103,12 +107,7 @@ class MainDrawerActivity : AppCompatActivity() {
                     .show()
                     return@setOnMenuItemClickListener true
                 }
-
-                else -> {
-                    Snackbar.make(findViewById(R.id.layout_main), "Unknown Issue", Snackbar.LENGTH_SHORT)
-                        .show()
-                    return@setOnMenuItemClickListener true
-                }
+                else -> { return@setOnMenuItemClickListener true }
             }
         }
         toolbar.title= viewModel.selectedDate.value.toString()

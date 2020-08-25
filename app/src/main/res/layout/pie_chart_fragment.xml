@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pieChart.PieChartFragment">
+    tools:context=".pieChart.PieChartFragment"
+    android:background="@color/AhorroBackground_YellowLight">
 
     <TextView
         android:id="@+id/tv_date_range"
@@ -18,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
     <View
-        android:id="@+id/line_1"
+        android:id="@+id/pie_char_line_1"
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:background="@color/colorGray"
@@ -34,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,8 @@
             android:id="@+id/tab_custom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="自訂"/>
+            android:text="自訂"
+            android:background="@drawable/ahorro_tab_date"/>
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_month"
             android:layout_width="wrap_content"
@@ -53,15 +54,17 @@
             android:id="@+id/tab_half_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="半年"/>
+            android:text="半年"
+            android:background="@drawable/ahorro_tab_date"/>
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="年"/>
+            android:text="年"
+            android:background="@drawable/ahorro_tab_date"/>
     </com.google.android.material.tabs.TabLayout>
     <View
-        android:id="@+id/line_1"
+        android:id="@+id/pie_char_line_2"
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:background="@color/colorGray"
@@ -80,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_tab"/>
     <View
-        android:id="@+id/line_3"
+        android:id="@+id/add_line_3"
         android:layout_width="match_parent"
         android:layout_height="0.7dp"
         android:background="@color/colorGray"
@@ -96,7 +99,7 @@
         android:layout_width="370dp"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@id/line_3"
+        app:layout_constraintTop_toBottomOf="@id/add_line_3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

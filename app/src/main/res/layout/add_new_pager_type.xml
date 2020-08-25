@@ -6,105 +6,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RadioGroup
-        android:id="@+id/group_type"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/add_type_rv_"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-<!--        <LinearLayout-->
-<!--            android:id="@+id/layout_type_up"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="center"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-            <RadioButton
-                android:id="@+id/radio_breakfast"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="早餐" />
-
-            <RadioButton
-                android:id="@+id/radio_lunch"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="午餐" />
-
-            <RadioButton
-                android:id="@+id/radio_dinner"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="晚餐" />
-
-            <RadioButton
-                android:id="@+id/radio_drinks"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="飲料" />
-            <RadioButton
-                android:id="@+id/radio_snake"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="零食" />
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:id="@+id/layout_type_down"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/layout_type_up"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="center">-->
-
-<!--            <RadioButton-->
-<!--                android:id="@+id/radio_traffic"-->
-
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:text="交通" />-->
-
-<!--            <RadioButton-->
-<!--                android:id="@+id/radio_daily"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:text="日用" />-->
-
-<!--            <RadioButton-->
-<!--                android:id="@+id/radio_entertainment"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:text="娛樂" />-->
-
-<!--            <RadioButton-->
-<!--                android:id="@+id/radio_social"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:text="社交" />-->
-<!--            <RadioButton-->
-<!--                android:id="@+id/radio_clothing"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:gravity="center"-->
-<!--                android:text="衣物" />-->
-<!--        </LinearLayout>-->
-
-    </RadioGroup>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

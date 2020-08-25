@@ -52,7 +52,6 @@ class ListViewModel(application: Application, val position: Int): AndroidViewMod
     }
 
     fun getSum(): Double{
-        var sum: Double= 0.0
-        return sum
+        return pageDateData.value!!.sumByDouble { it.amount }
     }
 }

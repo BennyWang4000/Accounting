@@ -1,4 +1,4 @@
-package com.example.accounting.addNewItem
+package com.example.accounting
 
 import androidx.lifecycle.MutableLiveData
 

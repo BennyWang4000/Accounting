@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.accounting.database.AccountingDatabase
 import com.example.accounting.Repository
+import com.example.accounting.database.model.ExpenseEntity
+import com.example.accounting.database.model.SettingsEntity
 import java.time.LocalDate
 import com.example.accounting.Repository.Date as RepositoryDate
 
@@ -19,31 +21,37 @@ class MainPagerViewModel (application: Application): AndroidViewModel(applicatio
 
     var currentDate: MutableLiveData<LocalDate>
     var selectedDate: MutableLiveData<LocalDate>
+    var selectedMonth: MutableLiveData<Int>
 
     var pagePosition= MutableLiveData<Int>(Int.MAX_VALUE/ 2)
 
     var lastPosition= RepositoryDate.lastPosition
 //    var currentPosition= RepositoryDate.currentPosition
 
+        var settings: LiveData<List<SettingsEntity>>
+        var totalBudgetAmount= MutableLiveData<Double>(0.0)
 
-    init {
-        val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getAccountingDao()
-        repository = Repository(listDao)
+        var monthlyExpense: LiveData<List<ExpenseEntity>>
 
-        currentDate= RepositoryDate.currentDate
+        init {
+            val listDao = AccountingDatabase.getDatabase(application, viewModelScope).getAccountingDao()
+            repository = Repository(listDao)
+
+            currentDate= RepositoryDate.currentDate
         selectedDate= RepositoryDate.selectedDate
+
+        selectedMonth= MutableLiveData(selectedDate.value!!.monthValue)
+        monthlyExpense= repository.getMonthlyExpenses("2020-08-__")
+        settings= repository.getSetting()
+
 
 //        dailyExpense = repository.getDateItem(selectedDate.value.toString())
     }
 
-//    fun upDateRepository(){
-//        repository.selectedDate.value= this.selectedDate.value
-//    }
-
-
-
-
-
+    fun getMonthSum(month: String): Double{
+//        return monthlyExpense.value!!.sumByDouble { it.amount }
+        return 0.0
+    }
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */

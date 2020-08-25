@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
         CategoryEntity::class,
         RoutineEntity::class,
         AccountEntity::class],
-    version = 106
+    version = 110
 )
 abstract class AccountingDatabase : RoomDatabase(){
 
@@ -46,6 +46,7 @@ abstract class AccountingDatabase : RoomDatabase(){
                     // Wipes and rebuilds instead of migrating if no Migration object.
                     // Migration is not part of this codelab.
                         .fallbackToDestructiveMigration()
+                        .allowMainThreadQueries()
                         .addCallback(ItemDatabaseCallback(scope))
                         .build()
                 INSTANCE = instance
@@ -102,6 +103,19 @@ abstract class AccountingDatabase : RoomDatabase(){
                 0,
                 0
             ))
+            accountingDao.insertSetting(
+                SettingsEntity(
+            0,
+                0,
+                0,
+                "0",
+                false,
+                false,
+                "A",
+                1,
+                    ""
+            )
+            )
         }
     }
 

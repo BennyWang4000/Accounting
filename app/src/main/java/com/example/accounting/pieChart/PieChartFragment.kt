@@ -34,6 +34,7 @@ class PieChartFragment : Fragment() {
         val recyclerViewAdapter= PieChartTypeRankAdapter(viewModel, context!!)
         recyclerView.adapter= recyclerViewAdapter
 
+        recyclerViewAdapter.notifyDataSetChanged()
 
         //observe
         viewModel.allData.observe(this, Observer {
@@ -63,11 +64,7 @@ class PieChartFragment : Fragment() {
 //            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
 //            legend.orientation = Legend.LegendOrientation.VERTICAL
 
-
-
-
             recyclerViewAdapter.notifyDataSetChanged()
-
         })
 
         return root

@@ -11,16 +11,16 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:minHeight="?attr/actionBarSize"
-        app:logo="@drawable/ic_baseline_pie_chart_24_white"
+        app:logo="@drawable/ic_baseline_bar_chart_24_white"
         app:titleMarginStart="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/colorPrimary"
+        android:background="@color/AhorroActionBar_Gray"
         app:title="Analysis"
-        app:titleTextColor="#FFF"
+        app:titleTextColor="@color/AhorroWhite"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24_white"
-        android:elevation="2dp" />
+        android:elevation="2dp"/>
 
     <fragment
         android:name="com.example.accounting.pieChart.PieChartPagerContainer"

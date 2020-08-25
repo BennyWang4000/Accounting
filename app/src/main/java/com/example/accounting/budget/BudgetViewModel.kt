@@ -1,21 +1,22 @@
-package com.example.accounting.addNewItem.addNewFragment
+package com.example.accounting.budget
 
 import android.app.Application
-import android.content.ContentValues.TAG
+import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.accounting.Repository
 import com.example.accounting.Calculator
-import com.example.accounting.database.model.ExpenseEntity
+import com.example.accounting.Repository
 import com.example.accounting.database.AccountingDatabase
+import com.example.accounting.database.model.ExpenseEntity
+import com.example.accounting.database.model.SettingsEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
-import com.example.accounting.Repository.Date as RepositoryDate
 
-class AddNewViewModel(application: Application): AndroidViewModel(application) {
+class BudgetViewModel(application: Application): AndroidViewModel(application) {
     private val repository: Repository
 
     var selectedDate: MutableLiveData<LocalDate>
@@ -24,36 +25,31 @@ class AddNewViewModel(application: Application): AndroidViewModel(application) {
     var operand2: MutableLiveData<String>
     var isOperating: MutableLiveData<Boolean>
 
-    var descr: MutableLiveData<String>
-    var account: MutableLiveData<Int>
+    var settings: LiveData<List<SettingsEntity>>
 
     init {
         val accountingDao = AccountingDatabase.getDatabase(application, viewModelScope).getAccountingDao()
         repository = Repository(accountingDao)
 
-        selectedDate= RepositoryDate.selectedDate
+        selectedDate= Repository.selectedDate
 
         operand1= calculator.operand1
         operand2= calculator.operand2
         isOperating= calculator.isOperating
 
-        descr= MutableLiveData("")
-        account= MutableLiveData(0)
-
-        Log.d(TAG,  "Add New View Model Date: ${selectedDate.value.toString()}")
+        settings= repository.getSetting()
     }
 
     // to database
-    fun insertItem(expense: ExpenseEntity) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insertItem(expense)
+    fun getSetting(): LiveData<List<SettingsEntity>>{
+        return repository.getSetting()
     }
-    fun getDateId(date: String): Int{
-        return -1
+    fun updateBudgetAmount(){
+        repository.updateBudgetAmount(operand1.value!!.toInt())
     }
-    fun getCategoryId(type: String): Int{
-        return repository.getTypeId(type).value!![0].id
+    fun updateBudgetShow(isShow: Boolean){
+        repository.updateBudgetShow(isShow)
     }
-
 
     // to calculator===============
     fun clickNum(num: String){

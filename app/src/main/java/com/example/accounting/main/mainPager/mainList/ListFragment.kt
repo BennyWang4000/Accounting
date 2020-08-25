@@ -21,6 +21,7 @@ class ListFragment() : Fragment(){
     private lateinit var recyclerAdapter: ListRecyclerAdapter
     private lateinit var viewModel:  ListViewModel
     private lateinit var rvList:  RecyclerView
+    private lateinit var tvSum: TextView
     var position: Int= -1
 
     constructor(p: Int) : this() {
@@ -29,6 +30,9 @@ class ListFragment() : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.main_fragment_list, container, false)
+
+        tvSum= root.findViewById(R.id.tv_cost)
+
         //view model
         val factory = ListViewModelFactory(activity!!.application, position)
         viewModel = ViewModelProvider(this, factory).get(ListViewModel::class.java)
@@ -39,35 +43,30 @@ class ListFragment() : Fragment(){
         rvList.adapter = recyclerAdapter
         rvList.layoutManager = LinearLayoutManager(context!!)
         //observe page changed
+
         viewModel.selectedDate.observe(this, Observer {
             //            viewModel.pageChanged()
             Log.d(ContentValues.TAG, "list viewModel observe selectedDate: $it :D")
             recyclerAdapter.notifyDataSetChanged()
         })
-        //        viewModel.nextDayData.observe(this, Observer{})
-        //        viewModel.privousDayData.observe(this, Observer {})
-        //        viewModel.selectedDateData.observe(this, Observer{})
-        //observe data
 
+        //observe data
         viewModel.getDateData().observe(this, Observer { item ->
             // Update the cached copy of the words in the adapter.
             item?.let {
+                tvSum.text= viewModel.getSum().toString()
                 recyclerAdapter.addNewItem(it)
                 recyclerAdapter.notifyDataSetChanged()
             }
         })
 
-
-        //tv_cost
-        //observe selected date
-        val tvCost = root.findViewById<TextView>(R.id.tv_cost)
-        viewModel.selectedDate.observe(this, Observer { date ->
-            // Update the cached copy of the words in the adapter.()
-            date?.let {
-//               tvToday.text= viewModel.selectedDate.value.toString
-                tvCost.text = viewModel.getSum().toString()
-            }
-        })
+//        //observe selected date
+//        viewModel.selectedDate.observe(this, Observer { date ->
+//            // Update the cached copy of the words in the adapter.()
+//            date?.let {
+////               tvToday.text= viewModel.selectedDate.value.toString
+//            }
+//        })
         return root
     }
 }

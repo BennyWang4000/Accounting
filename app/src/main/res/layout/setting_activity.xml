@@ -9,25 +9,152 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_setting"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:minHeight="?attr/actionBarSize"
         app:logo="@drawable/ic_baseline_settings_24_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/AhorroActionBar_Gray"
         app:title="Setting"
-        app:titleTextColor="#FFF"
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24_white"
-        android:elevation="2dp"/>
+        style="@style/ToolBarStyle"
+        app:titleTextColor="@color/AhorroWhite"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/setting_layout_budget"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SettingItemStyle">
         <ImageView
+            android:id="@+id/setting_iv_budget"
+            android:src="@drawable/ic_baseline_android_24_black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/setting_tv_budget"
+            android:text="預算編列"
+            style="@style/SettingTextViewStyle"/>
     </LinearLayout>
-
+    <LinearLayout
+        android:id="@+id/setting_layout_account"
+        app:layout_constraintTop_toBottomOf="@id/setting_layout_budget"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SettingItemStyle">
+        <ImageView
+            android:id="@+id/setting_iv_account"
+            android:src="@drawable/ic_baseline_credit_card_24_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/setting_tv_account"
+            android:text="帳號管理"
+            style="@style/SettingTextViewStyle"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting_layout_currency"
+        app:layout_constraintTop_toBottomOf="@id/setting_layout_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SettingItemStyle">
+        <ImageView
+            android:id="@+id/setting_iv_currency"
+            android:src="@drawable/ic_baseline_money_24_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/setting_tv_currency"
+            android:text="貨幣選擇"
+            style="@style/SettingTextViewStyle"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+            <TextView
+                android:id="@+id/setting_tv_show_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TWD"
+                style="@style/SettingTextViewStyle"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting_layout_passcode"
+        app:layout_constraintTop_toBottomOf="@id/setting_layout_currency"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SettingItemStyle">
+        <ImageView
+            android:id="@+id/setting_iv_passcode"
+            android:src="@drawable/ic_baseline_lock_24_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/setting_tv_passcode"
+            android:text="密碼設定"
+            style="@style/SettingTextViewStyle"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/setting_sw_passcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting_layout_category"
+        app:layout_constraintTop_toBottomOf="@id/setting_layout_passcode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SettingItemStyle">
+        <ImageView
+            android:id="@+id/setting_iv_category"
+            android:src="@drawable/ic_baseline_local_offer_24_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/setting_tv_category"
+            android:text="類別管理"
+            style="@style/SettingTextViewStyle"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting_layout_backup"
+        app:layout_constraintTop_toBottomOf="@id/setting_layout_category"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SettingItemStyle">
+        <ImageView
+            android:id="@+id/setting_iv_backup"
+            android:src="@drawable/ic_baseline_backup_24_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/setting_tv_backup"
+            android:text="備份/管理"
+            style="@style/SettingTextViewStyle"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/setting_layout_info"
+        app:layout_constraintTop_toBottomOf="@id/setting_layout_backup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/SettingItemStyle">
+        <ImageView
+            android:id="@+id/setting_iv_info"
+            android:src="@drawable/ic_baseline_info_24_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/setting_tv_info"
+            android:text="關於我們"
+            style="@style/SettingTextViewStyle"/>
+    </LinearLayout>
+    <View app:layout_constraintTop_toBottomOf="@id/setting_layout_budget" style="@style/LineStyle" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <View app:layout_constraintTop_toBottomOf="@id/setting_layout_account" style="@style/LineStyle" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <View app:layout_constraintTop_toBottomOf="@id/setting_layout_currency" style="@style/LineStyle" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <View app:layout_constraintTop_toBottomOf="@id/setting_layout_passcode" style="@style/LineStyle" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <View app:layout_constraintTop_toBottomOf="@id/setting_layout_category" style="@style/LineStyle" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <View app:layout_constraintTop_toBottomOf="@id/setting_layout_backup" style="@style/LineStyle" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <View app:layout_constraintTop_toBottomOf="@id/setting_layout_info" style="@style/LineStyle" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
