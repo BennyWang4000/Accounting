@@ -1,8 +1,6 @@
-package com.example.accounting.budget
+package com.example.accounting.setting.budget
 
 import android.app.Application
-import android.content.ContentValues
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,10 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.accounting.Calculator
 import com.example.accounting.Repository
 import com.example.accounting.database.AccountingDatabase
-import com.example.accounting.database.model.ExpenseEntity
 import com.example.accounting.database.model.SettingsEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class BudgetViewModel(application: Application): AndroidViewModel(application) {

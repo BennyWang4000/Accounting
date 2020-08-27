@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
         CategoryEntity::class,
         RoutineEntity::class,
         AccountEntity::class],
-    version = 110
+    version = 116
 )
 abstract class AccountingDatabase : RoomDatabase(){
 
@@ -75,6 +75,7 @@ abstract class AccountingDatabase : RoomDatabase(){
             }
         }
 
+
         /**
          * Populate the database in a new coroutine.
          * If you want to start with more words, just add them.
@@ -83,6 +84,7 @@ abstract class AccountingDatabase : RoomDatabase(){
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
 //            listDao.deleteAll()
+//            if (accountingDao.getSettings().value[0].isFirstLaunch)
             accountingDao.insertAccount(AccountEntity(0, "現金"))
             accountingDao.insertCategory(CategoryEntity(
                 0,

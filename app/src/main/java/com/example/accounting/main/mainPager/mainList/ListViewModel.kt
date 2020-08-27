@@ -38,7 +38,7 @@ class ListViewModel(application: Application, val position: Int): AndroidViewMod
         pageDate= selectedDate.value!!.plusDays((position- PAGER_LIST_MID_POSITION).toLong())
         pageDateData= repository.getDailyExpenses(pageDate.toString())
 
-        if(repository.getDailyExpenses(pageDate.toString()).value== null) {
+        repository.getDailyExpenses(pageDate.toString()).value.let{
             Log.d("pageDate:", "NULL DATA..")
         }
 

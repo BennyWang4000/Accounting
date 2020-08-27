@@ -1,19 +1,22 @@
-package com.example.accounting.addNewItem.addNewFragment.adapter
+package com.example.accounting.addNewItem.adapter
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.accounting.addNewItem.addNewFragment.AddNewViewModel
-import com.example.accounting.addNewItem.pager.AddNewPagerTypeFragment
+import com.example.accounting.addNewItem.AddNewViewModel
+import com.example.accounting.addNewItem.typePage.AddNewTypeListFragment
+import java.lang.Exception
 
 
 class TypePagerAdapter(val viewModel: AddNewViewModel, activity: FragmentActivity): FragmentStateAdapter(activity){
     override fun getItemCount(): Int {
-        return 10
+//        Log.d("viewModel.categories.value!!.size / 10 + 1", "${viewModel.categories.value!!.size / 10 + 1}")
+        return viewModel.categories.value!!.size / 10 + 1
     }
 
     override fun createFragment(position: Int): Fragment {
-        return AddNewPagerTypeFragment()
+        return AddNewTypeListFragment(position)
     }
 }
 //class TypePagerAdapter() : RecyclerView.Adapter<TypePagerAdapter.PagerViewHolder>() {

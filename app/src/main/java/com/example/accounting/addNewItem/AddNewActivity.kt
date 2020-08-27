@@ -13,9 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
-import com.example.accounting.addNewItem.addNewFragment.AddNewViewModel
 import com.example.accounting.addNewItem.addNewFragment.AddNewViewModelFactory
-import com.example.accounting.addNewItem.addNewFragment.adapter.TypePagerAdapter
+import com.example.accounting.addNewItem.adapter.TypePagerAdapter
 import com.example.accounting.database.model.ExpenseEntity
 import com.example.accounting.editArea.EditAreaActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -62,15 +61,6 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
         val factory= AddNewViewModelFactory(application)
         viewModel= ViewModelProvider(this, factory).get(AddNewViewModel::class.java)
 
-        //view pager
-        pagerType= findViewById(R.id.pager_type)
-//        val viewList= listOf(R.layout.add_new_pager_type, R.layout.add_new_pager_type_2)
-//        pagerTypeAdapter= AddNewViewPagerAdapter()
-//        pagerType.adapter= pagerTypeAdapter
-        val typePagerAdapter= TypePagerAdapter()
-        pagerType.adapter= typePagerAdapter
-
-        tvToday.text= viewModel.selectedDate.value.toString()
 
         //observe
         viewModel.selectedDate.observe(this, androidx.lifecycle.Observer {
@@ -79,8 +69,26 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
             } catch (e: Exception) {
                 Snackbar.make(this.findViewById(R.id.layout_main), "$e", Snackbar.LENGTH_SHORT)
                     .show()
-            }
+                }
         })
+        var isFirstLaunch= true
+        //view pager
+        pagerType= findViewById(R.id.pager_type)
+        val typePagerAdapter = TypePagerAdapter(viewModel, this)
+        viewModel.categories.observe(this, Observer {
+            Log.d("viewModel categories", "OBSERVE")
+//            if(isFirstLaunch) {
+                pagerType.adapter = typePagerAdapter
+//                isFirstLaunch= !isFirstLaunch
+//            }
+        })
+
+
+
+
+        tvToday.text= viewModel.selectedDate.value.toString()
+
+
 
         //tool bar
         val toolbar= findViewById<Toolbar>(R.id.toolbar_add)

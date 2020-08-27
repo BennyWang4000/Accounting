@@ -14,6 +14,10 @@ import java.time.format.DateTimeFormatter
 
 //負責 view model 和 Dao / database 之間的資料使用
 class Repository(private val accountingDao: AccountingDao) {
+    private var allCategories: LiveData<List<CategoryEntity>>
+    init {
+        allCategories = accountingDao.getAllCategories()
+    }
 
     companion object Date {
         private val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -63,11 +67,14 @@ class Repository(private val accountingDao: AccountingDao) {
 //        accountingDao.insertDate(date)
 //    }
 
-    //type_table--------------------------------------
-    fun getTypeId(type: String): LiveData<List<CategoryEntity>>{
-        return accountingDao.getTypeId(type)
-    }
+    //category_table--------------------------------------
+    fun getAllCategories(): LiveData<List<CategoryEntity>> = allCategories
 
+    fun getBehaviorCategories(behavior: Int): LiveData<List<CategoryEntity>> = accountingDao.getBehaviorCategories(behavior)
+
+    fun getPageCategories(page: Int): LiveData<List<CategoryEntity>>{
+        return accountingDao.getPageCategories(page)
+    }
 
     //setting_table--------------------------------------
     fun getSetting(): LiveData<List<SettingsEntity>>{

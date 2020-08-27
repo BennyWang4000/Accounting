@@ -24,8 +24,11 @@ interface AccountingDao {
     @Query("SELECT * FROM  category_table")
     fun getAllCategories(): LiveData<List<CategoryEntity>>
 
-    @Query("SELECT * FROM category_table WHERE _id IN (:id)")
-    fun getCategories(id: Int): LiveData<List<CategoryEntity>>
+    @Query("SELECT * FROM category_table WHERE behavior = (:b)")
+    fun getBehaviorCategories(b: Int): LiveData<List<CategoryEntity>>
+
+    @Query("SELECT * FROM category_table WHERE _id BETWEEN (:id) AND (:id+ 9)")
+    fun getPageCategories(id: Int): LiveData<List<CategoryEntity>>
 
     @Query("SELECT * FROM category_table WHERE name IN (:n)")
     fun getTypeId(n: String): LiveData<List<CategoryEntity>>

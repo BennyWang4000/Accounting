@@ -14,5 +14,5 @@ data class CategoryEntity(
     @ColumnInfo(name= "category_order") var categoryOrder: Int,
     @ColumnInfo(name= "default_name") var defaultName: String,
     @ColumnInfo(name= "behavior") var behavior: Int
-    //expense= -1; income= 1
+    //expense= 0; income= 1
 )

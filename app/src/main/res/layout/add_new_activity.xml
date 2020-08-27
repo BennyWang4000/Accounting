@@ -26,14 +26,14 @@
         <LinearLayout
             android:id="@+id/layout_bt_title"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/toolbar_add"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:orientation="horizontal"
             android:background="?attr/colorPrimaryDark">
-
             <TextView
                 android:id="@+id/tv_today"
                 android:text="Today"
@@ -41,8 +41,6 @@
                 android:gravity="center_horizontal"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +86,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager_type"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/layout_costs"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +117,7 @@
                 android:id="@+id/iv_edit_title"
                 android:src="@drawable/ic_baseline_edit_24_gray"
                 android:layout_width="wrap_content"
-                android:layout_margin="25dp"
+                android:layout_marginLeft="25dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -129,7 +127,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:orientation="vertical"
@@ -137,14 +137,14 @@
                 <TextView
                     android:id="@+id/tv_title_title"
                     android:text="標題"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textColor="@color/AhorroTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/tv_title"
                     android:text=" "
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textColor="@color/AhorroIconColor_Gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -174,7 +174,7 @@
                 android:id="@+id/iv_edit_note"
                 android:src="@drawable/ic_baseline_credit_card_24_gray"
                 android:layout_width="wrap_content"
-                android:layout_margin="25dp"
+                android:layout_marginLeft="25dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -184,7 +184,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:orientation="vertical"
@@ -192,14 +194,14 @@
                 <TextView
                     android:id="@+id/tv_title_note"
                     android:text="帳戶"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textColor="@color/AhorroTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/tv_note"
                     android:text=" "
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:textColor="@color/AhorroIconColor_Gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -229,7 +231,7 @@
                 android:id="@+id/iv_edit_expense"
                 android:src="@drawable/ic_baseline_replay_24_gray"
                 android:layout_width="wrap_content"
-                android:layout_margin="25dp"
+                android:layout_marginLeft="25dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -239,7 +241,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:orientation="vertical"
@@ -247,7 +251,7 @@
                 <TextView
                     android:id="@+id/tv_title_expense"
                     android:text="固定支出"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textColor="@color/AhorroTextColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -267,6 +271,28 @@
         app:layout_constraintTop_toBottomOf="@id/layout_edit_expense_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/add_layout_receipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ToolBarStyle"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+            android:id="@+id/add_iv_receipt"
+            android:src="@drawable/ic_baseline_center_focus_strong_24_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/add_tv_receipt"
+            android:text="發票掃描"
+            android:textColor="@color/AhorroWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     
     <include layout="@layout/add_new_calculator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

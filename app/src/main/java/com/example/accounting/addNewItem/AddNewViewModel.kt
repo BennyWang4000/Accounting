@@ -1,15 +1,17 @@
-package com.example.accounting.addNewItem.addNewFragment
+package com.example.accounting.addNewItem
 
 import android.app.Application
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.accounting.Repository
 import com.example.accounting.Calculator
 import com.example.accounting.database.model.ExpenseEntity
 import com.example.accounting.database.AccountingDatabase
+import com.example.accounting.database.model.CategoryEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -27,6 +29,8 @@ class AddNewViewModel(application: Application): AndroidViewModel(application) {
     var descr: MutableLiveData<String>
     var account: MutableLiveData<Int>
 
+    var categories: LiveData<List<CategoryEntity>>
+
     init {
         val accountingDao = AccountingDatabase.getDatabase(application, viewModelScope).getAccountingDao()
         repository = Repository(accountingDao)
@@ -37,22 +41,23 @@ class AddNewViewModel(application: Application): AndroidViewModel(application) {
         operand2= calculator.operand2
         isOperating= calculator.isOperating
 
+        categories= repository.getAllCategories()
+
         descr= MutableLiveData("")
         account= MutableLiveData(0)
 
         Log.d(TAG,  "Add New View Model Date: ${selectedDate.value.toString()}")
     }
 
+    //getter
+    fun getAllCategories(): LiveData<List<CategoryEntity>> = this.categories
+
     // to database
     fun insertItem(expense: ExpenseEntity) = viewModelScope.launch(Dispatchers.IO) {
         repository.insertItem(expense)
     }
-    fun getDateId(date: String): Int{
-        return -1
-    }
-    fun getCategoryId(type: String): Int{
-        return repository.getTypeId(type).value!![0].id
-    }
+
+
 
 
     // to calculator===============

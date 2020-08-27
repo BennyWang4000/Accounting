@@ -42,24 +42,27 @@ class PieChartFragment : Fragment() {
             Log.e("test", "observe") //chart
             val pieChart: PieChart= root.findViewById(R.id.chart_pie)
 
-            val pieDataSet= PieDataSet(viewModel.getPieData(), "expense")
-            pieDataSet.colors = TypeStyle.COLOR_RANK
-            pieDataSet.valueTextColor= Color.WHITE
-            pieDataSet.valueTextSize= 10f
-
+            val pieDataSet= PieDataSet(viewModel.getPieData(), "expense").apply{
+                colors = TypeStyle.COLOR_RANK
+                valueTextColor= Color.WHITE
+                valueTextSize= 10f
+            }
             val pieData= PieData(pieDataSet)
 
-            pieChart.data= pieData
-            pieChart.description.isEnabled= false
-            pieChart.centerText= "支出\n${viewModel.getPieDataSum().toString()}"
-            pieChart.animate()
-            pieChart.isClickable= false
+            with(pieChart){
+                data= pieData
+                description.isEnabled= false
+                centerText= "支出\n${viewModel.getPieDataSum().toString()}"
+                animate()
+                isClickable= false
+            }
 
             //position
 
 //            //legend
-            val legend= pieChart.legend
-            legend.isEnabled= false
+            val legend= pieChart.legend.apply {
+                isEnabled= false
+            }
 //            legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
 //            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
 //            legend.orientation = Legend.LegendOrientation.VERTICAL

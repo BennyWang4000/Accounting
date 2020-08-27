@@ -1,15 +1,14 @@
-package com.example.accounting.addNewItem.addNewFragment
+package com.example.accounting.setting.category
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.accounting.addNewItem.AddNewViewModel
 
-class AddNewViewModelFactory(
+class CategoryViewModelFactory (
     val application: Application
 ): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return AddNewViewModel(
+        return CategoryViewModel(
             application
         ) as T
     }

@@ -7,7 +7,8 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import com.example.accounting.R
-import com.example.accounting.budget.BudgetActivity
+import com.example.accounting.setting.budget.BudgetActivity
+import com.example.accounting.setting.category.CategoryActivity
 
 class SettingActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -48,27 +49,13 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v!!.id){
-            R.id.setting_layout_budget -> {
-                startActivity(Intent(this, BudgetActivity::class.java))
-            }
-            R.id.setting_layout_account -> {
-                startActivity(Intent(this, BudgetActivity::class.java))
-            }
-            R.id.setting_layout_currency -> {
-                startActivity(Intent(this, BudgetActivity::class.java))
-            }
-            R.id.setting_layout_passcode -> {
-                startActivity(Intent(this, BudgetActivity::class.java))
-            }
-            R.id.setting_layout_category -> {
-                startActivity(Intent(this, BudgetActivity::class.java))
-            }
-            R.id.setting_layout_backup -> {
-                startActivity(Intent(this, BudgetActivity::class.java))
-            }
-            R.id.setting_layout_info -> {
-                startActivity(Intent(this, BudgetActivity::class.java))
-            }
+            R.id.setting_layout_budget -> startActivity(Intent(this, BudgetActivity::class.java))
+            R.id.setting_layout_account -> startActivity(Intent(this, BudgetActivity::class.java))
+            R.id.setting_layout_currency -> startActivity(Intent(this, BudgetActivity::class.java))
+            R.id.setting_layout_passcode -> startActivity(Intent(this, BudgetActivity::class.java))
+            R.id.setting_layout_category -> startActivity(Intent(this, CategoryActivity::class.java))
+            R.id.setting_layout_backup -> startActivity(Intent(this, BudgetActivity::class.java))
+            R.id.setting_layout_info -> startActivity(Intent(this, BudgetActivity::class.java))
         }
     }
 }

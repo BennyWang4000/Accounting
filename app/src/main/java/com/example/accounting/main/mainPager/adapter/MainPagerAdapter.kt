@@ -1,11 +1,10 @@
 package com.example.accounting.main.mainPager.adapter
 
-import android.app.Application
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.accounting.main.listFragment.ListFragment
+import com.example.accounting.main.mainPager.mainList.ListFragment
 import com.example.accounting.main.listFragment.mainFragment.MainPagerViewModel
 
 /**

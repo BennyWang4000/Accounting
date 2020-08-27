@@ -1,4 +1,4 @@
-package com.example.accounting.budget
+package com.example.accounting.setting.budget
 
 
 import android.annotation.SuppressLint
@@ -8,13 +8,11 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.accounting.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
 
 class BudgetActivity : AppCompatActivity(), View.OnClickListener {
 

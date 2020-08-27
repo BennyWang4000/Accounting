@@ -17,6 +17,8 @@ class EditAreaActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_text_activity)
 
+        val editArea= EditArea()
+
         val RESULT_CODE_OK= 1
         val RESULT_CODE_CANCELED = -1
 
@@ -39,7 +41,10 @@ class EditAreaActivity() : AppCompatActivity() {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.item_save -> {
-                    setResult(RESULT_CODE_OK, Intent().putExtra("content", etEditArea.text.toString()))
+                    setResult(
+                        RESULT_CODE_OK,
+                        Intent().putExtra("content", editArea.isValid(etEditArea.text.toString()))
+                    )
                 }else -> {}
             }
             finish()

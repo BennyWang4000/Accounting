@@ -1,4 +1,4 @@
-package com.example.accounting.main.listFragment
+package com.example.accounting.main.mainPager.mainList
 
 
 import android.content.ContentValues
@@ -14,18 +14,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
+import com.example.accounting.main.listFragment.ListViewModel
 import com.example.accounting.main.mainPager.mainList.adapter.ListRecyclerAdapter
 
 class ListFragment() : Fragment(){
 
     private lateinit var recyclerAdapter: ListRecyclerAdapter
-    private lateinit var viewModel:  ListViewModel
+    private lateinit var viewModel: ListViewModel
     private lateinit var rvList:  RecyclerView
     private lateinit var tvSum: TextView
     var position: Int= -1
 
     constructor(p: Int) : this() {
         this.position= p
+//        Log.v("Fragment position", "$position")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,15 +52,7 @@ class ListFragment() : Fragment(){
             recyclerAdapter.notifyDataSetChanged()
         })
 
-        //observe data
-        viewModel.getDateData().observe(this, Observer { item ->
-            // Update the cached copy of the words in the adapter.
-            item?.let {
-                tvSum.text= viewModel.getSum().toString()
-                recyclerAdapter.addNewItem(it)
-                recyclerAdapter.notifyDataSetChanged()
-            }
-        })
+
 
 //        //observe selected date
 //        viewModel.selectedDate.observe(this, Observer { date ->
@@ -69,4 +63,46 @@ class ListFragment() : Fragment(){
 //        })
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //observe data
+        viewModel.getDateData().observe(this, Observer { item ->
+            // Update the cached copy of the words in the adapter.
+            item?.let {
+                tvSum.text= viewModel.getSum().toString()
+                recyclerAdapter.addNewItem(it)
+                recyclerAdapter.notifyDataSetChanged()
+            }
+        })
+    }
+
+//    override fun onResume() {
+//        super.onResume()
+//        Log.v("lifecycle", "onResume() -> $position")
+//    }
+//
+//    override fun onStart() {
+//        super.onStart()
+//        Log.v("lifecycle", "onResume() -> $position")
+//    }
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        Log.v("lifecycle", "onResume() -> $position")
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        Log.v("lifecycle", "onResume() -> $position")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Log.v("lifecycle", "onResume() -> $position")
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        Log.v("lifecycle", "onResume() -> $position")
+//    }
 }

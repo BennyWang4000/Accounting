@@ -3,10 +3,10 @@
     android:opacity="opaque"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@color/colorPrimary"/>
+        android:drawable="@color/AhorroBackground_YellowLight"/>
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_baseline_monetization_on_72_white"/>
+            android:src="@drawable/ic_baseline_money_24_gray"/>
     </item>
 </layer-list>

@@ -1,6 +1,5 @@
 package com.example.accounting
 
-import android.graphics.Color
 
 class TypeStyle{
  companion object Color{
