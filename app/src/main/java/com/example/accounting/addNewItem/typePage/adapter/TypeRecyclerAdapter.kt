@@ -26,7 +26,7 @@ class TypeRecyclerAdapter(private val context: Context, private val viewModel: A
 
     override fun getItemCount(): Int {
         //一頁十個
-        Log.e(" viewModel.pageCategories.value!!.size", "${ viewModel.pageCategories.value!!.size}")
+//        Log.e(" viewModel.pageCategories.value!!.size", "${ viewModel.pageCategories.value!!.size}")
         return viewModel.pageCategories.value!!.size
 //        return 10
     }
@@ -34,11 +34,20 @@ class TypeRecyclerAdapter(private val context: Context, private val viewModel: A
     override fun onBindViewHolder(holder: TypeRecyclerAdapter.TypeViewHolder, position: Int) {
         //寬度為螢幕的五分之一
         holder.layoutItem.layoutParams.width= context.resources.displayMetrics.widthPixels/ 5
+        holder.layoutItem.setOnClickListener{
+            viewModel.selectedCategoryId.value= position
+            Log.e("position", "$position")
+//            return@setOnClickListener
+        }
         // 有錯誤，卻能顯示成功
         try {
             holder.tvName.text = "${viewModel.pageCategories.value!![position].name}${ viewModel.pageCategories.value!![position].id}"
         } catch (e: Exception){
             Log.e("EXCEPTION", "$e")
         }
+    }
+
+    private fun clickListener(v: View){
+
     }
 }

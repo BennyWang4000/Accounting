@@ -22,7 +22,7 @@ class EditAreaActivity() : AppCompatActivity() {
         val RESULT_CODE_OK= 1
         val RESULT_CODE_CANCELED = -1
 
-        Log.d("test", "${callingActivity}")
+        Log.d("test", "$callingActivity")
 
         val etEditArea= findViewById<EditText>(R.id.et_edit_area)
 
@@ -43,7 +43,7 @@ class EditAreaActivity() : AppCompatActivity() {
                 R.id.item_save -> {
                     setResult(
                         RESULT_CODE_OK,
-                        Intent().putExtra("content", editArea.isValid(etEditArea.text.toString()))
+                        Intent().putExtra("content", etEditArea.text.toString())
                     )
                 }else -> {}
             }

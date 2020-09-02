@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/AhorroBackground_YellowLight"
+    android:layout_gravity="center">
+    <TextView
+        android:id="@+id/dialog_yes_no_message"
+        android:text="訊息"
+        android:textColor="@color/AhorroTextColor"
+        android:layout_margin="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialog_negative"
+            android:text="否"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/ahorro_button_dialog"
+            android:textColor="@color/AhorroWhite"/>
+        <Button
+            android:id="@+id/dialog_positive"
+            android:text="是"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/ahorro_button_dialog"
+            android:textColor="@color/AhorroWhite"/>
+    </LinearLayout>
+
+</LinearLayout>

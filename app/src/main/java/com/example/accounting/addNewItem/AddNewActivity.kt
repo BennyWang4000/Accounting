@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,12 +16,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.example.accounting.R
-import com.example.accounting.addNewItem.addNewFragment.AddNewViewModelFactory
 import com.example.accounting.addNewItem.adapter.TypePagerAdapter
+import com.example.accounting.addNewItem.addNewFragment.AddNewViewModelFactory
 import com.example.accounting.database.model.ExpenseEntity
 import com.example.accounting.editArea.EditAreaActivity
+import com.example.accounting.widget.YesNoDialog
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
+
 
 class AddNewActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -38,6 +43,7 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
     private val REQUEST_CODE_TITLE= 1
     private val REQUEST_CODE_NOTE= 2
     private val REQUEST_CODE_EXPENSE= 3
+
 
     private lateinit var viewModel: AddNewViewModel
 
@@ -65,11 +71,11 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
         //observe
         viewModel.selectedDate.observe(this, androidx.lifecycle.Observer {
             try {
-                tvToday.text= viewModel.selectedDate.value.toString()
+                tvToday.text = viewModel.selectedDate.value.toString()
             } catch (e: Exception) {
                 Snackbar.make(this.findViewById(R.id.layout_main), "$e", Snackbar.LENGTH_SHORT)
                     .show()
-                }
+            }
         })
         var isFirstLaunch= true
         //view pager
@@ -78,23 +84,18 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
         viewModel.categories.observe(this, Observer {
             Log.d("viewModel categories", "OBSERVE")
 //            if(isFirstLaunch) {
-                pagerType.adapter = typePagerAdapter
+            pagerType.adapter = typePagerAdapter
 //                isFirstLaunch= !isFirstLaunch
 //            }
         })
 
-
-
-
         tvToday.text= viewModel.selectedDate.value.toString()
-
-
 
         //tool bar
         val toolbar= findViewById<Toolbar>(R.id.toolbar_add)
         toolbar.inflateMenu(R.menu.save_tool_bar)
         toolbar.setNavigationOnClickListener {
-            finish()
+            this.onBackPressed()
         }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -182,17 +183,17 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
         viewModel.operand2.observe(this, Observer {
             if (viewModel.isOperating.value!!) {
                 Log.e("operand2: ", "${viewModel.operand2.value}")
-                tvCost.text= viewModel.operand2.value
+                tvCost.text = viewModel.operand2.value
             }
         })
         viewModel.operand1.observe(this, Observer {
             if (!viewModel.isOperating.value!!) {
                 Log.e("operand1: ", "${viewModel.operand1.value}")
-                tvCost.text= viewModel.operand1.value
+                tvCost.text = viewModel.operand1.value
             }
         })
 
-        viewModel.isOperating.observe(this, Observer{
+        viewModel.isOperating.observe(this, Observer {
             Log.e("isOperating: ", "${viewModel.isOperating.value}")
         })
     }
@@ -203,15 +204,24 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
         when (v!!.id){
             R.id.layout_edit_title_container -> {
                 Log.d("layout press", "title")
-                startActivityForResult(Intent(this, EditAreaActivity::class.java), REQUEST_CODE_TITLE)
+                startActivityForResult(
+                    Intent(this, EditAreaActivity::class.java),
+                    REQUEST_CODE_TITLE
+                )
             }
             R.id.layout_edit_note_container -> {
                 Log.d("layout press", "note")
-                startActivityForResult(Intent(this, EditAreaActivity::class.java), REQUEST_CODE_NOTE)
+                startActivityForResult(
+                    Intent(this, EditAreaActivity::class.java),
+                    REQUEST_CODE_NOTE
+                )
             }
             R.id.layout_edit_expense_container -> {
                 Log.d("layout press", "expense")
-                startActivityForResult(Intent(this, EditAreaActivity::class.java), REQUEST_CODE_EXPENSE)
+                startActivityForResult(
+                    Intent(this, EditAreaActivity::class.java),
+                    REQUEST_CODE_EXPENSE
+                )
 
             }
             R.id.bt_1 -> {viewModel.clickNum("1")}
@@ -224,37 +234,67 @@ class AddNewActivity : AppCompatActivity(), View.OnClickListener{
             R.id.bt_8 -> {viewModel.clickNum("8")}
             R.id.bt_9 -> {viewModel.clickNum("9")}
             R.id.bt_0 -> {viewModel.clickNum("0")}
-            R.id.bt_ac -> {viewModel.clickAC()}
-            R.id.bt_point -> {viewModel.clickNum(".")}
-            R.id.bt_plus -> {viewModel.clickOperator(1)}
-            R.id.bt_minus -> {viewModel.clickOperator(2)}
-            R.id.bt_multiplied -> {viewModel.clickOperator(3)}
-            R.id.bt_divided -> {viewModel.clickOperator(4)}
-            R.id.bt_backspace -> {viewModel.clickBackspace()}
-            R.id.bt_ok -> {
-                tvCost.text= viewModel.clickOK()
+            R.id.bt_ac -> {viewModel.clickAC() }
+            R.id.bt_point -> {viewModel.clickNum(".") }
+            R.id.bt_plus -> {viewModel.clickOperator(1) }
+            R.id.bt_minus -> {viewModel.clickOperator(2) }
+            R.id.bt_multiplied -> {viewModel.clickOperator(3) }
+            R.id.bt_divided -> {viewModel.clickOperator(4) }
+            R.id.bt_backspace -> {viewModel.clickBackspace() }
+            R.id.bt_ok -> {tvCost.text = viewModel.clickOK()
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
     }
 
+    private var yesNoDialog: YesNoDialog?= null
+
+    override fun onBackPressed() {
+        if(viewModel.operand1.value!= "0")
+            showDialog("紀錄尚未完成，是否仍要退出？")
+        else
+            super.onBackPressed()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         when(requestCode){
             REQUEST_CODE_TITLE -> {
-                viewModel.descr.value= data!!.getStringExtra("content")
-                tvTitle.text= viewModel.descr.value
+                data?.let {
+                    viewModel.descr.value = data.getStringExtra("content")
+                }
+                tvTitle.text = viewModel.descr.value
             }
             REQUEST_CODE_NOTE -> {
-                viewModel.account.value= 0
-                tvNote.text= viewModel.account.value.toString()
+                viewModel.account.value = 0
+                tvNote.text = viewModel.account.value.toString()
             }
             REQUEST_CODE_EXPENSE -> {
-                Snackbar.make(this.findViewById<ConstraintLayout>(R.id.layout_add_new), ":D", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    this.findViewById<ConstraintLayout>(R.id.layout_add_new),
+                    ":D",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
             else -> {}
         }
+    }
+
+    private fun showDialog(message: String){
+        val yesNoDialog= YesNoDialog(this)
+            yesNoDialog
+                .setMessage(message)
+                .setCancel(object : YesNoDialog.IOnCancelListener {
+                    override fun onCancel(dialog: YesNoDialog?) {
+                        yesNoDialog.dismiss()
+
+                    }
+                })
+                .setConfirm(object : YesNoDialog.IOnConfirmListener {
+                    override fun onConfirm(dialog: YesNoDialog?) {
+                        finish()
+                    }
+                }).show()
     }
 }
 

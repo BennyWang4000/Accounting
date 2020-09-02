@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <ImageView
-        android:src="@drawable/ic_baseline_android_24_black"
+        android:src="@drawable/ic_baseline_local_offer_24_gray"
         android:id="@+id/iv_type"
         android:layout_marginLeft="15dp"
         android:layout_width="wrap_content"

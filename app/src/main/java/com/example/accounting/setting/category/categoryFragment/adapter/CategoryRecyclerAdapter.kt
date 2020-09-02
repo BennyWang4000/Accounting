@@ -1,5 +1,6 @@
 package com.example.accounting.setting.category.categoryFragment.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +27,10 @@ class CategoryRecyclerAdapter(
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.tvName.text= "${viewModel.behaviorCategories.value!![position].name}${viewModel.behaviorCategories.value!![position].id}"
-
+        holder.tvName.text= viewModel.behaviorCategories.value!![position].name +
+                "${viewModel.behaviorCategories.value!![position].id}"
     }
 
     override fun getItemCount(): Int {

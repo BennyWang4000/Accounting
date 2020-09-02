@@ -42,7 +42,7 @@
                 android:id="@+id/main_im_pigbank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_android_24_black" />
+                android:src="@drawable/ic_baseline_money_24_gray" />
 
             <TextView
                 android:id="@+id/main_tv_pigbank_percent"

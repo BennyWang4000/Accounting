@@ -15,7 +15,7 @@
 
     <ImageView
         android:id="@+id/item_iv_category"
-        android:src="@drawable/ic_baseline_android_24_black"
+        android:src="@drawable/ic_baseline_local_offer_24_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"

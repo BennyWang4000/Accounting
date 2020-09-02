@@ -275,7 +275,7 @@
     <LinearLayout
         android:id="@+id/add_layout_receipt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         style="@style/ToolBarStyle"
         android:orientation="vertical"
         android:gravity="center"

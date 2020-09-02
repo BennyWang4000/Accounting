@@ -43,7 +43,7 @@ class PieChartFragment : Fragment() {
             val pieChart: PieChart= root.findViewById(R.id.chart_pie)
 
             val pieDataSet= PieDataSet(viewModel.getPieData(), "expense").apply{
-                colors = TypeStyle.COLOR_RANK
+                colors = TypeStyle.Color
                 valueTextColor= Color.WHITE
                 valueTextSize= 10f
             }

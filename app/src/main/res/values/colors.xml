@@ -22,8 +22,10 @@
     //192  63  57<color name="AhorroRedDark">#C03F39</color>
     //  0   0   0<color name="AhorroBlack">#000000</color>
     // 47  47  56<color name="AhorroActionBar_Gray">#2F2F38</color>
+    // 52  52  59<color name="AhorroDialog_GrayDark">#34343B</color>
     // 61  66  75<color name="AhorroTextColor">#3D424B</color>
     // 94  86  86<color name="AhorroIconColor_Gray">#5E5656</color>
+    //109 109 114<color name="AhorroDialog_Gray">#6D6D72</color>
     //223 221 203<color name="AhorroCalculatorBackgroundDark">#DFDDCB</color>
     //252 250 234<color name="AhorroCalculatorBackground">#FCFAEA</color>
     //255 255 255<color name="AhorroWhite">#FFFFFF</color>

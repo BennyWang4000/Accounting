@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
         CategoryEntity::class,
         RoutineEntity::class,
         AccountEntity::class],
-    version = 116
+    version = 117
 )
 abstract class AccountingDatabase : RoomDatabase(){
 
@@ -86,14 +86,14 @@ abstract class AccountingDatabase : RoomDatabase(){
 //            listDao.deleteAll()
 //            if (accountingDao.getSettings().value[0].isFirstLaunch)
             accountingDao.insertAccount(AccountEntity(0, "現金"))
-            accountingDao.insertCategory(CategoryEntity(
-                0,
-                "早餐",
-                "breakfast",
-                0,
-                "defaultName",
-                -1
-            ))
+//            accountingDao.insertCategory(CategoryEntity(
+//                0,
+//                "早餐",
+//                "breakfast",
+//                0,
+//                "defaultName",
+//                -1
+//            ))
             accountingDao.insertRoutine(RoutineEntity(
                 0,
                 0.0,

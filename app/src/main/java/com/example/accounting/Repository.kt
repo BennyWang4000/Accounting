@@ -72,8 +72,10 @@ class Repository(private val accountingDao: AccountingDao) {
 
     fun getBehaviorCategories(behavior: Int): LiveData<List<CategoryEntity>> = accountingDao.getBehaviorCategories(behavior)
 
-    fun getPageCategories(page: Int): LiveData<List<CategoryEntity>>{
-        return accountingDao.getPageCategories(page)
+    fun getPageCategories(page: Int): LiveData<List<CategoryEntity>> = accountingDao.getPageCategories(page)
+
+    fun insertCategory(category: CategoryEntity){
+        accountingDao.insertCategory(category)
     }
 
     //setting_table--------------------------------------

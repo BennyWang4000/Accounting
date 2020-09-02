@@ -66,4 +66,8 @@ class Calculator{
             }
         }
     }
+
+    fun isEmpty(num: String): Boolean{
+        return num== "0" || num== ""
+    }
 }

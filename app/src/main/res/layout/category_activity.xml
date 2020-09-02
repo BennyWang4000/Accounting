@@ -42,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/LineStyle"/>
+
     <fragment
         android:id="@+id/category_frg"
         android:layout_width="match_parent"
@@ -49,6 +50,27 @@
         android:name="com.example.accounting.setting.category.categoryFragment.CategoryFragment"
         app:layout_constraintTop_toBottomOf="@id/category_line"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="50dp"/>
+    <LinearLayout
+        android:id="@+id/category_layout_bottom_add_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ToolBarStyle"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+            android:id="@+id/category_layout_bottom_add_new_iv"
+            android:src="@drawable/ic_baseline_add_circle_outline_24_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/category_layout_bottom_add_new__tv"
+            android:text="新增類別"
+            android:textColor="@color/AhorroWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

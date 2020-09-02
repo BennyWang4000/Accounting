@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.accounting.R
 import com.example.accounting.setting.category.categoryFragment.adapter.CategoryRecyclerAdapter
+import kotlin.properties.Delegates
 
 class CategoryFragment(): Fragment() {
 
     private lateinit var recyclerAdapter: CategoryRecyclerAdapter
     private var behavior= -1
     constructor(behavior: Int): this(){
+        // expense: 0, income: 1
         this.behavior= behavior
     }
 
@@ -36,8 +38,9 @@ class CategoryFragment(): Fragment() {
         val recyclerview = root.findViewById<RecyclerView>(R.id.category_rv_category)
         recyclerAdapter = CategoryRecyclerAdapter(context!!, viewModel)
         val linearLayoutManager = LinearLayoutManager(context!!)
-        recyclerview.layoutManager= linearLayoutManager
-//    recyclerview.adapter = recyclerAdapter
+//        recyclerview.layoutManager= linearLayoutManager
+//        recyclerview.adapter = recyclerAdapter
+
         viewModel.behaviorCategories.observe(this, Observer{
             with(recyclerview){
                 adapter = recyclerAdapter

@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
+    android:clickable="true"
+    android:background="@drawable/ahorro_button_yellow"
     android:layout_gravity="center"
     android:padding="8dp">
     <ImageView
